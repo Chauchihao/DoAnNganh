@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TraCuuHangHoaController">
+    <children>
+      <Label layoutX="375.0" prefHeight="35.0" prefWidth="220.0" text="Tra Cứu Hàng Hóa" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="80.0" text="Mã hàng hóa" />
+      <Button fx:id="btContine" layoutX="750.0" layoutY="60.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Tiếp Tục" />
+      <Button fx:id="btThoat" layoutX="750.0" layoutY="121.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Thoát" />
+      <TableView fx:id="tbHangHoa" layoutY="180.0" prefHeight="330.0" prefWidth="902.0" />
+      <TextField fx:id="txtTraCuu" layoutX="180.0" layoutY="74.0" prefHeight="26.0" prefWidth="463.0" />
+   </children>
+</AnchorPane>
