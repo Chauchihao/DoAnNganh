@@ -8,4 +8,5 @@ module com.doannganh.qldvvpkcm {
 
     opens com.doannganh.qldvvpkcm to javafx.fxml;
     exports com.doannganh.qldvvpkcm;
+    exports com.doannganh.pojo;
 }
