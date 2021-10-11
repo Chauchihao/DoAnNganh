@@ -9,15 +9,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TraCuuHangHoaController">
-    <children>
-      <Label layoutX="375.0" prefHeight="35.0" prefWidth="220.0" text="Tra Cứu Hàng Hóa" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="24.0" />
-         </font>
-      </Label>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TraCuuHangHoaQuanLyTruongController">
+   <children>
       <Button fx:id="btContine" layoutX="750.0" layoutY="60.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Tiếp Tục" />
-      <Button fx:id="btThoat" layoutX="750.0" layoutY="121.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Thoát" />
+      <Button fx:id="btThoat" layoutX="750.0" layoutY="121.0" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="30.0" prefWidth="66.0" text="Thoát" />
       <TableView fx:id="tbHangHoa" layoutY="180.0" prefHeight="330.0" prefWidth="902.0" />
       <HBox layoutX="104.0" layoutY="77.0" prefHeight="35.0" prefWidth="512.0">
          <children>
@@ -25,5 +20,10 @@
             <TextField fx:id="txtTraCuu" prefHeight="35.0" prefWidth="409.0" />
          </children>
       </HBox>
+      <Label layoutX="271.0" layoutY="14.0" text="TRA CỨU HÀNG HÓA">
+         <font>
+            <Font name="Arial Bold" size="35.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

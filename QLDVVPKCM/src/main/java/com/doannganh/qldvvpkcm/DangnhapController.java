@@ -54,6 +54,7 @@ public class DangnhapController implements Initializable {
             Connection conn = JdbcUtils.getConn();
             LoaiUserService s = new LoaiUserService(conn);
             this.cbLoaiUser.setItems(FXCollections.observableList(s.getLoaiTK()));
+            this.cbLoaiUser.getSelectionModel().selectLast();
             
             conn.close();
         } catch (SQLException ex) {
@@ -88,7 +89,6 @@ public class DangnhapController implements Initializable {
                                     var path= "";
                                     Utils.getBox("Đăng nhập thành công!", Alert.AlertType.INFORMATION).show();
                                     try {
-
                                         if (u.getLoaiuser_id()== 1)
                                             path = "trangchuquanlytruong.fxml";
                                         if (u.getLoaiuser_id() == 2)
@@ -100,6 +100,8 @@ public class DangnhapController implements Initializable {
                                         loader.setLocation(getClass().getResource(path));
                                         trangchu = loader.load();
                                         Scene scene = new Scene(trangchu);
+                                        TrangChuController controller = loader.getController();
+                                        controller.setTTUser(u);
                                         stage.setScene(scene);
                                         stage.show();
                                     } catch (IOException ex) {

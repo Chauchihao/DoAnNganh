@@ -10,17 +10,21 @@ import com.doannganh.pojo.User;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,20 +35,26 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
 /**
  * FXML Controller class
- *
+ * 
  * @author Admin
  */
-public class TraCuuHangHoaController implements Initializable {
-
+public class TraCuuHangHoaQuanLyTruongController implements Initializable {
+    
     /**
      * Initializes the controller class.
      */
@@ -58,19 +68,69 @@ public class TraCuuHangHoaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadTable();
-        loadHangHoas();
-        
+        nd = getTTUser(nd);
         this.cbTraCuu.setItems(list);
         this.cbTraCuu.getSelectionModel().selectFirst();
+        loadTable();
+        loadHangHoa("", this.cbTraCuu.getSelectionModel().getSelectedItem());
         
         this.txtTraCuu.textProperty().addListener((obj) -> {
             loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
+        });
+        
+        this.tbHangHoa.setRowFactory(obj -> {
+            TableRow r = new TableRow();
+            r.setOnMouseClicked(event -> {
+                try {
+                    Connection conn = JdbcUtils.getConn();
+                    HangHoaService s = new HangHoaService(conn);
+                    HangHoa hh = this.tbHangHoa.getSelectionModel().getSelectedItem();
+                    int rindex = this.tbHangHoa.getSelectionModel().getSelectedIndex();
+                    if (nd.getLoaiuser_id() == 1) {
+                        TextInputDialog dialog = new TextInputDialog(hh.getGiaban().toString());
+                        dialog.setTitle("Cập nhật");
+                        dialog.setHeaderText("Hãy nhập giá bán:");
+                        dialog.setContentText("Giá bán:");
+                        Optional<String> result = dialog.showAndWait();
+                        if (result.isPresent()){
+                            TextField tf = dialog.getEditor();
+                            if (tf.getText().matches("\\d+") && tf.getText().isEmpty() == false) {
+                                if (tf.getText().length() > 9)
+                                    Utils.getBox("Chỉ được nhập số nhỏ hơn 1.000.000.000", Alert.AlertType.ERROR).show();
+                                else if (Integer.parseInt(tf.getText()) < 10000)
+                                        Utils.getBox("Chỉ được nhập số lớn hơn 10.000", Alert.AlertType.ERROR).show();
+                                    else {
+                                        hh.setGiaban(new BigDecimal(result.get()));
+                                        if (s.suaGiaBan(hh.getHanghoa_id(), hh.getGiaban().toString())) {
+                                            Utils.getBox("Cập nhật giá bán thành công!", Alert.AlertType.INFORMATION).show();
+                                            this.tbHangHoa.getItems().set(rindex, hh);
+                                        } else
+                                            Utils.getBox("Cập nhật giá bán thất bại!!!", Alert.AlertType.ERROR).show();
+                                    }
+                            } else
+                                Utils.getBox("Chỉ được nhập số", Alert.AlertType.ERROR).show();
+                        }
+                    }
+                    if (nd.getLoaiuser_id() == 2) {
+                        
+                    }
+                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(TraCuuHangHoaQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            });
+            return r;
         });
     }
     
     public void setTTUser(User u){
         nd = u;
+    }
+    
+    public User getTTUser(User u){
+        nd = u;
+        return nd;
     }
     
     public void loadHangHoas(){
@@ -119,7 +179,14 @@ public class TraCuuHangHoaController implements Initializable {
         
         TableColumn colGiaBan = new TableColumn("Giá Bán");
         colGiaBan.setCellValueFactory(new PropertyValueFactory("giaban"));
-        
+        /*colGiaBan.setEditable(true);
+        colGiaBan.setCellFactory(TextFieldTableCell.forTableColumn());
+        colGiaBan.setOnEditCommit(new EventHandler<CellEditEvent<HangHoa, BigDecimal>>() {
+            @Override public void handle(CellEditEvent<HangHoa, BigDecimal> t) {
+                ((HangHoa) t.getTableView().getItems().get(t.getTablePosition().getRow())).setGiaban(t.getNewValue());
+            }
+        });*/
+
         TableColumn colNgaySanXuat = new TableColumn("Ngày Sản Xuất");
         colNgaySanXuat.setCellValueFactory(new PropertyValueFactory("ngaysanxuat"));
         
@@ -129,6 +196,16 @@ public class TraCuuHangHoaController implements Initializable {
         TableColumn colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
         colLoaiHangHoa.setCellValueFactory(new PropertyValueFactory("loaihanghoa_id"));
         
+        /*if (nd.getLoaiuser_id() == 2){
+            this.tbHangHoa.setEditable(true);
+            colMaHangHoa.setEditable(true);
+            colMaHangHoa.setCellFactory(TextFieldTableCell.forTableColumn());
+            colMaHangHoa.setOnEditCommit(new EventHandler<CellEditEvent<HangHoa, Integer>>() {
+                @Override public void handle(CellEditEvent<HangHoa, Integer> t) {
+                    ((HangHoa) t.getTableView().getItems().get(t.getTablePosition().getRow())).setHanghoa_id(t.getNewValue());
+                }
+            });
+        }*/
         this.tbHangHoa.getColumns().addAll(colMaHangHoa, colTenHangHoa, colThuongHieu
                 , colSoLuong, colGiaNhap, colGiaBan, colNgaySanXuat, colNgayHetHan, colLoaiHangHoa);
     }
@@ -142,7 +219,6 @@ public class TraCuuHangHoaController implements Initializable {
         Scene scene = new Scene(dangnhap);
         stage.setScene(scene);
         stage.show();
-
     }
     
     public void continueHandler(ActionEvent evt) throws IOException {

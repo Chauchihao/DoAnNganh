@@ -22,7 +22,7 @@ public class HangHoa {
     private Date ngaysanxuat;
     private Date ngayhethan;
     private String hinhanh;
-    private int loaihanghoa_id;
+    private String loaihanghoa_id;
 
     /**
      * @return the hanghoa_id
@@ -153,14 +153,14 @@ public class HangHoa {
     /**
      * @return the loaihanghoa_id
      */
-    public int getLoaihanghoa_id() {
+    public String getLoaihanghoa_id() {
         return loaihanghoa_id;
     }
 
     /**
      * @param loaihanghoa_id the loaihanghoa_id to set
      */
-    public void setLoaihanghoa_id(int loaihanghoa_id) {
+    public void setLoaihanghoa_id(String loaihanghoa_id) {
         this.loaihanghoa_id = loaihanghoa_id;
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.doannganh.qldvvpkcm;
 
+import com.doannganh.pojo.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,21 +30,26 @@ public class TrangChuController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    User nd;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
     
-    public void traCuuTTHangHoaHandler(MouseEvent evt) {
+    public void setTTUser(User u){
+        nd = u;
+    }
+    
+    public void traCuuHangHoaHandler(MouseEvent evt) {
         try {
-            Parent tccb;
+            Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("tracuuhanghoa.fxml"));
-            tccb = loader.load();
-            Scene scene = new Scene(tccb);
+            tchh = loader.load();
+            Scene scene = new Scene(tchh);
             TraCuuHangHoaController controller = loader.getController();
-            //controller.setTTUser(nd);
+            controller.setTTUser(nd);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -51,20 +57,31 @@ public class TrangChuController implements Initializable {
         }
     }
     
-    public void traCuuCapNhatHangHoaHandler(MouseEvent evt) {
+    public void traCuuHangHoaQuanLyTruongHandler(MouseEvent evt) {
         try {
-            Parent tccb;
+            Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("tracuusuachuahanghoa.fxml"));
-            tccb = loader.load();
-            Scene scene = new Scene(tccb);
-            TraCuuSuaChuaHangHoaController controller = loader.getController();
-            //controller.setTTUser(nd);
+            loader.setLocation(getClass().getResource("tracuuchanghoaquanlytruong.fxml"));
+            tchh = loader.load();
+            Scene scene = new Scene(tchh);
+            TraCuuHangHoaQuanLyTruongController controller = loader.getController();
+            controller.setTTUser(nd);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void logoutHandler(ActionEvent evt) throws IOException {
+        Parent dangnhap;
+        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("dangnhap.fxml"));
+        dangnhap = loader.load();
+        Scene scene = new Scene(dangnhap);
+        stage.setScene(scene);
+        stage.show();
     }
 }

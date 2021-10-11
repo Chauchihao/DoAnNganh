@@ -6,6 +6,7 @@
 package com.doannganh.service;
 
 import com.doannganh.pojo.HangHoa;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,9 @@ public class HangHoaService {
     
     public List<HangHoa> getHangHoas() throws SQLException {
         Statement stm = this.conn.createStatement();
-        ResultSet r = stm.executeQuery("SELECT * FROM hanghoa");
+        ResultSet r = stm.executeQuery("SELECT hanghoa.*, tenloai FROM hanghoa, loaihanghoa"
+                + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                + " ORDER BY hanghoa_id");
         
         List<HangHoa> hangHoa = new ArrayList<>();
         while (r.next()) {
@@ -41,19 +44,43 @@ public class HangHoaService {
             hh.setGiaban(r.getBigDecimal("giaban"));
             hh.setNgaysanxuat(r.getDate("ngaysanxuat"));
             hh.setNgayhethan(r.getDate("ngayhethan"));
-            hh.setLoaihanghoa_id(r.getInt("loaihanghoa_id"));
+            hh.setLoaihanghoa_id(r.getString("tenloai"));
             
             hangHoa.add(hh);
         }
         return hangHoa;
     }
     
-    public List<HangHoa> getHangHoa(String tuKhoa) throws SQLException {
+    public List<HangHoa> getHangHoa(String tuKhoa, String traCuu) throws SQLException {
         if (tuKhoa == null)
             throw new SQLDataException();
-        String sql = "SELECT *"
-            + " FROM hanghoa WHERE (tenhanghoa like concat('%', ?, '%')) ";
-        
+        String sql = "";
+        if (traCuu == "" || tuKhoa == "")
+            sql = "SELECT hanghoa.*, tenloai FROM hanghoa, loaihanghoa"
+                    + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                    + " ORDER BY hanghoa_id";
+        if (traCuu == "Mã hàng")
+            sql = "SELECT hanghoa.*, tenloai FROM hanghoa, loaihanghoa"
+                    + " WHERE hanghoa_id like concat('%', ?, '%')"
+                    + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                    + " ORDER BY hanghoa_id";
+        if (traCuu == "Tên hàng")
+            sql = "SELECT hanghoa.*, tenloai"
+                    + " FROM hanghoa, loaihanghoa"
+                    + " WHERE tenhanghoa like concat('%', ?, '%')"
+                    + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                    + " ORDER BY hanghoa_id";
+        if (traCuu == "Thương hiệu")
+            sql = "SELECT hanghoa.*, tenloai"
+                    + " FROM hanghoa, loaihanghoa"
+                    + " WHERE thuonghieu like concat('%', ?, '%')"
+                    + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                    + " ORDER BY hanghoa_id";
+        if (traCuu == "Loại hàng")
+            sql = "SELECT hanghoa.*, tenloai"
+                    + " FROM hanghoa, loaihanghoa WHERE tenloai like concat('%', ?, '%')"
+                    + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                    + " ORDER BY hanghoa_id";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         stm.setString(1, tuKhoa);
         ResultSet rs = stm.executeQuery();
@@ -69,64 +96,21 @@ public class HangHoaService {
             hh.setGiaban(rs.getBigDecimal("giaban"));
             hh.setNgaysanxuat(rs.getDate("ngaysanxuat"));
             hh.setNgayhethan(rs.getDate("ngayhethan"));
-            hh.setLoaihanghoa_id(rs.getInt("loaihanghoa_id"));
+            hh.setLoaihanghoa_id(rs.getString("tenloai"));
             
             hangHoa.add(hh);
         }
         return hangHoa;
     }
     
-    /*public List<HangHoa> getHangHoa(int id, String ten, String thuongHieu, String loai) throws SQLException {
-        String sql = "";
-        if (id != 0)
-            sql = "SELECT hanghoa_id, tenhanghoa, thuonghieu, soluongtrongkho"
-            + ",gianhap, giaban, ngaysanxuat, ngayhethan"
-            + " FROM hanghoa, loaihanghoa WHERE"
-            + " (hanghoa_id like concat('%', ?, '%') OR tenhanghoa "
-            + "like concat('%', ?, '%') OR thuonghieu like concat('%', ?, '%')"
-            + " OR tenLoai like concat('%', ?, '%')) AND"
-            + " hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id";
-        else
-            sql = "SELECT hanghoa_id, tenhanghoa, thuonghieu, soluongtrongkho"
-            + ",gianhap, giaban, ngaysanxuat, ngayhethan"
-            + " FROM hanghoa, loaihanghoa WHERE"
-            + " (hanghoa_id like concat('%', ?, '%') OR tenhanghoa "
-            + "like concat('%', ?, '%') OR thuonghieu like concat('%', ?, '%')"
-            + " OR tenLoai like concat('%', ?, '%'))";
+    public boolean suaGiaBan(int id, String gb) throws SQLException {
+        String sql = "UPDATE hanghoa SET giaban=? WHERE hanghoa_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        if (id == 0)
-            stm.setString(1, null);
-        else
-            stm.setInt(1, id);
-        if (ten == "")
-            stm.setString(2, null);
-        else
-            stm.setString(2, ten);
-        if (thuongHieu == "")
-            stm.setString(3, null);
-        else
-            stm.setString(3, thuongHieu);
-        if (loai == "")
-            stm.setString(4, null);
-        else
-            stm.setString(4, loai);
-        ResultSet rs = stm.executeQuery();
+        stm.setString(1, gb);
+        stm.setInt(2, id);
         
-        List<HangHoa> hangHoa = new ArrayList<>();
-        while (rs.next()) {
-            HangHoa hh = new HangHoa();
-            hh.setHanghoa_id(rs.getInt("hanghoa_id"));
-            hh.setTenhanghoa(rs.getString("tenhanghoa"));
-            hh.setThuonghieu(rs.getString("thuonghieu"));
-            hh.setSoluongtrongkho(rs.getBigDecimal("soluongtrongkho"));
-            hh.setGianhap(rs.getBigDecimal("gianhap"));
-            hh.setGiaban(rs.getBigDecimal("giaban"));
-            hh.setNgaysanxuat(rs.getDate("ngaysanxuat"));
-            hh.setNgayhethan(rs.getDate("ngayhethan"));
-            //hh.setLoaihanghoa_id(rs.getString("tenloai"));
-            
-            hangHoa.add(hh);
-        }
-        return hangHoa;
-    }*/
+        int row = stm.executeUpdate();
+        
+        return row > 0;
+    }
 }

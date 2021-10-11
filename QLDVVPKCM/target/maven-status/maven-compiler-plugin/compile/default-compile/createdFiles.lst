@@ -2,7 +2,7 @@ com\doannganh\qldvvpkcm\DangnhapController.class
 com\doannganh\qldvvpkcm\PrimaryController.class
 com\doannganh\qldvvpkcm\SecondaryController.class
 com\doannganh\service\UserService.class
-com\doannganh\qldvvpkcm\TraCuuSuaChuaHangHoaController.class
+com\doannganh\qldvvpkcm\TextInputDialog.class
 module-info.class
 com\doannganh\pojo\User.class
 com\doannganh\service\LoaiHangHoaService.class
@@ -15,4 +15,5 @@ com\doannganh\pojo\LoaiUser.class
 com\doannganh\pojo\LoaiHangHoa.class
 com\doannganh\service\LoaiUserService.class
 com\doannganh\qldvvpkcm\App.class
+com\doannganh\qldvvpkcm\TraCuuHangHoaQuanLyTruongController.class
 com\doannganh\service\HangHoaService.class
