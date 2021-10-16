@@ -12,13 +12,16 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -26,10 +29,11 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class TrangChuController implements Initializable {
-
+    
     /**
      * Initializes the controller class.
      */
+    
     User nd;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,16 +44,20 @@ public class TrangChuController implements Initializable {
         nd = u;
     }
     
-    public void traCuuHangHoaHandler(MouseEvent evt) {
+    public void traCuuHangHoaThuKhoHandler(MouseEvent evt) throws IOException{
         try {
             Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("tracuuhanghoa.fxml"));
+            loader.setLocation(getClass().getResource("tracuuhanghoathukho.fxml"));
             tchh = loader.load();
             Scene scene = new Scene(tchh);
-            TraCuuHangHoaController controller = loader.getController();
+            TraCuuHangHoaThuKhoController controller = loader.getController();
             controller.setTTUser(nd);
+            //stage.setResizable(false);
+            //stage.initStyle(StageStyle.UTILITY);
+            //stage.setFullScreen(true);
+            
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -57,7 +65,7 @@ public class TrangChuController implements Initializable {
         }
     }
     
-    public void traCuuHangHoaQuanLyTruongHandler(MouseEvent evt) {
+    public void traCuuHangHoaQuanLyTruongHandler(MouseEvent evt) throws IOException{
         try {
             Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
@@ -67,6 +75,10 @@ public class TrangChuController implements Initializable {
             Scene scene = new Scene(tchh);
             TraCuuHangHoaQuanLyTruongController controller = loader.getController();
             controller.setTTUser(nd);
+            //stage.setResizable(false);
+            //stage.initStyle(StageStyle.UTILITY);
+            //stage.setFullScreen(true);
+            //stage.setMaximized(true);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -74,14 +86,19 @@ public class TrangChuController implements Initializable {
         }
     }
     
-    public void logoutHandler(ActionEvent evt) throws IOException {
-        Parent dangnhap;
-        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("dangnhap.fxml"));
-        dangnhap = loader.load();
-        Scene scene = new Scene(dangnhap);
-        stage.setScene(scene);
-        stage.show();
+    public void logoutHandler(ActionEvent evt) throws IOException{
+        try {
+            Parent dx;
+            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("dangnhap.fxml"));
+            dx = loader.load();
+            Scene scene = new Scene(dx);
+            stage.setScene(scene);
+            //stage.setMaximized(true);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

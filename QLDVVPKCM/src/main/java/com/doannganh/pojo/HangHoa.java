@@ -19,10 +19,12 @@ public class HangHoa {
     private BigDecimal soluongtrongkho;
     private BigDecimal gianhap;
     private BigDecimal giaban;
-    private Date ngaysanxuat;
-    private Date ngayhethan;
+    private String ngaysanxuat;
+    private String ngayhethan;
     private String hinhanh;
-    private String loaihanghoa_id;
+    private int loaihanghoa_id;
+    private String tenloaihang;
+    private String nhacungcap;
 
     /**
      * @return the hanghoa_id
@@ -111,28 +113,28 @@ public class HangHoa {
     /**
      * @return the ngaysanxuat
      */
-    public Date getNgaysanxuat() {
+    public String getNgaysanxuat() {
         return ngaysanxuat;
     }
 
     /**
      * @param ngaysanxuat the ngaysanxuat to set
      */
-    public void setNgaysanxuat(Date ngaysanxuat) {
+    public void setNgaysanxuat(String ngaysanxuat) {
         this.ngaysanxuat = ngaysanxuat;
     }
 
     /**
      * @return the ngayhethan
      */
-    public Date getNgayhethan() {
+    public String getNgayhethan() {
         return ngayhethan;
     }
 
     /**
      * @param ngayhethan the ngayhethan to set
      */
-    public void setNgayhethan(Date ngayhethan) {
+    public void setNgayhethan(String ngayhethan) {
         this.ngayhethan = ngayhethan;
     }
 
@@ -153,14 +155,44 @@ public class HangHoa {
     /**
      * @return the loaihanghoa_id
      */
-    public String getLoaihanghoa_id() {
+    public int getLoaihanghoa_id() {
         return loaihanghoa_id;
     }
 
     /**
      * @param loaihanghoa_id the loaihanghoa_id to set
      */
-    public void setLoaihanghoa_id(String loaihanghoa_id) {
+    public void setLoaihanghoa_id(int loaihanghoa_id) {
         this.loaihanghoa_id = loaihanghoa_id;
     }
+
+    /**
+     * @return the tenloaihang
+     */
+    public String getTenloaihang() {
+        return tenloaihang;
+    }
+
+    /**
+     * @param tenloaihang the tenloaihang to set
+     */
+    public void setTenloaihang(String tenloaihang) {
+        this.tenloaihang = tenloaihang;
+    }
+
+    /**
+     * @return the nhacungcap
+     */
+    public String getNhacungcap() {
+        return nhacungcap;
+    }
+
+    /**
+     * @param nhacungcap the nhacungcap to set
+     */
+    public void setNhacungcap(String nhacungcap) {
+        this.nhacungcap = nhacungcap;
+    }
+
+    
 }
