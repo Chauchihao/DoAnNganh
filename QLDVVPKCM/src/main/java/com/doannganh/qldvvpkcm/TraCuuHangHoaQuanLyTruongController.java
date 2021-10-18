@@ -38,6 +38,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -49,12 +50,14 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.BigDecimalStringConverter;
+import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.DateStringConverter;
 
 /**
@@ -94,10 +97,10 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
                     HangHoaService s = new HangHoaService(conn);
                     HangHoa hh = this.tbHangHoa.getSelectionModel().getSelectedItem();
                     int rindex = this.tbHangHoa.getSelectionModel().getSelectedIndex();
-                    TextInputDialog dialog = new TextInputDialog(hh.getGiaban().toString());
+                    TextInputDialog dialog = new TextInputDialog(hh.getGianiemyet());
                     dialog.setTitle("Cập nhật");
-                    dialog.setHeaderText("Hãy nhập giá bán:");
-                    dialog.setContentText("Giá bán:");
+                    dialog.setHeaderText("Hãy nhập giá niêm yết:");
+                    dialog.setContentText("Giá niêm yết:");
                     Optional<String> result = dialog.showAndWait();
                     if (result.isPresent()){
                         TextField tf = dialog.getEditor();
@@ -105,19 +108,19 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
                             Utils.getBox("Vui lòng không để trống!", Alert.AlertType.ERROR).show();
                         else if (!tf.getText().matches("\\d+"))
                             Utils.getBox("Vui lòng chỉ nhập số!", Alert.AlertType.ERROR).show();
-                        else if (result.get().equals(hh.getGiaban().toString()))
-                            Utils.getBox("Vui lòng thay đổi giá bán để cập nhật!", Alert.AlertType.ERROR).show();
+                        else if (result.get().equals(hh.getGianiemyet()))
+                            Utils.getBox("Vui lòng thay đổi giá niêm yết để cập nhật!", Alert.AlertType.ERROR).show();
                         else {
                             if (tf.getText().length() > 9)
-                                Utils.getBox("Vui lòng nhập giá bán < 1.000.000.000", Alert.AlertType.ERROR).show();
+                                Utils.getBox("Vui lòng nhập giá niêm yết < 1.000.000.000", Alert.AlertType.ERROR).show();
                             else if (Integer.parseInt(tf.getText()) < 10000)
-                                    Utils.getBox("Vui lòng nhập giá bán >= 10.000", Alert.AlertType.ERROR).show();
-                            else if (Integer.parseInt(tf.getText()) <= Integer.parseInt(hh.getGianhap().toString())) {
-                                Utils.getBox("Vui lòng nhập giá bán > giá nhập: " + hh.getGianhap().toString(), Alert.AlertType.ERROR).show();
+                                    Utils.getBox("Vui lòng nhập giá niêm yết >= 10.000", Alert.AlertType.ERROR).show();
+                            else if (Integer.parseInt(tf.getText()) <= Integer.parseInt(hh.getGianhap())) {
+                                Utils.getBox("Vui lòng nhập giá niêm yết > giá nhập: " + hh.getGianhap(), Alert.AlertType.ERROR).show();
                             }
                                 else {
-                                    hh.setGiaban(new BigDecimal(result.get()));
-                                    if (s.suaGiaBan(hh.getHanghoa_id(), hh.getGiaban().toString())) {
+                                    hh.setGianiemyet(result.get());
+                                    if (s.suaGiaNiemYet(hh.getHanghoa_id(), hh.getGianiemyet())) {
                                         Utils.getBox("Cập nhật giá bán thành công!", Alert.AlertType.INFORMATION).show();
                                         this.tbHangHoa.getItems().set(rindex, hh);
                                     } else
@@ -167,14 +170,33 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         TableColumn<HangHoa, BigDecimal> colGiaNhap = new TableColumn("Giá Nhập");
         colGiaNhap.setCellValueFactory(new PropertyValueFactory("gianhap"));
         
-        TableColumn<HangHoa, BigDecimal> colGiaBan = new TableColumn("Giá Bán");
-        colGiaBan.setCellValueFactory(new PropertyValueFactory("giaban"));
+        TableColumn<HangHoa, BigDecimal> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
+        colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("gianiemyet"));
 
         TableColumn<HangHoa, java.util.Date> colNgaySanXuat = new TableColumn("Ngày Sản Xuất");
         colNgaySanXuat.setCellValueFactory(new PropertyValueFactory("ngaysanxuat"));
         
         TableColumn<HangHoa, java.util.Date> colNgayHetHan = new TableColumn("Ngày Hết Hạn");
         colNgayHetHan.setCellValueFactory(new PropertyValueFactory("ngayhethan"));
+        
+        TableColumn<HangHoa, Boolean> colTinhTrang = new TableColumn("Tình trạng");
+        colTinhTrang.setCellValueFactory(new PropertyValueFactory("tinhtrang"));
+        colTinhTrang.setEditable(false);
+        /*colTinhTrang.setCellFactory((obj) -> {
+            CheckBox chb = new CheckBox();
+            chb.setOnAction(evt -> {
+                TableCell cell = (TableCell) ((CheckBox) evt.getSource()).getParent();
+                HangHoa hh = (HangHoa) cell.getTableRow().getItem();
+                chb.setId(Integer.toString(hh.getHanghoa_id()));
+                if (hh.isTinhtrang()) {
+                    chb.isSelected();
+                    chb.setSelected(true);
+                }
+            });
+            TableCell cell = new TableCell();
+            cell.setGraphic(chb);
+            return cell;
+        });*/
         
         TableColumn<HangHoa, String> colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
         colLoaiHangHoa.setCellValueFactory(new PropertyValueFactory("tenloaihang"));
@@ -183,8 +205,8 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         colNhaCungCap.setCellValueFactory(new PropertyValueFactory("nhacungcap"));
         
         this.tbHangHoa.getColumns().addAll(colMaHangHoa, colTenHangHoa, colThuongHieu
-                , colSoLuong, colGiaNhap, colGiaBan, colNgaySanXuat, colNgayHetHan
-                , colLoaiHangHoa, colNhaCungCap);
+                , colSoLuong, colGiaNhap, colGiaNiemYet, colNgaySanXuat, colNgayHetHan
+                , colTinhTrang, colLoaiHangHoa, colNhaCungCap);
     }
     
     public void logoutHandler(ActionEvent evt) throws IOException {

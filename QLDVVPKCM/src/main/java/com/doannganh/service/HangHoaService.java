@@ -30,7 +30,7 @@ public class HangHoaService {
     
     public List<HangHoa> getHangHoas() throws SQLException {
         Statement stm = this.conn.createStatement();
-        ResultSet r = stm.executeQuery("SELECT hanghoa.*, tenloai, tencongty"
+        ResultSet rs = stm.executeQuery("SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
@@ -38,18 +38,19 @@ public class HangHoaService {
                 + " ORDER BY hanghoa.hanghoa_id");
         
         List<HangHoa> hangHoa = new ArrayList<>();
-        while (r.next()) {
+        while (rs.next()) {
             HangHoa hh = new HangHoa();
-            hh.setHanghoa_id(r.getInt("hanghoa.hanghoa_id"));
-            hh.setTenhanghoa(r.getString("tenhanghoa"));
-            hh.setThuonghieu(r.getString("thuonghieu"));
-            hh.setSoluongtrongkho(r.getBigDecimal("soluongtrongkho"));
-            hh.setGianhap(r.getBigDecimal("gianhap"));
-            hh.setGiaban(r.getBigDecimal("giaban"));
-            hh.setNgaysanxuat(r.getString("ngaysanxuat"));
-            hh.setNgayhethan(r.getString("ngayhethan"));
-            hh.setTenloaihang(r.getString("tenloai"));
-            hh.setNhacungcap(r.getString("tencongty"));
+            hh.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
+            hh.setTenhanghoa(rs.getString("tenhanghoa"));
+            hh.setThuonghieu(rs.getString("thuonghieu"));
+            hh.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            hh.setGianhap(rs.getString("gianhap"));
+            hh.setGianiemyet(rs.getString("gianiemyet"));
+            hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setTinhtrang(rs.getBoolean("tinhtrang"));
+            hh.setTenloaihang(rs.getString("tenloai"));
+            hh.setNhacungcap(rs.getString("tencongty"));
             
             hangHoa.add(hh);
         }
@@ -61,14 +62,14 @@ public class HangHoaService {
             throw new SQLDataException();
         String sql = "";
         if (traCuu == "" || tuKhoa == "")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
         if (traCuu == "Mã hàng")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.hanghoa_id like concat('%', ?, '%')"
                 + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
@@ -76,7 +77,7 @@ public class HangHoaService {
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
         if (traCuu == "Tên hàng")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tenhanghoa like concat('%', ?, '%')"
                 + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
@@ -84,7 +85,7 @@ public class HangHoaService {
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
         if (traCuu == "Thương hiệu")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE thuonghieu like concat('%', ?, '%')"
                 + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
@@ -92,7 +93,7 @@ public class HangHoaService {
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
         if (traCuu == "Loại hàng")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tenloai like concat('%', ?, '%')"
                 + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
@@ -100,7 +101,7 @@ public class HangHoaService {
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
         if (traCuu == "Nhà cung cấp")
-            sql = "SELECT hanghoa.*, tenloai, tencongty"
+            sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tencongty like concat('%', ?, '%')"
                 + " AND hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
@@ -117,11 +118,12 @@ public class HangHoaService {
             hh.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
             hh.setTenhanghoa(rs.getString("tenhanghoa"));
             hh.setThuonghieu(rs.getString("thuonghieu"));
-            hh.setSoluongtrongkho(rs.getBigDecimal("soluongtrongkho"));
-            hh.setGianhap(rs.getBigDecimal("gianhap"));
-            hh.setGiaban(rs.getBigDecimal("giaban"));
+            hh.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            hh.setGianhap(rs.getString("gianhap"));
+            hh.setGianiemyet(rs.getString("gianiemyet"));
             hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
             hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setTinhtrang(rs.getBoolean("tinhtrang"));
             hh.setTenloaihang(rs.getString("tenloai"));
             hh.setNhacungcap(rs.getString("tencongty"));
             
@@ -157,10 +159,10 @@ public class HangHoaService {
         return thuonghieu;
     }
     
-    public boolean suaGiaBan(int id, String gb) throws SQLException {
-        String sql = "UPDATE hanghoa SET giaban=? WHERE hanghoa_id=?";
+    public boolean suaGiaNiemYet(int id, String gny) throws SQLException {
+        String sql = "UPDATE hanghoa SET gianiemyet=? WHERE hanghoa_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, gb);
+        stm.setString(1, gny);
         stm.setInt(2, id);
         
         int row = stm.executeUpdate();
@@ -188,21 +190,22 @@ public class HangHoaService {
         return row > 0;
     }
     
-    public boolean suaSoLuong(int id, BigDecimal sl)  throws SQLException {
+    public boolean suaSoLuong(int id, String sl)  throws SQLException {
         String sql ="UPDATE hanghoa SET soluongtrongkho=? WHERE hanghoa_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setBigDecimal(1, sl);
+        stm.setString(1, sl);
         stm.setInt(2, id);
         int row = stm.executeUpdate();
         
         return row > 0;
     }
     
-    public boolean suaGiaNhap(int id, BigDecimal gn)  throws SQLException {
-        String sql ="UPDATE hanghoa SET gianhap=? WHERE hanghoa_id=?";
+    public boolean suaGiaNhap(int id, String gn, int idNCC)  throws SQLException {
+        String sql ="UPDATE nhacungcap_hanghoa SET gianhap=? WHERE hanghoa_id=? AND nhacungcap_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setBigDecimal(1, gn);
+        stm.setString(1, gn);
         stm.setInt(2, id);
+        stm.setInt(3, idNCC);
         int row = stm.executeUpdate();
         
         return row > 0;
@@ -325,4 +328,14 @@ public class HangHoaService {
         
         stm.executeUpdate();
     }*/
+    
+    public boolean deleteHH(int id) throws SQLException {
+        suaKhoaNgoai0();
+        String sql = "DELETE FROM hanghoa WHERE hanghoa_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        int row = stm.executeUpdate();
+        suaKhoaNgoai1();
+        return row > 0;
+    }
 }

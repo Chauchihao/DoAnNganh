@@ -16,12 +16,13 @@ public class HangHoa {
     private int hanghoa_id;
     private String tenhanghoa;
     private String thuonghieu;
-    private BigDecimal soluongtrongkho;
-    private BigDecimal gianhap;
-    private BigDecimal giaban;
+    private String soluongtrongkho;
+    private String gianhap;
+    private String gianiemyet;
     private String ngaysanxuat;
     private String ngayhethan;
     private String hinhanh;
+    private boolean tinhtrang;
     private int loaihanghoa_id;
     private String tenloaihang;
     private String nhacungcap;
@@ -71,43 +72,43 @@ public class HangHoa {
     /**
      * @return the soluongtrongkho
      */
-    public BigDecimal getSoluongtrongkho() {
+    public String getSoluongtrongkho() {
         return soluongtrongkho;
     }
 
     /**
      * @param soluongtrongkho the soluongtrongkho to set
      */
-    public void setSoluongtrongkho(BigDecimal soluongtrongkho) {
+    public void setSoluongtrongkho(String soluongtrongkho) {
         this.soluongtrongkho = soluongtrongkho;
     }
 
     /**
      * @return the gianhap
      */
-    public BigDecimal getGianhap() {
+    public String getGianhap() {
         return gianhap;
     }
 
     /**
      * @param gianhap the gianhap to set
      */
-    public void setGianhap(BigDecimal gianhap) {
+    public void setGianhap(String gianhap) {
         this.gianhap = gianhap;
     }
 
     /**
-     * @return the giaban
+     * @return the gianiemyet
      */
-    public BigDecimal getGiaban() {
-        return giaban;
+    public String getGianiemyet() {
+        return gianiemyet;
     }
 
     /**
-     * @param giaban the giaban to set
+     * @param gianiemyet the gianiemyet to set
      */
-    public void setGiaban(BigDecimal giaban) {
-        this.giaban = giaban;
+    public void setGianiemyet(String gianiemyet) {
+        this.gianiemyet = gianiemyet;
     }
 
     /**
@@ -150,6 +151,20 @@ public class HangHoa {
      */
     public void setHinhanh(String hinhanh) {
         this.hinhanh = hinhanh;
+    }
+
+    /**
+     * @return the tinhtrang
+     */
+    public boolean isTinhtrang() {
+        return tinhtrang;
+    }
+
+    /**
+     * @param tinhtrang the tinhtrang to set
+     */
+    public void setTinhtrang(boolean tinhtrang) {
+        this.tinhtrang = tinhtrang;
     }
 
     /**
