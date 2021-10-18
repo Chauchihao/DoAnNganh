@@ -16,13 +16,16 @@ public class HangHoa {
     private int hanghoa_id;
     private String tenhanghoa;
     private String thuonghieu;
-    private BigDecimal soluongtrongkho;
-    private BigDecimal gianhap;
-    private BigDecimal giaban;
-    private Date ngaysanxuat;
-    private Date ngayhethan;
+    private String soluongtrongkho;
+    private String gianhap;
+    private String gianiemyet;
+    private String ngaysanxuat;
+    private String ngayhethan;
     private String hinhanh;
-    private String loaihanghoa_id;
+    private boolean tinhtrang;
+    private int loaihanghoa_id;
+    private String tenloaihang;
+    private String nhacungcap;
 
     /**
      * @return the hanghoa_id
@@ -69,70 +72,70 @@ public class HangHoa {
     /**
      * @return the soluongtrongkho
      */
-    public BigDecimal getSoluongtrongkho() {
+    public String getSoluongtrongkho() {
         return soluongtrongkho;
     }
 
     /**
      * @param soluongtrongkho the soluongtrongkho to set
      */
-    public void setSoluongtrongkho(BigDecimal soluongtrongkho) {
+    public void setSoluongtrongkho(String soluongtrongkho) {
         this.soluongtrongkho = soluongtrongkho;
     }
 
     /**
      * @return the gianhap
      */
-    public BigDecimal getGianhap() {
+    public String getGianhap() {
         return gianhap;
     }
 
     /**
      * @param gianhap the gianhap to set
      */
-    public void setGianhap(BigDecimal gianhap) {
+    public void setGianhap(String gianhap) {
         this.gianhap = gianhap;
     }
 
     /**
-     * @return the giaban
+     * @return the gianiemyet
      */
-    public BigDecimal getGiaban() {
-        return giaban;
+    public String getGianiemyet() {
+        return gianiemyet;
     }
 
     /**
-     * @param giaban the giaban to set
+     * @param gianiemyet the gianiemyet to set
      */
-    public void setGiaban(BigDecimal giaban) {
-        this.giaban = giaban;
+    public void setGianiemyet(String gianiemyet) {
+        this.gianiemyet = gianiemyet;
     }
 
     /**
      * @return the ngaysanxuat
      */
-    public Date getNgaysanxuat() {
+    public String getNgaysanxuat() {
         return ngaysanxuat;
     }
 
     /**
      * @param ngaysanxuat the ngaysanxuat to set
      */
-    public void setNgaysanxuat(Date ngaysanxuat) {
+    public void setNgaysanxuat(String ngaysanxuat) {
         this.ngaysanxuat = ngaysanxuat;
     }
 
     /**
      * @return the ngayhethan
      */
-    public Date getNgayhethan() {
+    public String getNgayhethan() {
         return ngayhethan;
     }
 
     /**
      * @param ngayhethan the ngayhethan to set
      */
-    public void setNgayhethan(Date ngayhethan) {
+    public void setNgayhethan(String ngayhethan) {
         this.ngayhethan = ngayhethan;
     }
 
@@ -151,16 +154,60 @@ public class HangHoa {
     }
 
     /**
+     * @return the tinhtrang
+     */
+    public boolean isTinhtrang() {
+        return tinhtrang;
+    }
+
+    /**
+     * @param tinhtrang the tinhtrang to set
+     */
+    public void setTinhtrang(boolean tinhtrang) {
+        this.tinhtrang = tinhtrang;
+    }
+
+    /**
      * @return the loaihanghoa_id
      */
-    public String getLoaihanghoa_id() {
+    public int getLoaihanghoa_id() {
         return loaihanghoa_id;
     }
 
     /**
      * @param loaihanghoa_id the loaihanghoa_id to set
      */
-    public void setLoaihanghoa_id(String loaihanghoa_id) {
+    public void setLoaihanghoa_id(int loaihanghoa_id) {
         this.loaihanghoa_id = loaihanghoa_id;
     }
+
+    /**
+     * @return the tenloaihang
+     */
+    public String getTenloaihang() {
+        return tenloaihang;
+    }
+
+    /**
+     * @param tenloaihang the tenloaihang to set
+     */
+    public void setTenloaihang(String tenloaihang) {
+        this.tenloaihang = tenloaihang;
+    }
+
+    /**
+     * @return the nhacungcap
+     */
+    public String getNhacungcap() {
+        return nhacungcap;
+    }
+
+    /**
+     * @param nhacungcap the nhacungcap to set
+     */
+    public void setNhacungcap(String nhacungcap) {
+        this.nhacungcap = nhacungcap;
+    }
+
+    
 }
