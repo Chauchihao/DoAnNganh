@@ -30,7 +30,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -47,6 +51,8 @@ public class DangnhapController implements Initializable {
     @FXML private TextField txtTaiKhoan;
     @FXML private PasswordField txtMatKhau;
     @FXML private Button btDangNhap;
+    @FXML private AnchorPane apDangNhap;
+    User nd;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,18 +61,38 @@ public class DangnhapController implements Initializable {
             LoaiUserService s = new LoaiUserService(conn);
             this.cbLoaiUser.setItems(FXCollections.observableList(s.getLoaiTK()));
             this.cbLoaiUser.getSelectionModel().selectLast();
-            
+            apDangNhap.setOnKeyPressed(evt -> {
+                if (evt.getCode() == KeyCode.ENTER) {
+                    if (dangnhap()) {
+                        var path= "";
+                        try {
+                            if (nd.getLoaiuser_id()== 1)
+                                path = "trangchuquanlytruong.fxml";
+                            if (nd.getLoaiuser_id() == 2)
+                                path = "trangchuthukho.fxml";
+                            if (nd.getLoaiuser_id() == 3)
+                                path = "trangchunhanvien.fxml";
+                            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                            Parent root = (Parent) loader.load();
+                            TrangChuController controller = (TrangChuController) loader.getController();
+                            controller.setTTUser(nd);
+                            stage.setScene(new Scene(root));
+                        } catch (IOException ex) {
+                            Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
-    public void dangNhapHandler(ActionEvent evt) {
-        
+    public boolean dangnhap() {
         try {
             Connection conn = JdbcUtils.getConn();
-            
             if (this.cbLoaiUser.getSelectionModel().isEmpty())
                 Utils.getBox("Vui lòng chọn loại tài khoản!!!", Alert.AlertType.WARNING).show();
                 else if (this.txtTaiKhoan.getText().isEmpty()) 
@@ -84,36 +110,48 @@ public class DangnhapController implements Initializable {
                                     Utils.getBox("Tên tài khoản không tồn tại!!!", Alert.AlertType.WARNING).show();
                                 else if (s.getUser(u.getTaikhoan()).getLoaiuser_id()!= u.getLoaiuser_id())
                                         Utils.getBox("Vui lòng chọn đúng loại tài khoản hoặc nhập đúng tài khoản!!!", Alert.AlertType.WARNING).show();
-                                else if (s.login(u)){
-                                    Parent trangchu;
-                                    var path= "";
+                                else if (s.login(u)) {
+                                    nd = u;
                                     Utils.getBox("Đăng nhập thành công!", Alert.AlertType.INFORMATION).show();
-                                    try {
-                                        if (u.getLoaiuser_id()== 1)
-                                            path = "trangchuquanlytruong.fxml";
-                                        if (u.getLoaiuser_id() == 2)
-                                            path = "trangchuthukho.fxml";
-                                        if (u.getLoaiuser_id() == 3)
-                                            path = "trangchunhanvien.fxml";
-                                        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-                                        FXMLLoader loader = new FXMLLoader();
-                                        loader.setLocation(getClass().getResource(path));
-                                        trangchu = loader.load();
-                                        Scene scene = new Scene(trangchu);
-                                        TrangChuController controller = loader.getController();
-                                        controller.setTTUser(u);
-                                        stage.setScene(scene);
-                                        stage.show();
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
+                                    return true;
                                 }
-                                    else
-                                        Utils.getBox("Đăng nhập thất bại!!!", Alert.AlertType.WARNING).show();
-                                        
-                            }
+                                else {
+                                    Utils.getBox("Đăng nhập thất bại!!!", Alert.AlertType.WARNING).show();
+                                    return false;
+                                }
+                        }
             conn.close();
         } catch (SQLException ex) {
+            Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public void dangNhapHandler(ActionEvent evt) throws IOException{
+        try {
+            if (dangnhap()) {
+                var path= "";
+                if (nd.getLoaiuser_id()== 1)
+                    path = "trangchuquanlytruong.fxml";
+                if (nd.getLoaiuser_id() == 2)
+                    path = "trangchuthukho.fxml";
+                if (nd.getLoaiuser_id() == 3)
+                    path = "trangchunhanvien.fxml";
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                TrangChuController controller = loader.getController();
+                controller.setTTUser(nd);
+                Parent root = (Parent) loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                //stage.setResizable(false);
+                //stage.initStyle(StageStyle.UTILITY);
+                //stage.setFullScreen(true);
+
+                //stage.setMaximized(true);
+                stage.setScene(scene);
+                stage.show();
+            }
+        } catch (IOException ex) {
             Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

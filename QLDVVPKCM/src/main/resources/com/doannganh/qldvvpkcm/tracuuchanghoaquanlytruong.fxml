@@ -13,7 +13,7 @@
    <children>
       <Button fx:id="btContine" layoutX="750.0" layoutY="60.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Tiếp Tục" />
       <Button fx:id="btThoat" layoutX="750.0" layoutY="121.0" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="30.0" prefWidth="66.0" text="Thoát" />
-      <TableView fx:id="tbHangHoa" layoutY="180.0" prefHeight="330.0" prefWidth="902.0" />
+      <TableView fx:id="tbHangHoa" editable="true" layoutY="180.0" prefHeight="330.0" prefWidth="902.0" />
       <HBox layoutX="104.0" layoutY="77.0" prefHeight="35.0" prefWidth="512.0">
          <children>
             <ComboBox fx:id="cbTraCuu" prefHeight="36.0" prefWidth="142.0" />
