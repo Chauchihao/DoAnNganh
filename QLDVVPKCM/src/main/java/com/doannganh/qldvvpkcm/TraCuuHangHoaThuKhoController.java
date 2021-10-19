@@ -425,7 +425,7 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
             this.tbHangHoa.getColumns().addAll(colMaHangHoa, colTenHangHoa
                     , colThuongHieu, colSoLuong, colGiaNhap, colGiaNiemYet
                     , colNgaySanXuat, colNgayHetHan, colTinhTrang
-                    , colLoaiHangHoa, colNhaCungCap, colAction);
+                    , colLoaiHangHoa, colNhaCungCap);
         } catch (SQLException ex) {
             Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
         }

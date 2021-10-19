@@ -18,8 +18,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -35,9 +40,25 @@ public class TrangChuController implements Initializable {
      */
     
     User nd;
+    @FXML private AnchorPane acpLoad;
+    @FXML private ScrollPane spLoad;
+    @FXML private HBox hbLoad;
+    @FXML
+    private void switchToSecondary() throws IOException {
+        //App.setRoot("secondary");
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
+        //hb.set
+        acpLoad.getChildren().add(loader.load());
+    }
+    @FXML
+    private void doi() throws IOException {
+        //App.setRoot("secondary");
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoathukho.fxml"));
+        //hb.set
+        acpLoad.getChildren().add(loader.load());
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
     
     public void setTTUser(User u){
@@ -52,6 +73,7 @@ public class TrangChuController implements Initializable {
             loader.setLocation(getClass().getResource("tracuuhanghoathukho.fxml"));
             tchh = loader.load();
             Scene scene = new Scene(tchh);
+            
             TraCuuHangHoaThuKhoController controller = loader.getController();
             controller.setTTUser(nd);
             //stage.setResizable(false);
@@ -70,7 +92,7 @@ public class TrangChuController implements Initializable {
             Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("tracuuchanghoaquanlytruong.fxml"));
+            loader.setLocation(getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
             tchh = loader.load();
             Scene scene = new Scene(tchh);
             TraCuuHangHoaQuanLyTruongController controller = loader.getController();

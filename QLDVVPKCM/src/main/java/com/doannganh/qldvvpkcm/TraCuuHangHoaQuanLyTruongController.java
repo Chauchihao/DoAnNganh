@@ -50,10 +50,14 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.BigDecimalStringConverter;
@@ -182,6 +186,50 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         TableColumn<HangHoa, Boolean> colTinhTrang = new TableColumn("Tình trạng");
         colTinhTrang.setCellValueFactory(new PropertyValueFactory("tinhtrang"));
         colTinhTrang.setEditable(false);
+        /*colTinhTrang.setCellFactory((obj) -> {
+            HBox hb = new HBox();
+            ToggleGroup group = new ToggleGroup();
+            ToggleButton btBan = new ToggleButton("Bán");
+            btBan.setToggleGroup(group);
+            ToggleButton btDung = new ToggleButton("Dừng");
+            btDung.setToggleGroup(group);
+            
+            btn.setOnAction(evt -> {
+                Utils.getBox("Bạn có xác nhận xóa hàng hóa không?", Alert.AlertType.CONFIRMATION)
+                     .showAndWait().ifPresent(bt -> {
+                        if (bt == ButtonType.OK) {
+                            TableCell cell = (TableCell) ((ToggleButton) evt.getSource()).getParent();
+                            HangHoa hh = (HangHoa) cell.getTableRow().getItem();
+
+                            if ("0".equals(hh.getSoluongtrongkho())) {
+                               try {
+                                    if (s.deleteHH(hh.getHanghoa_id())){
+                                        loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
+                                        Utils.getBox("Đã xóa hàng hóa thành công", Alert.AlertType.INFORMATION).show();
+                                    } else
+                                        Utils.getBox("Đã xóa hàng hóa thất bại", Alert.AlertType.ERROR).show();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            } else
+                                Utils.getBox("Chưa thể xóa hàng hóa khi số lượng trong kho > 0", Alert.AlertType.WARNING).show();
+
+                        }
+                     });
+            });
+            hb.getChildren().addAll(btBan, btDung);
+            TableCell cell = new TableCell();
+            cell.setGraphic(hb);
+            return cell;
+        });*/
+        
+        /*colTinhTrang.setOnEditStart((var evt) -> {
+            HangHoa hh = evt.getRowValue();
+            if (hh.isTinhtrang()) {
+                chb.isSelected();
+                chb.setSelected(true);
+            }
+        });*/
         /*colTinhTrang.setCellFactory((obj) -> {
             CheckBox chb = new CheckBox();
             chb.setOnAction(evt -> {
