@@ -147,6 +147,21 @@ public class HangHoaService {
         return id;
     }
     
+    public List getIDByThuongHieu(String th) throws SQLException {
+        String sql = "SELECT hanghoa_id FROM hanghoa"
+                    + " WHERE thuonghieu=?";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, th);
+        ResultSet rs = stm.executeQuery();
+        
+        List l = new ArrayList<>();
+        while (rs.next()) {
+            l.add(rs.getInt("hanghoa_id"));
+        }
+        return l;
+    }
+    
     public List getThuongHieu() throws SQLException {
         Statement stm = this.conn.createStatement();
         ResultSet r = stm.executeQuery("SELECT thuonghieu FROM hanghoa"
