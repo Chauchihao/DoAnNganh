@@ -114,7 +114,6 @@ public class DangnhapController implements Initializable {
                                         Utils.getBox("Vui lòng chọn đúng loại tài khoản hoặc nhập đúng tài khoản!!!", Alert.AlertType.WARNING).show();
                                 else if (s.login(u)) {
                                     nd = u;
-                                    Utils.getBox("Đăng nhập thành công!", Alert.AlertType.INFORMATION).show();
                                     return true;
                                 }
                                 else {
@@ -140,9 +139,10 @@ public class DangnhapController implements Initializable {
                 if (nd.getLoaiuser_id() == 3)
                     path = "trangchunhanvien.fxml";
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+                Parent root = (Parent) loader.load();
                 TrangChuController controller = loader.getController();
                 controller.setTTUser(nd);
-                Parent root = (Parent) loader.load();
+                
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 //stage.setMaximized(true);

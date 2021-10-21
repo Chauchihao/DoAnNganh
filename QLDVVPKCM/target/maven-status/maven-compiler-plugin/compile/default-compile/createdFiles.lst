@@ -9,6 +9,7 @@ com\doannganh\pojo\User.class
 com\doannganh\service\LoaiHangHoaService.class
 com\doannganh\qldvvpkcm\TrangChuController.class
 com\doannganh\service\JdbcUtils.class
+com\doannganh\qldvvpkcm\QuanLyNhaCungCapController.class
 com\doannganh\service\NhaCungCapService.class
 com\doannganh\pojo\HangHoa.class
 com\doannganh\qldvvpkcm\Utils.class

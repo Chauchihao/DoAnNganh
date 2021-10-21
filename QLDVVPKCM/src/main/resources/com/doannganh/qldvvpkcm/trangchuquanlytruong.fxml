@@ -21,10 +21,10 @@
             <VBox prefHeight="658.0" prefWidth="197.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="218.0" text="Thoát" />
-                  <AnchorPane prefHeight="210.0" prefWidth="223.0">
+                  <AnchorPane onMouseClicked="#loadTraCuuHHQLT" prefHeight="210.0" prefWidth="223.0">
                      <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="208.0" prefWidth="208.0" />
-                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#switchToSecondary" pickOnBounds="true" preserveRatio="true">
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadTraCuuHHQLT" prefHeight="208.0" prefWidth="208.0" />
+                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#loadTraCuuHHQLT" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../image/790891169210564609.png" />
                            </image>

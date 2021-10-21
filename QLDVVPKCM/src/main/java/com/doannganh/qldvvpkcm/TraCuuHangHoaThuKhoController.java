@@ -16,9 +16,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -483,7 +484,29 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
             l.add(0,false);
             l.add(1,true);
             ObservableList listTT = FXCollections.observableList(l);
-            colTinhTrang.setCellFactory(ComboBoxTableCell.<HangHoa, String>forTableColumn(listTT));
+            colTinhTrang.setCellFactory(ComboBoxTableCell.<HangHoa, Boolean>forTableColumn(listTT));
+            colTinhTrang.setOnEditCommit((var evt) -> {
+                try {
+                    HangHoa hh = evt.getRowValue();
+                    Boolean c = evt.getOldValue();
+                    Boolean m = evt.getNewValue();
+                    hh.setTinhtrang(m);
+                    if (m.equals(c)) {
+                        hh.setTinhtrang(c);
+                        Utils.getBox("Vui lòng chọn loại hàng hóa để cập nhật!", Alert.AlertType.WARNING).show();
+                    } else {
+                        if (s.suaTinhTrang(hh.getHanghoa_id(), hh.isTinhtrang())) {
+                            Utils.getBox("Cập nhật loại hàng hóa thành công!", Alert.AlertType.INFORMATION).show();
+                        } else {
+                            hh.setTinhtrang(c);
+                            Utils.getBox("Cập nhật loại hàng hóa thất bại!!!", Alert.AlertType.ERROR).show();
+                        }
+                    }
+                    tbHangHoa.refresh();
+                }catch (SQLException ex) {
+                    Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
             ObservableList listLHH = FXCollections.observableList(ss.getLoaiHH());
             colLoaiHangHoa.setCellFactory(ComboBoxTableCell.<HangHoa, String>forTableColumn(listLHH));
             colLoaiHangHoa.setOnEditCommit((var evt) -> {

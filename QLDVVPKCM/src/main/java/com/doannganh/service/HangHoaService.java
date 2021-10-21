@@ -246,6 +246,15 @@ public class HangHoaService {
         return row > 0;
     }
     
+    public boolean suaTinhTrang(int id, Boolean tt)  throws SQLException {
+        String sql ="UPDATE hanghoa SET tinhtrang=? WHERE hanghoa_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setBoolean(1, tt);
+        stm.setInt(2, id);
+        int row = stm.executeUpdate();
+        return row > 0;
+    }
+    
     public boolean suaLoaiHH(int id, int loaiHH)  throws SQLException {
         suaKhoaNgoai0();
         String sql ="UPDATE hanghoa SET loaihanghoa_id=? WHERE hanghoa_id=?";
