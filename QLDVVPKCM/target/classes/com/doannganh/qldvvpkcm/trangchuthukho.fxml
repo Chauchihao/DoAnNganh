@@ -21,12 +21,22 @@
             <VBox prefHeight="658.0" prefWidth="197.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="212.0" text="Thoát" />
-                  <AnchorPane prefHeight="210.0" prefWidth="223.0">
+                  <AnchorPane onMouseClicked="#loadTraCuuHHTK" prefHeight="210.0" prefWidth="223.0">
                      <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#doi" prefHeight="208.0" prefWidth="208.0" />
-                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#doi" pickOnBounds="true" preserveRatio="true">
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadTraCuuHHTK" prefHeight="208.0" prefWidth="208.0" />
+                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#loadTraCuuHHTK" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../image/790891169210564609.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="36.0" onMouseClicked="#loadQuanLyNCC" prefHeight="210.0" prefWidth="223.0">
+                     <children>
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadQuanLyNCC" prefHeight="208.0" prefWidth="208.0" />
+                        <ImageView fitHeight="208.0" fitWidth="208.0" onMouseClicked="#loadQuanLyNCC" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/887200347922239548.png" />
                            </image>
                         </ImageView>
                      </children>

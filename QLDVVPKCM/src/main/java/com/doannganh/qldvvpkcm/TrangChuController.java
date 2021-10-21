@@ -46,19 +46,21 @@ public class TrangChuController implements Initializable {
     @FXML private ScrollPane spLoad;
     @FXML private HBox hbLoad;
     @FXML
-    private void switchToSecondary() throws IOException {
-        //App.setRoot("secondary");
+    private void loadTraCuuHHQLT() throws IOException {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
-        //hb.set
         acpLoad.getChildren().add(loader.load());
     }
     @FXML
-    private void doi() throws IOException {
-        //App.setRoot("secondary");
+    private void loadTraCuuHHTK() throws IOException {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoathukho.fxml"));
-        //hb.set
+        acpLoad.getChildren().add(loader.load());
+    }
+    @FXML
+    private void loadQuanLyNCC() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("quanlynhacungcap.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
     @Override
