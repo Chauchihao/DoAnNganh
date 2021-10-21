@@ -38,6 +38,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -45,10 +49,17 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.BigDecimalStringConverter;
 import javafx.util.converter.DateStringConverter;
@@ -68,20 +79,133 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
     @FXML private TextField txtTraCuu;
     @FXML private TableView<HangHoa> tbHangHoa;
     @FXML private ComboBox<String> cbTraCuu;
+    
     ObservableList<String> list = FXCollections.observableArrayList
         ("Mã hàng", "Tên hàng", "Thương hiệu", "Loại hàng", "Nhà cung cấp");
+    ObservableList listTH;
+    private String th;
     User nd;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.cbTraCuu.setItems(list);
         this.cbTraCuu.getSelectionModel().selectFirst();
+        
         loadTable();
         if (this.txtTraCuu.getText().isEmpty())
             loadHangHoa("", this.cbTraCuu.getSelectionModel().getSelectedItem());
         
         this.txtTraCuu.textProperty().addListener((obj) -> {
             loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
+        });
+        
+        this.tbHangHoa.setRowFactory(obj -> {
+            TableRow r = new TableRow();
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem item = new MenuItem("Sửa thương hiệu");
+            item.setOnAction((var e) -> {
+                try {
+                    Connection conn = JdbcUtils.getConn();
+                    HangHoaService s = new HangHoaService(conn);
+                    listTH = FXCollections.observableList(s.getThuongHieu());
+                    HangHoa hh = this.tbHangHoa.getSelectionModel().getSelectedItem();
+                    int rindex = this.tbHangHoa.getSelectionModel().getSelectedIndex();
+                    HBox hb = new HBox();
+                    VBox vb = new VBox();
+                    Button bt = new Button("Sửa");
+                    Button btAll = new Button("Sửa tất cả");
+                    TextField tf = new TextField(hh.getThuonghieu());
+                    vb.getChildren().setAll(bt, btAll);
+                    hb.getChildren().setAll(tf, vb);
+                    
+                    bt.setOnAction((var evt) -> {
+                        String tam = "";
+                        boolean co = true;
+                        if (tf.getText().isEmpty())
+                            Utils.getBox("Vui lòng không để trống!", Alert.AlertType.WARNING).show();
+                        else {
+                            tam = tf.getText();
+                            for (int i = 0; i < listTH.size(); i++) {
+                                if (tam.equals(listTH.get(i))) {
+                                    Utils.getBox("Vui lòng thay đổi thương hiệu để sửa!", Alert.AlertType.WARNING).show();
+                                    co = false;
+                                    break;
+                                } else {
+                                    tam = tf.getText();
+                                }
+                            }
+                            if (co) {
+                                hh.setThuonghieu(tam);
+                                try {
+                                    if (s.suaThuongHieu(hh.getHanghoa_id(), hh.getThuonghieu())) {
+                                        Utils.getBox("Sửa thương hiệu thành công!", Alert.AlertType.INFORMATION).show();
+                                        this.tbHangHoa.getItems().set(rindex, hh);
+                                    } else
+                                        Utils.getBox("Sửa thương hiệu thất bại!!!", Alert.AlertType.ERROR).show();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
+                        try {
+                            listTH = FXCollections.observableList(s.getThuongHieu());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                    btAll.setOnAction((var evt) -> {
+                        String tam = "";
+                        boolean co = true;
+                        if (tf.getText().isEmpty())
+                            Utils.getBox("Vui lòng không để trống!", Alert.AlertType.WARNING).show();
+                        else {
+                            tam = tf.getText();
+                            for (int i = 0; i < listTH.size(); i++) {
+                                if (tam.equals(listTH.get(i))) {
+                                    Utils.getBox("Vui lòng thay đổi thương hiệu để sửa!", Alert.AlertType.WARNING).show();
+                                    co = false;
+                                    break;
+                                } else {
+                                    tam = tf.getText();
+                                }
+                            }
+                            if (co) {
+                                try {
+                                    List l = s.getIDByThuongHieu(hh.getThuonghieu());
+                                    for (int i = 0; i < l.size(); i++) {
+                                        if (s.suaThuongHieu((int) l.get(i), tam))
+                                            this.tbHangHoa.refresh();
+                                    }
+                                    if (!l.isEmpty())
+                                        Utils.getBox("Sửa thương hiệu thành công!", Alert.AlertType.INFORMATION).show();
+                                    else
+                                        Utils.getBox("Sửa thương hiệu thất bại!!!", Alert.AlertType.ERROR).show();
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
+                        loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
+                        try {
+                            listTH = FXCollections.observableList(s.getThuongHieu());
+                        } catch (SQLException ex) {
+                            Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                    Scene scene = new Scene(hb);
+                    Stage stage = new Stage();
+                    stage.setTitle("Thương Hiệu");
+                    stage.setScene(scene);
+                    stage.showAndWait();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            contextMenu.getItems().add(item);
+            r.setOnContextMenuRequested(evt -> {
+                contextMenu.show(r, evt.getScreenX(), evt.getSceneY());
+            });
+            return r;
         });
     }
     
@@ -176,14 +300,26 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
                     Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            ObservableList listTH = FXCollections.observableList(s.getThuongHieu());
-            colThuongHieu.setCellFactory(ComboBoxTableCell.<HangHoa, String>forTableColumn(listTH));
-            colThuongHieu.setOnEditCommit((var evt) -> {
+            
+            
+            
+            //ContextMenu contextMenu = new ContextMenu();
+            //MenuItem item1 = new MenuItem("Thêm thương hiệu");
+            //MenuItem item2 = new MenuItem("Sửa thương hiệu");
+            //contextMenu.getItems().addAll(item1, item2);
+            //contextMenu.show(colThuongHieu);
+            listTH = FXCollections.observableList(s.getThuongHieu());
+            colThuongHieu.setCellFactory((TableColumn<HangHoa, String> p) -> {
+                ComboBoxTableCell<HangHoa, String> cell = new ComboBoxTableCell<>(listTH);
+                return cell;
+            });
+            colThuongHieu.setOnEditCommit((TableColumn.CellEditEvent<HangHoa, String> evt) -> {
                 try {
                     HangHoa hh = evt.getRowValue();
                     String c = String.valueOf(evt.getOldValue());
                     String m = String.valueOf(evt.getNewValue());
                     hh.setThuonghieu(m);
+                    
                     if (m.equals(c)) {
                         hh.setThuonghieu(c);
                         Utils.getBox("Vui lòng thay đổi thương hiệu để cập nhật!", Alert.AlertType.WARNING).show();
@@ -194,8 +330,9 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
                             hh.setThuonghieu(c);
                             Utils.getBox("Cập nhật thương hiệu thất bại!!!", Alert.AlertType.ERROR).show();
                         }
-                    }
+                    }   
                     tbHangHoa.refresh();
+                    listTH = FXCollections.observableList(s.getThuongHieu());
                 }catch (SQLException ex) {
                     Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -342,6 +479,11 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
                     Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+            List l = new ArrayList<>();
+            l.add(0,false);
+            l.add(1,true);
+            ObservableList listTT = FXCollections.observableList(l);
+            colTinhTrang.setCellFactory(ComboBoxTableCell.<HangHoa, String>forTableColumn(listTT));
             ObservableList listLHH = FXCollections.observableList(ss.getLoaiHH());
             colLoaiHangHoa.setCellFactory(ComboBoxTableCell.<HangHoa, String>forTableColumn(listLHH));
             colLoaiHangHoa.setOnEditCommit((var evt) -> {
@@ -425,11 +567,12 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
             this.tbHangHoa.getColumns().addAll(colMaHangHoa, colTenHangHoa
                     , colThuongHieu, colSoLuong, colGiaNhap, colGiaNiemYet
                     , colNgaySanXuat, colNgayHetHan, colTinhTrang
-                    , colLoaiHangHoa, colNhaCungCap, colAction);
+                    , colLoaiHangHoa, colNhaCungCap);
         } catch (SQLException ex) {
             Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
     public void logoutHandler(ActionEvent evt) throws IOException {
         try {

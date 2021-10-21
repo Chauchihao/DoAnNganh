@@ -5,25 +5,36 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#traCuuHangHoaQuanLyTruongHandler" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TrangChuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TrangChuController">
    <children>
-      <ImageView fx:id="imgTest1" fitHeight="168.0" fitWidth="225.0" layoutX="46.0" layoutY="139.0" onMouseClicked="#traCuuHangHoaThuKhoHandler" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../image/790891169210564609.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="110.0" layoutY="50.0" text="TRANG CHỦ THỦ KHO">
+      <Label alignment="CENTER" prefHeight="71.0" prefWidth="1454.0" text="TRANG CHỦ THỦ KHO" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="Arial Bold" size="35.0" />
          </font>
       </Label>
-      <Label layoutX="116.0" layoutY="280.0" text="Tra Cứu">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="btThoat" layoutX="441.0" layoutY="232.0" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="30.0" prefWidth="66.0" text="Thoát" />
+      <HBox prefHeight="1010.0" prefWidth="1920.0">
+         <children>
+            <VBox prefHeight="658.0" prefWidth="197.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="212.0" text="Thoát" />
+                  <AnchorPane prefHeight="210.0" prefWidth="223.0">
+                     <children>
+                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#doi" prefHeight="208.0" prefWidth="208.0" />
+                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#doi" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/790891169210564609.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1010.0" prefWidth="1712.0" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+</VBox>
