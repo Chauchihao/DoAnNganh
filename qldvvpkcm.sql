@@ -30,7 +30,7 @@ CREATE TABLE `hanghoa` (
   `ngaysanxuat` date NOT NULL,
   `ngayhethan` date NOT NULL,
   `hinhanh` varchar(255) NOT NULL,
-  `tinhtrang` boolean NOT NULL DEFAULT True,
+  `tinhtrang` bool NOT NULL DEFAULT True,
   `loaihanghoa_id` int NULL,
   
   PRIMARY KEY (`hanghoa_id`),

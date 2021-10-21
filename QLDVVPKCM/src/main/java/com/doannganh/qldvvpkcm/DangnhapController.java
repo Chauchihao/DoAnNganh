@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -52,7 +54,7 @@ public class DangnhapController implements Initializable {
     @FXML private PasswordField txtMatKhau;
     @FXML private Button btDangNhap;
     @FXML private AnchorPane apDangNhap;
-    User nd;
+    public static User nd;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -143,12 +145,9 @@ public class DangnhapController implements Initializable {
                 Parent root = (Parent) loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
-                //stage.setResizable(false);
-                //stage.initStyle(StageStyle.UTILITY);
-                //stage.setFullScreen(true);
-
                 //stage.setMaximized(true);
                 stage.setScene(scene);
+                stage.sizeToScene();
                 stage.show();
             }
         } catch (IOException ex) {
