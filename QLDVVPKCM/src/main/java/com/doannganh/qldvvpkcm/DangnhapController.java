@@ -147,7 +147,8 @@ public class DangnhapController implements Initializable {
                 Stage stage = new Stage();
                 //stage.setMaximized(true);
                 stage.setScene(scene);
-                stage.sizeToScene();
+                stage = App.setSize(stage);
+                //stage.sizeToScene();
                 stage.show();
             }
         } catch (IOException ex) {

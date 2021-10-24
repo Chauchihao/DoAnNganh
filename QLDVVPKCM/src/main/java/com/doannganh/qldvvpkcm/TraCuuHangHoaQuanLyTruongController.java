@@ -286,21 +286,5 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         }
     }
     
-    public void continueHandler(ActionEvent evt) throws IOException {
-        Parent trangchu;
-        var path="";
-        //if (nd.getIdLoaiTK() == 1)
-            //path = "UInhanvien.fxml";
-        //if (nd.getIdLoaiTK() == 2)
-            //path = "UIkhachhang.fxml";
-        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(path));
-        trangchu = loader.load();
-        Scene scene = new Scene(trangchu);
-        TrangChuController controller = loader.getController();
-        //controller.setTenTK(nd);
-        stage.setScene(scene);
-        stage.show();
-    }
+    
 }
