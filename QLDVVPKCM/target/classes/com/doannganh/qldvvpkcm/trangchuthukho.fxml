@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,42 +10,43 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TrangChuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="776.0" styleClass="root" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TrangChuController">
    <children>
-      <Label alignment="CENTER" prefHeight="71.0" prefWidth="1454.0" text="TRANG CHỦ THỦ KHO" textAlignment="CENTER" textOverrun="CLIP">
-         <font>
-            <Font name="Arial Bold" size="35.0" />
-         </font>
-      </Label>
-      <HBox prefHeight="1010.0" prefWidth="1920.0">
+      <AnchorPane prefHeight="1000.0" prefWidth="1900.0">
          <children>
-            <VBox prefHeight="658.0" prefWidth="197.0">
+            <HBox prefHeight="1000.0" prefWidth="1900.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="212.0" text="Thoát" />
-                  <AnchorPane onMouseClicked="#loadTraCuuHHTK" prefHeight="210.0" prefWidth="223.0">
+                  <VBox prefHeight="553.0" prefWidth="208.0">
                      <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadTraCuuHHTK" prefHeight="208.0" prefWidth="208.0" />
-                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#loadTraCuuHHTK" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../image/790891169210564609.png" />
-                           </image>
-                        </ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="212.0" text="Thoát" />
+                        <AnchorPane onMouseClicked="#loadTraCuuHHTK" prefHeight="210.0" prefWidth="223.0">
+                           <children>
+                              <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadTraCuuHHTK" prefHeight="208.0" prefWidth="208.0" />
+                              <ImageView fitHeight="208.0" fitWidth="227.0" nodeOrientation="INHERIT" onMouseClicked="#loadTraCuuHHTK" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../image/z2866524378047_4f570394acd71bdac584f203d9c59088.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="10.0" layoutY="36.0" onMouseClicked="#loadQuanLyNCC" prefHeight="210.0" prefWidth="223.0">
-                     <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadQuanLyNCC" prefHeight="208.0" prefWidth="208.0" />
-                        <ImageView fitHeight="208.0" fitWidth="208.0" onMouseClicked="#loadQuanLyNCC" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../image/887200347922239548.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </AnchorPane>
+                  </VBox>
+                  <ScrollPane prefHeight="1000.0" prefWidth="1690.0">
+                     <content>
+                        <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1000.0" prefWidth="1690.0">
+                           <children>
+                              <Label prefHeight="71.0" prefWidth="1690.0" text="TRANG CHỦ THỦ KHO" textAlignment="CENTER" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Arial Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
-            </VBox>
-            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1010.0" prefWidth="1712.0" />
+            </HBox>
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
 </VBox>

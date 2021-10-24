@@ -17,10 +17,11 @@ public class NhaCungCap {
     private String quocgia;
     private String email;
     private String sodt;
+    private int tongmathang;
     
     @Override
     public String toString() {
-        return this.tencongty;
+        return this.getTencongty();
     }
 
     /**
@@ -119,5 +120,19 @@ public class NhaCungCap {
      */
     public void setSodt(String sodt) {
         this.sodt = sodt;
+    }
+
+    /**
+     * @return the tongmathang
+     */
+    public int getTongmathang() {
+        return tongmathang;
+    }
+
+    /**
+     * @param tongmathang the tongmathang to set
+     */
+    public void setTongmathang(int tongmathang) {
+        this.tongmathang = tongmathang;
     }
 }
