@@ -175,12 +175,15 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         
         TableColumn<HangHoa, BigDecimal> colSoLuong = new TableColumn("Số Lượng");
         colSoLuong.setCellValueFactory(new PropertyValueFactory("soluongtrongkho"));
+        colSoLuong.setStyle( "-fx-alignment: CENTER-RIGHT;");
         
         TableColumn<HangHoa, BigDecimal> colGiaNhap = new TableColumn("Giá Nhập");
         colGiaNhap.setCellValueFactory(new PropertyValueFactory("gianhap"));
+        colGiaNhap.setStyle( "-fx-alignment: CENTER-RIGHT;");
         
         TableColumn<HangHoa, BigDecimal> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
         colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("gianiemyet"));
+        colGiaNiemYet.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
         TableColumn<HangHoa, java.util.Date> colNgaySanXuat = new TableColumn("Ngày Sản Xuất");
         colNgaySanXuat.setCellValueFactory(new PropertyValueFactory("ngaysanxuat"));

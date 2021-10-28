@@ -5,10 +5,13 @@
  */
 package com.doannganh.qldvvpkcm;
 
+import java.io.InputStream;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -21,5 +24,13 @@ public class Utils {
         alert.setContentText(content);
 
         return alert;
+    }
+    
+    public static ImageView setImageView(String path) {
+        InputStream is = Utils.class.getResourceAsStream(path);
+        ImageView iv = new ImageView(new Image(is));
+        iv.setFitWidth(100);
+        iv.setFitHeight(100);
+        return iv;
     }
 }
