@@ -52,6 +52,19 @@ public class LoaiHangHoaService {
         return id;
     }
     
+    public String getLoaiHHByid(int id) throws SQLException {
+        
+        String sql= "SELECT tenloai FROM loaihanghoa WHERE loaihanghoa_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        String ten = "";
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            ten = rs.getString("tenloai");
+        }
+        return ten;
+    }
+    
     /*public List getTenLoai() throws SQLException {
         Statement stm = this.conn.createStatement();
         ResultSet r = stm.executeQuery("SELECT tenloai FROM loaihanghoa");

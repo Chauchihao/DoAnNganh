@@ -48,6 +48,7 @@ public class HangHoaService {
             hh.setGianiemyet(rs.getString("gianiemyet"));
             hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
             hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setHinhanh(rs.getString("hinhanh"));
             hh.setTinhtrang(rs.getBoolean("tinhtrang"));
             hh.setTenloaihang(rs.getString("tenloai"));
             hh.setNhacungcap(rs.getString("tencongty"));
@@ -123,6 +124,7 @@ public class HangHoaService {
             hh.setGianiemyet(rs.getString("gianiemyet"));
             hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
             hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setHinhanh(rs.getString("hinhanh"));
             hh.setTinhtrang(rs.getBoolean("tinhtrang"));
             hh.setTenloaihang(rs.getString("tenloai"));
             hh.setNhacungcap(rs.getString("tencongty"));
@@ -130,6 +132,36 @@ public class HangHoaService {
             hangHoa.add(hh);
         }
         return hangHoa;
+    }
+    
+    public HangHoa getHangHoaByID(int id) throws SQLException {
+        String sql= "SELECT hanghoa.*, tenloai, tencongty, gianhap"
+                + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
+                + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = ?"
+                + " ORDER BY hanghoa.hanghoa_id";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        
+        ResultSet rs = stm.executeQuery();
+        HangHoa hh = new HangHoa();
+        while (rs.next()) {
+            hh.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
+            hh.setTenhanghoa(rs.getString("tenhanghoa"));
+            hh.setThuonghieu(rs.getString("thuonghieu"));
+            hh.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            hh.setGianhap(rs.getString("gianhap"));
+            hh.setGianiemyet(rs.getString("gianiemyet"));
+            hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setHinhanh(rs.getString("hinhanh"));
+            hh.setTinhtrang(rs.getBoolean("tinhtrang"));
+            hh.setTenloaihang(rs.getString("tenloai"));
+            hh.setNhacungcap(rs.getString("tencongty"));
+        }
+        return hh;
     }
     
     public int getIDLoaiByTenLoai(String loai) throws SQLException {
@@ -160,6 +192,21 @@ public class HangHoaService {
             l.add(rs.getInt("hanghoa_id"));
         }
         return l;
+    }
+    
+    public String getSoLuongByIDHH(int id) throws SQLException {
+        String sql = "SELECT soluongtrongkho FROM hanghoa"
+                    + " WHERE hanghoa_id=?";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        ResultSet rs = stm.executeQuery();
+        
+        String sl = "";
+        while (rs.next()) {
+            sl = rs.getString("soluongtrongkho");
+        }
+        return sl;
     }
     
     public List getThuongHieu() throws SQLException {
