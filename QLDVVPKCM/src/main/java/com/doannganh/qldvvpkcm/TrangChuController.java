@@ -41,7 +41,7 @@ public class TrangChuController implements Initializable {
      * Initializes the controller class.
      */
     
-    User nd;
+    static User nd;
     @FXML private AnchorPane acpLoad;
     @FXML private ScrollPane spLoad;
     @FXML private HBox hbLoad;
@@ -62,6 +62,14 @@ public class TrangChuController implements Initializable {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("quanlynhacungcap.fxml"));
         acpLoad.getChildren().add(loader.load());
+    }
+    @FXML
+    public void loadTaoHoaDon() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("taohoadon.fxml"));
+        acpLoad.getChildren().add(loader.load());
+        TaoHoaDonController controller = loader.getController();
+        //controller.setTTUser(nd);
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

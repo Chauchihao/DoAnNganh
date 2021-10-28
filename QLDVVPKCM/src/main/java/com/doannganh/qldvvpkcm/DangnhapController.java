@@ -113,7 +113,7 @@ public class DangnhapController implements Initializable {
                                 else if (s.getUser(u.getTaikhoan()).getLoaiuser_id()!= u.getLoaiuser_id())
                                         Utils.getBox("Vui lòng chọn đúng loại tài khoản hoặc nhập đúng tài khoản!!!", Alert.AlertType.WARNING).show();
                                 else if (s.login(u)) {
-                                    nd = u;
+                                    nd = s.getUser(u.getTaikhoan());
                                     return true;
                                 }
                                 else {

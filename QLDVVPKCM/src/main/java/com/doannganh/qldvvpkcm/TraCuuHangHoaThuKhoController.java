@@ -282,12 +282,15 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
             
             TableColumn<HangHoa, String> colSoLuong = new TableColumn("Số Lượng");
             colSoLuong.setCellValueFactory(new PropertyValueFactory("soluongtrongkho"));
+            colSoLuong.setStyle( "-fx-alignment: CENTER-RIGHT;");
             
             TableColumn<HangHoa, String> colGiaNhap = new TableColumn("Giá Nhập");
             colGiaNhap.setCellValueFactory(new PropertyValueFactory("gianhap"));
+            colGiaNhap.setStyle( "-fx-alignment: CENTER-RIGHT;");
             
             TableColumn<HangHoa, String> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
             colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("gianiemyet"));
+            colGiaNiemYet.setStyle( "-fx-alignment: CENTER-RIGHT;");
             
             TableColumn<HangHoa, String> colNgaySanXuat = new TableColumn("Ngày Sản Xuất");
             colNgaySanXuat.setCellValueFactory(new PropertyValueFactory("ngaysanxuat"));
@@ -690,9 +693,11 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
             
             TableColumn<NhaCungCap, String> colSoDT = new TableColumn("Số điện thoại");
             colSoDT.setCellValueFactory(new PropertyValueFactory("sodt"));
+            colSoDT.setStyle( "-fx-alignment: CENTER-RIGHT;");
             
             TableColumn<NhaCungCap, Integer> colTongMatHang = new TableColumn("Tổng mặt hàng");
             colTongMatHang.setCellValueFactory(new PropertyValueFactory("tongmathang"));
+            colTongMatHang.setStyle( "-fx-alignment: CENTER-RIGHT;");
             
             colMaNCC.setOnEditStart(evt -> {
                 Utils.getBox("Không thể sửa mã nhà cung cấp!!!", Alert.AlertType.ERROR).show();
@@ -919,5 +924,11 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TraCuuHangHoaThuKhoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void clearHandler(ActionEvent evt) throws IOException {
+        if (!this.txtTraCuu.getText().isEmpty())
+            this.txtTraCuu.setText("");
+        
     }
 }
