@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,7 +36,7 @@ import javafx.stage.StageStyle;
  *
  * @author Admin
  */
-public class TrangChuController implements Initializable {
+public class TrangChuQuanLyTruongController implements Initializable {
     
     /**
      * Initializes the controller class.
@@ -51,26 +52,7 @@ public class TrangChuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
-    @FXML
-    public void loadTraCuuHHTK() throws IOException {
-        acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoathukho.fxml"));
-        acpLoad.getChildren().add(loader.load());
-    }
-    @FXML
-    public void loadQuanLyNCC() throws IOException {
-        acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("quanlynhacungcap.fxml"));
-        acpLoad.getChildren().add(loader.load());
-    }
-    @FXML
-    public void loadTaoHoaDon() throws IOException {
-        acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("taohoadon.fxml"));
-        acpLoad.getChildren().add(loader.load());
-        TaoHoaDonController controller = loader.getController();
-        //controller.setTTUser(nd);
-    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
@@ -79,29 +61,7 @@ public class TrangChuController implements Initializable {
         nd = u;
     }
     
-    public void traCuuHangHoaThuKhoHandler(MouseEvent evt) throws IOException{
-        try {
-            Parent tchh;
-            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("tracuuhanghoathukho.fxml"));
-            tchh = loader.load();
-            Scene scene = new Scene(tchh);
-            
-            TraCuuHangHoaThuKhoController controller = loader.getController();
-            controller.setTTUser(nd);
-            //stage.setResizable(false);
-            //stage.initStyle(StageStyle.UTILITY);
-            //stage.setFullScreen(true);
-            
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void traCuuHangHoaQuanLyTruongHandler(MouseEvent evt) throws IOException{
+    public void traCuuHangHoaQuanLyTruongHandler(ActionEvent evt) throws IOException{
         try {
             Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
@@ -114,7 +74,7 @@ public class TrangChuController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -122,7 +82,7 @@ public class TrangChuController implements Initializable {
     
     public void logoutHandler(ActionEvent evt) throws IOException{
         try {
-              App.setRoot("dangnhap");
+            App.setRoot("dangnhap");
 //            Parent dx;
 //            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
 //            FXMLLoader loader = new FXMLLoader();
@@ -133,7 +93,7 @@ public class TrangChuController implements Initializable {
 //            //stage.setMaximized(true);
 //            stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

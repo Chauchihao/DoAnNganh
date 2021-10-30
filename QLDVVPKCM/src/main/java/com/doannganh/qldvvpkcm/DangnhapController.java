@@ -133,23 +133,32 @@ public class DangnhapController implements Initializable {
             if (dangnhap()) {
                 var path= "";
                 if (nd.getLoaiuser_id()== 1)
-                    path = "trangchuquanlytruong.fxml";
-                if (nd.getLoaiuser_id() == 2)
-                    path = "trangchuthukho.fxml";
-                if (nd.getLoaiuser_id() == 3)
-                    path = "trangchunhanvien.fxml";
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-                Parent root = (Parent) loader.load();
-                TrangChuController controller = loader.getController();
-                controller.setTTUser(nd);
-                
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
+                {
+                    App.setRoot("trangchuquanlytruong");
+                    TrangChuQuanLyTruongController.setTTUser(nd);
+                }
+                if (nd.getLoaiuser_id() == 2){
+                    App.setRoot("trangchuthukho");
+                    TrangChuController.setTTUser(nd);
+                }
+                    
+                if (nd.getLoaiuser_id() == 3){
+                    App.setRoot("trangchunhanvien");
+                    TrangChuController.setTTUser(nd);
+                }
+                    
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+//                Parent root = (Parent) loader.load();
+//                TrangChuController controller = loader.getController();
+//                controller.setTTUser(nd);
+
+//                Scene scene = new Scene(root);
+//                Stage stage = new Stage();
                 //stage.setMaximized(true);
-                stage.setScene(scene);
-                stage = App.setSize(stage);
+//                stage.setScene(scene);
+//                stage = App.setSize(stage);
                 //stage.sizeToScene();
-                stage.show();
+//                stage.show();
             }
         } catch (IOException ex) {
             Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
