@@ -73,4 +73,31 @@ public class DonHangService {
             }
             return a;
     }
+    
+    public List<Integer> getDHIDByMonth(String date) throws SQLException{
+
+            ArrayList<Integer> a = new ArrayList<>();
+            String sql = "SELECT * FROM qldvvpkcm.donhang"
+                    + " Where month(ngayTaoDH) = month(?)";
+            PreparedStatement stm = this.conn.prepareStatement(sql);
+            stm.setString(1, date);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                a.add(rs.getInt("donhang_id"));
+            }
+            return a;
+    }
+    public List<Integer> getDHIDByYear(String date) throws SQLException{
+
+            ArrayList<Integer> a = new ArrayList<>();
+            String sql = "SELECT * FROM qldvvpkcm.donhang"
+                    + " Where year(ngayTaoDH) = year(?)";
+            PreparedStatement stm = this.conn.prepareStatement(sql);
+            stm.setString(1, date);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                a.add(rs.getInt("donhang_id"));
+            }
+            return a;
+    }
 }

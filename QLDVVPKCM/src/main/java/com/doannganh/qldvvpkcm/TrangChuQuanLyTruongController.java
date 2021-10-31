@@ -6,21 +6,17 @@
  */
 package com.doannganh.qldvvpkcm;
 
-import com.doannganh.pojo.ChiTietDonHang;
 import com.doannganh.pojo.User;
 import com.doannganh.service.ChiTietDonHangService;
 import com.doannganh.service.DonHangService;
 import com.doannganh.service.JdbcUtils;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,7 +32,10 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -65,6 +64,27 @@ public class TrangChuQuanLyTruongController implements Initializable {
     private NumberAxis doanhThu;
     
     @FXML
+    private Tab ngayhn;
+    
+    @FXML
+    private Text dtNgay;
+    
+    @FXML
+    private Text dtThang;
+    
+    @FXML
+    private Text dtNam;
+    
+    @FXML
+    private Tab thang;
+
+    @FXML
+    private Tab nam;
+    
+    @FXML
+    private ListView<String> listDH;
+    
+    @FXML
     public void loadTraCuuHHQLT() throws IOException {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
@@ -91,14 +111,85 @@ public class TrangChuQuanLyTruongController implements Initializable {
             Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+        public void loadTabNgay(){
+        try {
+            Connection conn = JdbcUtils.getConn();
+            DonHangService dhs = new DonHangService(conn);
+            ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+            LocalDate today = LocalDate.now();
+            List<Integer> idDH = dhs.getDHIDByDate(today.toString());
+            int tong = 0;
+            for(int j = 0; j < idDH.size(); j++){
+                    tong += ctdhs.tongDHByID(idDH.get(j));
+                }
+            this.dtNgay.setText(moneyFormat(tong));
+        } catch (SQLException ex) {
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+        public void loadTabThang(){
+        try {
+            Connection conn = JdbcUtils.getConn();
+            DonHangService dhs = new DonHangService(conn);
+            ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+            LocalDate today = LocalDate.now();
+            List<Integer> idDH = dhs.getDHIDByMonth(today.toString());
+            int tong = 0;
+            for(int j = 0; j < idDH.size(); j++){
+                    tong += ctdhs.tongDHByID(idDH.get(j));
+                }
+            this.dtThang.setText(moneyFormat(tong));
+        } catch (SQLException ex) {
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void loadTabNam(){
+        try {
+            Connection conn = JdbcUtils.getConn();
+            DonHangService dhs = new DonHangService(conn);
+            ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+            LocalDate today = LocalDate.now();
+            List<Integer> idDH = dhs.getDHIDByYear(today.toString());
+            int tong = 0;
+            for(int j = 0; j < idDH.size(); j++){
+                    tong += ctdhs.tongDHByID(idDH.get(j));
+                }
+            this.dtNam.setText(moneyFormat(tong));
+        } catch (SQLException ex) {
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadBarchart();
+        loadListView();
     }
     
     public static void setTTUser(User u){
         nd = u;
     }
+    
+    public void loadListView(){
+        try {
+            Connection conn = JdbcUtils.getConn();
+            ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+            DonHangService dhs = new DonHangService(conn);
+//            LocalDate today = LocalDate.now();
+            List<Integer> idDH = dhs.getDHIDByDate("2021-10-28");
+            for(int j = 0; j < idDH.size(); j++){
+                    int tong = ctdhs.tongDHByID(idDH.get(j));
+                    listDH.getItems().add("Mã đơn hàng: #" + idDH.get(j) + "\t\t\tTổng: " + moneyFormat(tong));
+                }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     public void traCuuHangHoaQuanLyTruongHandler(ActionEvent evt) throws IOException{
         try {
@@ -115,6 +206,11 @@ public class TrangChuQuanLyTruongController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static String moneyFormat(int money){
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return(formatter.format(money)+" VNĐ");
     }
     
     public ArrayList<String> bayNgayGanNhat(){
