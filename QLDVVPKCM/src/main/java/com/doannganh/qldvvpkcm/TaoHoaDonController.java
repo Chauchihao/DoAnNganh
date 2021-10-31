@@ -158,7 +158,7 @@ public class TaoHoaDonController implements Initializable {
                         Connection conn;
                         conn = JdbcUtils.getConn();
                         HangHoaService s = new HangHoaService(conn);
-                        loadCTDH(hh, "1");
+                        loadCTDH(hh,"1");
                         //int sl = Integer.valueOf(hh.getSoluongtrongkho()) - 1;
                         //hh.setSoluongtrongkho(String.valueOf(sl));
                         //s.suaSoLuong(hh.getHanghoa_id(), String.valueOf(sl));
@@ -282,7 +282,7 @@ public class TaoHoaDonController implements Initializable {
             ctdh.setDongia(hh.getGianiemyet());
             ctdh.setSoluong(sl);
             ctdh.setHinhanh(hh.getHinhanh());
-            ctdh.setGiamgia(String.valueOf(0));
+            ctdh.setGiamgia("0.0");
             BigDecimal dg = new BigDecimal(hh.getGianiemyet());
             BigDecimal slg = new BigDecimal(sl);
             BigDecimal gg = new BigDecimal(0);

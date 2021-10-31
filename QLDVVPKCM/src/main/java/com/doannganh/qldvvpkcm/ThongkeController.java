@@ -24,4 +24,6 @@ public class ThongkeController implements Initializable {
         // TODO
     }    
     
+    
+    
 }

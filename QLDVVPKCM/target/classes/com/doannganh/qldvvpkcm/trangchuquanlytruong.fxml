@@ -5,6 +5,9 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -85,7 +88,7 @@
                         <Font name="Arial Bold" size="35.0" />
                      </font>
                   </Label>
-                  <BarChart layoutX="42.0" layoutY="203.0" prefHeight="480.0" prefWidth="732.0" title="Doanh thu 7 ngày gần nhất">
+                  <BarChart fx:id="barChart" blendMode="MULTIPLY" layoutX="55.0" layoutY="242.0" onDragDetected="#loadBarchart" prefHeight="494.0" prefWidth="836.0" title="DOANH THU 7 NGÀY GẦN NHẤT">
                     <xAxis>
                       <CategoryAxis fx:id="ngay" side="BOTTOM" />
                     </xAxis>
@@ -93,9 +96,48 @@
                       <NumberAxis fx:id="doanhThu" side="LEFT" />
                     </yAxis>
                   </BarChart>
+                  <ListView layoutX="946.0" layoutY="107.0" prefHeight="606.0" prefWidth="286.0" />
+                  <TabPane layoutX="96.0" layoutY="98.0" prefHeight="132.0" prefWidth="310.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                      <Tab text="Untitled Tab 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                        <Tab text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                        <Tab text="Untitled Tab 2">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
                </children>
             </AnchorPane>
          </children>
       </HBox>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </VBox>
