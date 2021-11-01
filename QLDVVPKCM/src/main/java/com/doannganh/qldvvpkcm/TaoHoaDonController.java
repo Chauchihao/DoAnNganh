@@ -9,57 +9,52 @@ import com.doannganh.pojo.ChiTietDonHang;
 import com.doannganh.pojo.DonHang;
 import com.doannganh.pojo.HangHoa;
 import com.doannganh.pojo.User;
-import static com.doannganh.qldvvpkcm.TrangChuController.nd;
 import com.doannganh.service.ChiTietDonHangService;
 import com.doannganh.service.DonHangService;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
-import com.doannganh.service.LoaiHangHoaService;
-import com.doannganh.service.NhaCungCapService;
-import java.io.File;
+import com.doannganh.service.UserService;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -92,6 +87,7 @@ public class TaoHoaDonController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.cbTraCuu.setItems(list);
         this.cbTraCuu.getSelectionModel().selectFirst();
+        this.txtTongTien.setText(tongTien.toString());
         
         loadTable();
         loadHangHoa("", this.cbTraCuu.getSelectionModel().getSelectedItem());
@@ -104,23 +100,6 @@ public class TaoHoaDonController implements Initializable {
             else
                 loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
         });
-        
-        /*this.tbDonHang.editingCellProperty().addListener((obj) -> {
-            try {
-                Connection conn = JdbcUtils.getConn();
-                HangHoaService s = new HangHoaService(conn);
-                ChiTietDonHang ctdh = this.tbDonHang.getSelectionModel().getSelectedItem();
-                int rindex = this.tbDonHang.getSelectionModel().getSelectedIndex();
-                if (Integer.parseInt(ctdh.getSoluong()) > 1) {
-                    if (s.getSoLuongByIDHH(Integer.parseInt(ctdh.getSoluong())) != this.) {
-                        conn.close();
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(TaoHoaDonController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
-        });*/
         
         /*try {
             Connection conn = JdbcUtils.getConn();
@@ -158,12 +137,8 @@ public class TaoHoaDonController implements Initializable {
                         Connection conn;
                         conn = JdbcUtils.getConn();
                         HangHoaService s = new HangHoaService(conn);
-                        loadCTDH(hh,"1");
-                        //int sl = Integer.valueOf(hh.getSoluongtrongkho()) - 1;
-                        //hh.setSoluongtrongkho(String.valueOf(sl));
-                        //s.suaSoLuong(hh.getHanghoa_id(), String.valueOf(sl));
-                        //this.tbHangHoa.getItems().set(rindex, hh);
-                        //loadHangHoa(txtTraCuu.getText(), cbTraCuu.getSelectionModel().getSelectedItem());
+                        if (Integer.parseInt(hh.getSoluongtrongkho()) > 0)
+                            loadCTDH(hh, "1");
                         conn.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(TaoHoaDonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,10 +155,6 @@ public class TaoHoaDonController implements Initializable {
             return r;
         });
     }
-    
-    /*public void setTTUser(User u){
-        nd = u;
-    }*/
     
     public void loadHangHoa(String tuKhoa, String traCuu){
         try {
@@ -230,9 +201,6 @@ public class TaoHoaDonController implements Initializable {
             
             TableColumn<HangHoa, String> colNgayHetHan = new TableColumn("Ngày Hết Hạn");
             colNgayHetHan.setCellValueFactory(new PropertyValueFactory("ngayhethan"));
-            
-            //TableColumn<HangHoa, String> colHinhAnh = new TableColumn("Hình Ảnh");
-            //colHinhAnh.setCellValueFactory(new PropertyValueFactory("hinhanh"));
             
             TableColumn<HangHoa, String> colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
             colLoaiHangHoa.setCellValueFactory(new PropertyValueFactory("tenloaihang"));
@@ -282,7 +250,7 @@ public class TaoHoaDonController implements Initializable {
             ctdh.setDongia(hh.getGianiemyet());
             ctdh.setSoluong(sl);
             ctdh.setHinhanh(hh.getHinhanh());
-            ctdh.setGiamgia("0.0");
+            ctdh.setGiamgia(String.valueOf(0));
             BigDecimal dg = new BigDecimal(hh.getGianiemyet());
             BigDecimal slg = new BigDecimal(sl);
             BigDecimal gg = new BigDecimal(0);
@@ -525,6 +493,7 @@ public class TaoHoaDonController implements Initializable {
                 Connection conn = JdbcUtils.getConn();
                 DonHangService dhs = new DonHangService(conn);
                 ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+                HangHoaService hhs = new HangHoaService(conn);
                 DonHang dh = new DonHang();
                 
                 Calendar cal = Calendar.getInstance();
@@ -533,18 +502,27 @@ public class TaoHoaDonController implements Initializable {
                 dh.setNgaytaodh(ngay);
                 dh.setNhanvien_id(nd.getUser_id());
                 int id = dhs.tongDH() + 1;
+                dh.setDonhang_id(id);
                 if(dhs.themDH(dh)) {
                     for (int i = 0; i < this.tbDonHang.getItems().size(); i++) {
                         ChiTietDonHang ctdh = this.tbDonHang.getItems().get(i);
-//                        ctdhs.suaKhoaNgoai0();
                         ctdh.setDonhang_id(id);
-                        ctdhs.themCTDH(ctdh);
-                        ctdhs.suaIdDH(ctdh.getDonhang_id());
-//                        ctdhs.suaKhoaNgoai1();
-                        
-                        //ctdhs.suaIdDH(ctdh.getDonhang_id());
+                        int sltk = Integer.parseInt(hhs.getSoLuongByIDHH(ctdh.getHanghoa_id()));
+                        if (sltk > 0) {
+                            ctdhs.themCTDH(ctdh);
+                            int sl = sltk - Integer.parseInt(ctdh.getSoluong());
+                            hhs.suaSoLuong(ctdh.getHanghoa_id(), String.valueOf(sl));
+                        }
                     }
-                    Utils.getBox("Tạo đơn hàng"+ id + "thành công", Alert.AlertType.INFORMATION).show();
+                    Utils.getBox("Tạo đơn hàng thành công!\nBạn có muốn tạo hóa đơn hay không?",
+                            Alert.AlertType.CONFIRMATION).showAndWait().ifPresent(act -> {
+                                if (act == ButtonType.OK)
+                                    print(dh);
+                            });
+                    loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
+                    this.tbDonHang.getItems().clear();
+                    this.txtTongTien.setText("0");
+                    tongTien = BigDecimal.ZERO;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TaoHoaDonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -552,5 +530,32 @@ public class TaoHoaDonController implements Initializable {
             
         }
             
+    }
+    
+    public void clearHandler(ActionEvent evt) throws IOException {
+        if (!this.txtTraCuu.getText().isEmpty())
+            this.txtTraCuu.setText("");
+        
+    }
+    
+    public void print(DonHang dh){
+        try {
+            Connection conn = JdbcUtils.getConn();
+            UserService s = new UserService(conn);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/qldvvpkcm", "root", "12345678");
+            String reportPath = "/report/HoaDon.jrxml";
+            Map<String, Object> params = new HashMap<>();  
+            params.put("donhang_id", dh.getDonhang_id());  
+            params.put("ngayTaoDH", dh.getNgaytaodh());
+            params.put("hoten", s.getUserByID(dh.getNhanvien_id()).getHoten());
+            JasperReport jr = JasperCompileManager.compileReport(getClass().getResourceAsStream(reportPath));
+            JasperPrint jp = JasperFillManager.fillReport(jr,params, con);
+            JasperViewer.viewReport(jp, false);
+            con.close();
+        } catch(ClassNotFoundException | SQLException | JRException ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

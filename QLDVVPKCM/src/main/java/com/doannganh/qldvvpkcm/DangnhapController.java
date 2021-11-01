@@ -69,6 +69,20 @@ public class DangnhapController implements Initializable {
                         var path= "";
                         try {
                             if (nd.getLoaiuser_id()== 1)
+                            {
+                                App.setRoot("trangchuquanlytruong");
+                                TrangChuQuanLyTruongController.setTTUser(nd);
+                            }
+                            if (nd.getLoaiuser_id() == 2){
+                                App.setRoot("trangchuthukho");
+                                TrangChuController.setTTUser(nd);
+                            }
+
+                            if (nd.getLoaiuser_id() == 3){
+                                App.setRoot("trangchunhanvien");
+                                TrangChuController.setTTUser(nd);
+                            }
+                            /*if (nd.getLoaiuser_id()== 1)
                                 path = "trangchuquanlytruong.fxml";
                             if (nd.getLoaiuser_id() == 2)
                                 path = "trangchuthukho.fxml";
@@ -79,7 +93,7 @@ public class DangnhapController implements Initializable {
                             Parent root = (Parent) loader.load();
                             TrangChuController controller = (TrangChuController) loader.getController();
                             controller.setTTUser(nd);
-                            stage.setScene(new Scene(root));
+                            stage.setScene(new Scene(root));*/
                         } catch (IOException ex) {
                             Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);
                         }

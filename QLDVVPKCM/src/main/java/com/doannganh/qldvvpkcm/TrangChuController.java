@@ -79,7 +79,7 @@ public class TrangChuController implements Initializable {
         nd = u;
     }
     
-    public void traCuuHangHoaThuKhoHandler(MouseEvent evt) throws IOException{
+    /*public void traCuuHangHoaThuKhoHandler(MouseEvent evt) throws IOException{
         try {
             Parent tchh;
             Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
@@ -116,7 +116,7 @@ public class TrangChuController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     
     
