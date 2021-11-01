@@ -178,8 +178,8 @@ public class TrangChuQuanLyTruongController implements Initializable {
             Connection conn = JdbcUtils.getConn();
             ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
             DonHangService dhs = new DonHangService(conn);
-//            LocalDate today = LocalDate.now();
-            List<Integer> idDH = dhs.getDHIDByDate("2021-10-28");
+            LocalDate today = LocalDate.now();
+            List<Integer> idDH = dhs.getDHIDByDate(today.toString());
             for(int j = 0; j < idDH.size(); j++){
                     int tong = ctdhs.tongDHByID(idDH.get(j));
                     listDH.getItems().add("Mã đơn hàng: #" + idDH.get(j) + "\t\t\tTổng: " + moneyFormat(tong));
