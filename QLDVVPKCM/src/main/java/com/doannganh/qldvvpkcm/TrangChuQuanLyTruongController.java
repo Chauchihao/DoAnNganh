@@ -173,6 +173,11 @@ public class TrangChuQuanLyTruongController implements Initializable {
         nd = u;
     }
     
+    @FXML
+    public void loadTrangChu() throws IOException {
+        App.setRoot("trangchuquanlytruong");
+    }
+    
     public void loadListView(){
         try {
             Connection conn = JdbcUtils.getConn();

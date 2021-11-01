@@ -543,7 +543,7 @@ public class TaoHoaDonController implements Initializable {
             Connection conn = JdbcUtils.getConn();
             UserService s = new UserService(conn);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/qldvvpkcm", "root", "12345678");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/qldvvpkcm", "root", "123456");
             String reportPath = "/report/HoaDon.jrxml";
             Map<String, Object> params = new HashMap<>();  
             params.put("donhang_id", dh.getDonhang_id());  
