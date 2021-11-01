@@ -194,7 +194,12 @@ public class TrangChuQuanLyTruongController implements Initializable {
             Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @FXML
+    void loadThongKe(ActionEvent event) throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("thongke.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
     
     public void traCuuHangHoaQuanLyTruongHandler(ActionEvent evt) throws IOException{
         try {
@@ -222,12 +227,9 @@ public class TrangChuQuanLyTruongController implements Initializable {
         ArrayList<String> ngay = new ArrayList<>();
         LocalDate today = LocalDate.now();
         ngay.add(today.toString());
-        ngay.add(today.minusDays(1).toString());
-        ngay.add(today.minusDays(2).toString());
-        ngay.add(today.minusDays(3).toString());
-        ngay.add(today.minusDays(4).toString());
-        ngay.add(today.minusDays(5).toString());
-        ngay.add(today.minusDays(6).toString());
+        for(int i = 1; i < 7; i++){
+            ngay.add(today.minusDays(i).toString());
+        }
         return ngay;
     }
     

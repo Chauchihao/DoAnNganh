@@ -34,7 +34,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Thống kê">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loadThongKe" prefHeight="100.0" prefWidth="100.0" text="Thống kê">
                            <graphic>
                               <ImageView fitHeight="68.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
