@@ -5,6 +5,8 @@
  */
 package com.doannganh.pojo;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Admin
@@ -19,6 +21,8 @@ public class ChiTietDonHang {
     private String giamgia;
     private String thanhtien;
     private String hinhanh;
+
+    
 
     /**
      * @return the donhang_id
@@ -76,19 +80,6 @@ public class ChiTietDonHang {
         this.loaihang = loaihang;
     }
 
-    /**
-     * @return the soluong
-     */
-    public String getSoluong() {
-        return soluong;
-    }
-
-    /**
-     * @param soluong the soluong to set
-     */
-    public void setSoluong(String soluong) {
-        this.soluong = soluong;
-    }
 
     /**
      * @return the dongia
@@ -102,20 +93,6 @@ public class ChiTietDonHang {
      */
     public void setDongia(String dongia) {
         this.dongia = dongia;
-    }
-
-    /**
-     * @return the giamgia
-     */
-    public String getGiamgia() {
-        return giamgia;
-    }
-
-    /**
-     * @param giamgia the giamgia to set
-     */
-    public void setGiamgia(String giamgia) {
-        this.giamgia = giamgia;
     }
 
     /**
@@ -145,4 +122,33 @@ public class ChiTietDonHang {
     public void setHinhanh(String hinhanh) {
         this.hinhanh = hinhanh;
     }
+
+    /**
+     * @return the soluong
+     */
+    public String getSoluong() {
+        return soluong;
+    }
+
+    /**
+     * @param soluong the soluong to set
+     */
+    public void setSoluong(String soluong) {
+        this.soluong = soluong;
+    }
+
+    /**
+     * @return the giamgia
+     */
+    public String getGiamgia() {
+        return giamgia;
+    }
+
+    /**
+     * @param giamgia the giamgia to set
+     */
+    public void setGiamgia(String giamgia) {
+        this.giamgia = giamgia;
+    }
+
 }

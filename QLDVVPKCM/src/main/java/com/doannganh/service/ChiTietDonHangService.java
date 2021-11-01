@@ -8,8 +8,11 @@ package com.doannganh.service;
 import com.doannganh.pojo.ChiTietDonHang;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,21 +25,10 @@ public class ChiTietDonHangService {
         this.conn = conn;
     }
     
-    public void suaKhoaNgoai0() throws SQLException {
-        Statement stm = this.conn.createStatement();
-        stm.executeQuery("SET FOREIGN_KEY_CHECKS=0");
-    }
-    
-    public void suaKhoaNgoai1() throws SQLException {
-        Statement stm = this.conn.createStatement();
-        stm.executeQuery("SET FOREIGN_KEY_CHECKS=1");
-    }
-    
     public void suaIdDH(int id) throws SQLException {
         String sql ="UPDATE hanghoa SET hanghoa_id=? WHERE hanghoa_id=0";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         stm.setInt(1, id);
-        suaKhoaNgoai1();
     }
     
     public boolean themCTDH(ChiTietDonHang ctdh) throws SQLException {
@@ -54,5 +46,38 @@ public class ChiTietDonHangService {
         int row = stm.executeUpdate();
         //suaKhoaNgoai1();
         return row > 0;
+    }
+    
+    public List<ChiTietDonHang> getChiTietByID(int id) throws SQLException{
+        String sql = "SELECT * FROM qldvvpkcm.chitietdonhang " 
+                + "Where donhang_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        List<ChiTietDonHang> chiTietDH= new ArrayList<>();
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            ChiTietDonHang ct = new ChiTietDonHang();
+            ct.setDonhang_id(rs.getInt("donhang_id"));
+            ct.setDongia(rs.getString("dongia"));
+            ct.setSoluong(rs.getString("soluong"));
+            ct.setGiamgia(rs.getString("giamgia"));
+            
+            chiTietDH.add(ct);
+        }
+        return chiTietDH;
+    }
+    
+    
+    public int tongDHByID(int id) throws SQLException{
+        String sql = "SELECT sum(dongia*(1-giamgia)) as tong FROM qldvvpkcm.chitietdonhang " 
+                + "Where donhang_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        int tong = 0;
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            tong = rs.getInt("tong");
+        }
+        return tong;
     }
 }

@@ -3,6 +3,7 @@ E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\TraCuuHangHoaQuanLy
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\App.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\module-info.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\pojo\LoaiUser.java
+E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\ThongkeController.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\service\DonHangService.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\pojo\ChiTietDonHang.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\service\UserService.java
@@ -18,6 +19,7 @@ E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\TrangChuController.
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\service\JdbcUtils.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\TaoHoaDonController.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\service\ChiTietDonHangService.java
+E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\TrangChuQuanLyTruongController.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\service\NhaCungCapService.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\qldvvpkcm\PrimaryController.java
 E:\DoAnNganh\QLDVVPKCM\src\main\java\com\doannganh\pojo\NhaCungCap.java
