@@ -75,7 +75,7 @@ public class TrangChuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
     
-    public void setTTUser(User u){
+    public static void setTTUser(User u){
         nd = u;
     }
     
@@ -122,15 +122,16 @@ public class TrangChuController implements Initializable {
     
     public void logoutHandler(ActionEvent evt) throws IOException{
         try {
-            Parent dx;
-            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("dangnhap.fxml"));
-            dx = loader.load();
-            Scene scene = new Scene(dx);
-            stage.setScene(scene);
-            //stage.setMaximized(true);
-            stage.show();
+              App.setRoot("dangnhap");
+//            Parent dx;
+//            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(getClass().getResource("dangnhap.fxml"));
+//            dx = loader.load();
+//            Scene scene = new Scene(dx);
+//            stage.setScene(scene);
+//            //stage.setMaximized(true);
+//            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(TrangChuController.class.getName()).log(Level.SEVERE, null, ex);
         }
