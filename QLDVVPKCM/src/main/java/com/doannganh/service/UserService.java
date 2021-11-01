@@ -60,4 +60,29 @@ public class UserService {
         }
         return u;
     }
+    public User getUserByID(int id) throws SQLException {
+        String sql = "SELECT user_id, hoten, ngaysinh, gioitinh, cmnd, taikhoan"
+                + ", ngayVaoLam, email, diachi, sdt, loaiuser_id"
+                + " FROM user WHERE user_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        
+        ResultSet rs = stm.executeQuery();
+        User u = null;
+        while (rs.next()) {
+            u = new User();
+            u.setUser_id(rs.getInt("user_id"));
+            u.setHoten(rs.getString("hoten"));
+            u.setNgaysinh(rs.getDate("ngaysinh"));
+            u.setGioitinh(rs.getString("gioitinh"));
+            u.setCmnd(rs.getString("cmnd"));
+            u.setTaikhoan(rs.getString("taikhoan"));
+            u.setNgayvaolam(rs.getDate("ngayVaoLam"));
+            u.setEmail(rs.getString("email"));
+            u.setDiachi(rs.getString("diachi"));
+            u.setSdt(rs.getString("sdt"));
+            u.setLoaiuser_id(rs.getInt("loaiuser_id"));
+        }
+        return u;
+    }
 }
