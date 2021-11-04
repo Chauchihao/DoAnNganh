@@ -78,9 +78,10 @@ public class DonHangService {
 
             ArrayList<Integer> a = new ArrayList<>();
             String sql = "SELECT * FROM qldvvpkcm.donhang"
-                    + " Where month(ngayTaoDH) = month(?)";
+                    + " Where month(ngayTaoDH) = month(?) and year(ngayTaoDH) = year(?)";
             PreparedStatement stm = this.conn.prepareStatement(sql);
             stm.setString(1, date);
+            stm.setString(2, date);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 a.add(rs.getInt("donhang_id"));
