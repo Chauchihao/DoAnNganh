@@ -13,24 +13,32 @@
    <children>
       <HBox prefHeight="1082.0" prefWidth="1920.0">
          <children>
-            <VBox prefHeight="658.0" prefWidth="197.0">
+            <VBox prefHeight="1080.0" prefWidth="100.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="218.0" text="Thoát" />
-                  <AnchorPane onMouseClicked="#loadTaoHoaDon" prefHeight="210.0" prefWidth="223.0">
-                     <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" onAction="#loadTaoHoaDon" prefHeight="208.0" prefWidth="208.0" />
-                        <ImageView fitHeight="208.0" fitWidth="227.0" onMouseClicked="#loadTaoHoaDon" pickOnBounds="true" preserveRatio="true">
+                  <Button contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadTaoHoaDon" prefHeight="100.0" prefWidth="100.0" text="Đơn hàng">
+                     <graphic>
+                        <ImageView fitHeight="67.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../image/z2866524378047_4f570394acd71bdac584f203d9c59088.jpg" />
+                              <Image url="@../../../image/order_icon.png" />
                            </image>
                         </ImageView>
-                     </children>
-                  </AnchorPane>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadDoiTra" prefHeight="100.0" prefWidth="100.0" text="Đổi trả">
+                     <graphic>
+                        <ImageView fitHeight="67.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/return-order.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </VBox>
-            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1010.0" prefWidth="1712.0">
+            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1080.0" prefWidth="1820.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="71.0" prefWidth="1454.0" text="TRANG CHỦ NHÂN VIÊN" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label alignment="CENTER" prefHeight="71.0" prefWidth="1820.0" text="TRANG CHỦ NHÂN VIÊN" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="Arial Bold" size="35.0" />
                      </font>

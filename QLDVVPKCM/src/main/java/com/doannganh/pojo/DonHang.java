@@ -16,6 +16,10 @@ public class DonHang {
     private int nhanvien_id;
     private int khachhang_id;
     private String ngaytaodh;
+    private String hoTenNV;
+    private String hoTenKH;
+    private int tongCTDH;
+    private String tongTien;
 
     /**
      * @return the donhang_id
@@ -71,5 +75,61 @@ public class DonHang {
      */
     public void setNgaytaodh(String ngaytaodh) {
         this.ngaytaodh = ngaytaodh;
+    }
+
+    /**
+     * @return the hoTenKH
+     */
+    public String getHoTenKH() {
+        return hoTenKH;
+    }
+
+    /**
+     * @param hoTenKH the hoTenKH to set
+     */
+    public void setHoTenKH(String hoTenKH) {
+        this.hoTenKH = hoTenKH;
+    }
+
+    /**
+     * @return the hoTenNV
+     */
+    public String getHoTenNV() {
+        return hoTenNV;
+    }
+
+    /**
+     * @param hoTenNV the hoTenNV to set
+     */
+    public void setHoTenNV(String hoTenNV) {
+        this.hoTenNV = hoTenNV;
+    }
+
+    /**
+     * @return the tongCTDH
+     */
+    public int getTongCTDH() {
+        return tongCTDH;
+    }
+
+    /**
+     * @param tongCTDH the tongCTDH to set
+     */
+    public void setTongCTDH(int tongCTDH) {
+        this.tongCTDH = tongCTDH;
+    }
+
+    /**
+     * @return the tongTien
+     */
+    public String getTongTien() {
+        return tongTien;
+    }
+
+    /**
+     * @param tongTien the tongTien to set
+     */
+    public void setTongTien(String tongTien) {
+        this.tongTien = tongTien;
     }
 }

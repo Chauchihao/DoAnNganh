@@ -164,6 +164,19 @@ public class HangHoaService {
         return hh;
     }
     
+    public int getIDByTenHang(String th) throws SQLException {
+        String sql= "SELECT hanghoa_id FROM hanghoa WHERE tenhanghoa =?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, th);
+        
+        ResultSet rs = stm.executeQuery();
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt("hanghoa_id");
+        }
+        return id;
+    }
+    
     public int getIDLoaiByTenLoai(String loai) throws SQLException {
         String sql = "SELECT loaihanghoa_id FROM loaihanghoa"
                     + " WHERE tenloai=?";

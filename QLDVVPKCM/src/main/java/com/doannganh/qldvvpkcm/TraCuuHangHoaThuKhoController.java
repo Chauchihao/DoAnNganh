@@ -138,6 +138,8 @@ public class TraCuuHangHoaThuKhoController implements Initializable {
                     Stage stage = new Stage();
                     stage.setTitle("Thương Hiệu");
                     stage.setScene(scene);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(App.stage);
                     stage.showAndWait();
                     
                     bt.setOnAction((var evt) -> {
