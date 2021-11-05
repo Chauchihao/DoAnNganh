@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.9.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HoaDon" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="de4adf84-ab6f-4d44-b1f5-aeee1bd995ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HoaDon" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="de4adf84-ab6f-4d44-b1f5-aeee1bd995ef">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="QLDVVPKCM"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -137,58 +146,58 @@ WHERE
 	<title>
 		<band height="150" splitType="Stretch">
 			<staticText>
-				<reportElement x="190" y="10" width="200" height="30" uuid="d9496548-ad0d-43a3-a9fb-eeb16c270485"/>
+				<reportElement x="-20" y="10" width="842" height="30" uuid="d9496548-ad0d-43a3-a9fb-eeb16c270485"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Miulu Shop]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="190" y="40" width="200" height="30" uuid="278dd472-f435-4b22-91fc-9d2a04e8bf1b"/>
+				<reportElement x="-20" y="40" width="842" height="30" uuid="278dd472-f435-4b22-91fc-9d2a04e8bf1b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HOÁ ĐƠN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="90" width="80" height="20" uuid="cd052ad7-fa01-44c2-8e81-7be7cb1a2666"/>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="-10" y="90" width="110" height="20" uuid="cd052ad7-fa01-44c2-8e81-7be7cb1a2666"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<text><![CDATA[Ngày mua hàng: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="110" width="60" height="20" uuid="0b1c52fe-c542-4172-9c99-3562a384e625"/>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="-10" y="110" width="80" height="20" uuid="0b1c52fe-c542-4172-9c99-3562a384e625"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<text><![CDATA[Nhân viên: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="130" width="70" height="20" uuid="50eb66cc-9a93-4370-97ed-c1443bd6aa98"/>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="-10" y="130" width="100" height="20" uuid="50eb66cc-9a93-4370-97ed-c1443bd6aa98"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<text><![CDATA[Mã đơn hàng: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="70" y="90" width="500" height="20" uuid="f2b11823-747a-4318-a74f-9fc4dfb46d86"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="100" y="90" width="722" height="20" uuid="f2b11823-747a-4318-a74f-9fc4dfb46d86"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ngayTaoDH}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="110" width="520" height="20" uuid="ce1636cc-a801-4ee1-8201-bd2ee34d0174"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="70" y="110" width="752" height="20" uuid="ce1636cc-a801-4ee1-8201-bd2ee34d0174"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{hoten}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="130" width="510" height="20" uuid="01f2206d-a5b3-4bc9-8b79-376c1f812188"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+				<reportElement x="90" y="130" width="732" height="20" uuid="01f2206d-a5b3-4bc9-8b79-376c1f812188"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{donhang_id}]]></textFieldExpression>
 			</textField>
@@ -197,7 +206,7 @@ WHERE
 	<detail>
 		<band height="328" splitType="Stretch">
 			<componentElement>
-				<reportElement x="-20" y="9" width="581" height="310" uuid="4b53006c-ae43-47a1-8e67-023a5490e179">
+				<reportElement x="-20" y="9" width="842" height="319" uuid="4b53006c-ae43-47a1-8e67-023a5490e179">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
@@ -224,7 +233,7 @@ WHERE
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="40" height="30" uuid="a99c980f-7999-4025-9a68-d22bb0a410ff"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="40" height="30" uuid="a99c980f-7999-4025-9a68-d22bb0a410ff"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -232,12 +241,12 @@ WHERE
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="240" uuid="ec75fff9-56d6-4d0d-a3cf-b50e449182c5">
+					<jr:column width="360" uuid="ec75fff9-56d6-4d0d-a3cf-b50e449182c5">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="240" height="30" uuid="74eaa5bc-7d6f-4630-9538-02371ac4497a"/>
+								<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="360" height="30" uuid="74eaa5bc-7d6f-4630-9538-02371ac4497a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -246,7 +255,7 @@ WHERE
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="240" height="30" uuid="46c346a6-ccd4-4ee0-a365-0b98eedb4dd7"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="360" height="30" uuid="46c346a6-ccd4-4ee0-a365-0b98eedb4dd7"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -254,12 +263,12 @@ WHERE
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="e632105d-fae3-4695-adac-de0356bd0238">
+					<jr:column width="110" uuid="e632105d-fae3-4695-adac-de0356bd0238">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
 						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="30" uuid="dfcd4061-e9e4-446a-8ad5-c334ce4d6d66"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="110" height="30" uuid="dfcd4061-e9e4-446a-8ad5-c334ce4d6d66"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -268,11 +277,11 @@ WHERE
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="30" uuid="3642cb1c-8647-4798-af69-c5fc55bec47c"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="110" height="30" uuid="3642cb1c-8647-4798-af69-c5fc55bec47c"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{dongia}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new DecimalFormat("###,###,###").format($F{dongia}) + " VNĐ"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -298,20 +307,20 @@ WHERE
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="16163ca4-f938-45a9-b921-b81d7d7ea864">
+					<jr:column width="100" uuid="16163ca4-f938-45a9-b921-b81d7d7ea864">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="b1d036a0-9244-468a-ad4c-55f14bf2406e"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="12" isBold="true"/>
+								<reportElement x="0" y="0" width="100" height="30" uuid="b1d036a0-9244-468a-ad4c-55f14bf2406e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="16" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Tổng Tiền]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="30" uuid="c80a10fe-8b1b-4b6c-8704-28bd7f9c9510"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="30" uuid="c80a10fe-8b1b-4b6c-8704-28bd7f9c9510"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -320,7 +329,7 @@ WHERE
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="30" uuid="4b4c9f19-366b-456c-ac25-8aac3c135c20"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="30" uuid="4b4c9f19-366b-456c-ac25-8aac3c135c20"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -328,20 +337,20 @@ WHERE
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="90" uuid="c390a442-acf8-4a2b-b2fb-76f9f5206ca7">
+					<jr:column width="162" uuid="c390a442-acf8-4a2b-b2fb-76f9f5206ca7">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="cc877e01-55e3-4a24-9b52-59976f77ac51"/>
+								<reportElement x="0" y="0" width="162" height="30" uuid="cc877e01-55e3-4a24-9b52-59976f77ac51"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="12" isBold="true"/>
+									<font fontName="Times New Roman" size="16" isBold="true"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$V{tongTien}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new DecimalFormat("###,###,###").format($V{tongTien}) + " VNĐ"]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="3dd6f701-44df-4db6-881c-4961a5fbde63"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="162" height="30" uuid="3dd6f701-44df-4db6-881c-4961a5fbde63"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Times New Roman" size="12"/>
 								</textElement>
@@ -350,9 +359,11 @@ WHERE
 						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="4a54ae3e-ab7d-40b3-a9ec-05f51728547b"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{dongia}.multiply(new BigDecimal($F{soluong})).multiply(BigDecimal.ONE.subtract(new BigDecimal($F{giamgia})))]]></textFieldExpression>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="162" height="30" uuid="4a54ae3e-ab7d-40b3-a9ec-05f51728547b"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new DecimalFormat("###,###,###").format($F{dongia}.multiply(new BigDecimal($F{soluong})).multiply(BigDecimal.ONE.subtract(new BigDecimal($F{giamgia})))) + " VNĐ"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

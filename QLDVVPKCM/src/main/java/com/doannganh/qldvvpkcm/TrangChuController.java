@@ -68,12 +68,19 @@ public class TrangChuController implements Initializable {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("taohoadon.fxml"));
         acpLoad.getChildren().add(loader.load());
-        TaoHoaDonController controller = loader.getController();
-        //controller.setTTUser(nd);
     }
+    
+    @FXML
+    public void loadDoiTra() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("doitra.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
+    
     
     public static void setTTUser(User u){
         nd = u;

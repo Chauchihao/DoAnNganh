@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="acpTaoHD" prefHeight="764.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TaoHoaDonController">
+<AnchorPane id="AnchorPane" fx:id="acpTaoHD" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="764.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TaoHoaDonController">
    <children>
       <TableView fx:id="tbHangHoa" editable="true" layoutX="26.0" layoutY="134.0" prefHeight="290.0" prefWidth="869.0" />
       <TableView fx:id="tbDonHang" layoutX="26.0" layoutY="448.0" prefHeight="200.0" prefWidth="870.0" />

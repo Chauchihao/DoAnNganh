@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -87,7 +88,7 @@ public class TaoHoaDonController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.cbTraCuu.setItems(list);
         this.cbTraCuu.getSelectionModel().selectFirst();
-        this.txtTongTien.setText(tongTien.toString());
+        this.txtTongTien.setText(Utils.moneyBigDecimalFormat(tongTien));
         
         loadTable();
         loadHangHoa("", this.cbTraCuu.getSelectionModel().getSelectedItem());
@@ -137,8 +138,10 @@ public class TaoHoaDonController implements Initializable {
                         Connection conn;
                         conn = JdbcUtils.getConn();
                         HangHoaService s = new HangHoaService(conn);
-                        if (Integer.parseInt(hh.getSoluongtrongkho()) > 0)
+                        if (Integer.parseInt(hh.getSoluongtrongkho()) > 0) {
+                            hh.setGianiemyet(Utils.moneyStringFormat(hh.getGianiemyet()));
                             loadCTDH(hh, "1");
+                        }
                         conn.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(TaoHoaDonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,6 +208,19 @@ public class TaoHoaDonController implements Initializable {
             TableColumn<HangHoa, String> colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
             colLoaiHangHoa.setCellValueFactory(new PropertyValueFactory("tenloaihang"));
             
+            colGiaNiemYet.setCellFactory(tc -> new TableCell<HangHoa, String>() {
+                @Override
+                protected void updateItem(String value, boolean empty) {
+                    super.updateItem(value, empty) ;
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        BigDecimal tien = new BigDecimal(value);
+                        setText(Utils.moneyBigDecimalFormat(tien));
+                    }
+                }
+            });
+            
             /*cellFactory = (TableColumn<HangHoa, String> param) -> {
                 HBox box= new HBox();
                 ImageView imageview = new ImageView();
@@ -259,7 +275,7 @@ public class TaoHoaDonController implements Initializable {
             tongTien = tong.add(tt);
             ctdh.setThanhtien(tt.toString());
             h.add(ctdh);
-            this.txtTongTien.setText(tongTien.toString());
+            this.txtTongTien.setText(Utils.moneyBigDecimalFormat(tongTien));
             //ObservableList<ObservableList> h = FXCollections.observableArrayList();
             //(new Object(hh.getHanghoa_id(), hh.getTenhanghoa(), s.getLoaiHHByid(hh.getLoaihanghoa_id()), "", "0", hh.getGianiemyet(), "0"));
             /*ObservableList row = FXCollections.observableArrayList();
@@ -296,7 +312,7 @@ public class TaoHoaDonController implements Initializable {
         colSoLuong.setCellValueFactory(new PropertyValueFactory("soluong"));
         colSoLuong.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
-        TableColumn<ChiTietDonHang, String> colGiaNiemYet = new TableColumn("Giá");
+        TableColumn<ChiTietDonHang, String> colGiaNiemYet = new TableColumn("Đơn Giá");
         colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("dongia"));
         colGiaNiemYet.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
@@ -328,7 +344,7 @@ public class TaoHoaDonController implements Initializable {
                     BigDecimal tt = dg.multiply(slg).multiply(BigDecimal.ONE.subtract(gg));
                     BigDecimal tong = tongTien;
                     tongTien = tong.subtract(tt);
-                    this.txtTongTien.setText(tongTien.toString());
+                    this.txtTongTien.setText(Utils.moneyBigDecimalFormat(tongTien));
                     this.tbDonHang.getItems().remove(index);
                 }
                 //int sl = Integer.parseInt(ctdh.getSoluong());
@@ -388,7 +404,7 @@ public class TaoHoaDonController implements Initializable {
                             tong = tongTien;
                             tongTien = tong.add(ttm);
                             ctdh.setThanhtien(ttm.toString());
-                            this.txtTongTien.setText(tongTien.toString());
+                            this.txtTongTien.setText(Utils.moneyBigDecimalFormat(tongTien));
                             this.tbDonHang.getItems().set(rindex, ctdh);
                             Utils.getBox("Cập nhật số lượng thành công!", Alert.AlertType.INFORMATION).show();
                             //loadHangHoa(txtTraCuu.getText(), cbTraCuu.getSelecctionModel().getSelectedItem());
@@ -402,6 +418,30 @@ public class TaoHoaDonController implements Initializable {
             }
 
         });
+        
+        colGiaNiemYet.setCellFactory(tc -> new TableCell<ChiTietDonHang, String>() {
+                @Override
+                protected void updateItem(String value, boolean empty) {
+                    super.updateItem(value, empty) ;
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(Utils.moneyBigDecimalFormat(new BigDecimal(value)));
+                    }
+                }
+            });
+        
+        colThanhTien.setCellFactory(tc -> new TableCell<ChiTietDonHang, String>() {
+                @Override
+                protected void updateItem(String value, boolean empty) {
+                    super.updateItem(value, empty) ;
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(Utils.moneyBigDecimalFormat(new BigDecimal(value)));
+                    }
+                }
+            });
 
         /*colSoLuong.setCellFactory((TableColumn<ChiTietDonHang, String> param) -> {
             TableCell<ChiTietDonHang, String> cell = new TableCell<ChiTietDonHang, String>() {
@@ -503,12 +543,14 @@ public class TaoHoaDonController implements Initializable {
                 dh.setNhanvien_id(nd.getUser_id());
                 int id = dhs.tongDH() + 1;
                 dh.setDonhang_id(id);
+                dh.setKhachhang_id(1);
                 if(dhs.themDH(dh)) {
                     for (int i = 0; i < this.tbDonHang.getItems().size(); i++) {
                         ChiTietDonHang ctdh = this.tbDonHang.getItems().get(i);
                         ctdh.setDonhang_id(id);
                         int sltk = Integer.parseInt(hhs.getSoLuongByIDHH(ctdh.getHanghoa_id()));
                         if (sltk > 0) {
+                            ctdh.setDongia(Utils.moneyStringFormat(ctdh.getDongia()));
                             ctdhs.themCTDH(ctdh);
                             int sl = sltk - Integer.parseInt(ctdh.getSoluong());
                             hhs.suaSoLuong(ctdh.getHanghoa_id(), String.valueOf(sl));
@@ -517,12 +559,12 @@ public class TaoHoaDonController implements Initializable {
                     Utils.getBox("Tạo đơn hàng thành công!\nBạn có muốn tạo hóa đơn hay không?",
                             Alert.AlertType.CONFIRMATION).showAndWait().ifPresent(act -> {
                                 if (act == ButtonType.OK)
-                                    print(dh);
+                                    inHoaDon(dh);
                             });
                     loadHangHoa(this.txtTraCuu.getText(), this.cbTraCuu.getSelectionModel().getSelectedItem());
                     this.tbDonHang.getItems().clear();
-                    this.txtTongTien.setText("0");
                     tongTien = BigDecimal.ZERO;
+                    this.txtTongTien.setText(Utils.moneyBigDecimalFormat(tongTien));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TaoHoaDonController.class.getName()).log(Level.SEVERE, null, ex);
@@ -538,7 +580,7 @@ public class TaoHoaDonController implements Initializable {
         
     }
     
-    public void print(DonHang dh){
+    public void inHoaDon(DonHang dh){
         try {
             Connection conn = JdbcUtils.getConn();
             UserService s = new UserService(conn);
@@ -551,7 +593,11 @@ public class TaoHoaDonController implements Initializable {
             params.put("hoten", s.getUserByID(dh.getNhanvien_id()).getHoten());
             JasperReport jr = JasperCompileManager.compileReport(getClass().getResourceAsStream(reportPath));
             JasperPrint jp = JasperFillManager.fillReport(jr,params, con);
-            JasperViewer.viewReport(jp, false);
+            JasperViewer jv = new JasperViewer(jp, false);
+            //asperViewer.viewReport(jp, false);
+            jv.setTitle("Hóa Đơn");
+            jv.setZoomRatio(new Float(0.75));
+            jv.setVisible(true);
             con.close();
         } catch(ClassNotFoundException | SQLException | JRException ex) {
             ex.printStackTrace();
