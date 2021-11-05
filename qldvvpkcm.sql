@@ -41,6 +41,7 @@ CREATE TABLE `hanghoa` (
 CREATE TABLE `nhacungcap_hanghoa` (
   `nhacungcap_id` int NOT NULL,
   `hanghoa_id` int NOT NULL,
+  `soluong` int NOT NULL,
   `ngaynhap` datetime NOT NULL,
   `gianhap`  decimal(10,0) NULL,
   `ghichu` varchar(255) NULL,
@@ -175,30 +176,30 @@ CREATE TABLE `donhang` (
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Hạt dinh dưỡng lý tưởng dành cho mèo nhỏ Ideal Recipe Kitten 1kg','Jeil PetFood',42,275000,'2021-03-29','2022-03-29','/image/IdealRecipeCatKitten1Kg.jpg',1,2);
 
 
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,1,"2021-01-02",326000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,2,"2021-03-22",326000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,3,"2021-05-11",188000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,4,"2021-03-22",130000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,5,"2021-01-23",331000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,6,"2021-02-19",312000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,7,"2021-01-14",102000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,8,"2021-01-14",128000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,9,"2021-01-14",80000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,10,"2021-01-14",401000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,11,"2021-01-14",684000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,12,"2021-01-14",1050000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,13,"2021-04-25",31500,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,14,"2021-04-25",28000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,15,"2021-04-25",32000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,16,"2021-04-25",30000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,17,"2021-04-25",34000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,18,"2021-04-25",92000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,19,"2021-04-25",334000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,20,"2021-04-25",239000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,21,"2021-04-25",274000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,22,"2021-04-25",300000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,23,"2021-04-25",34000,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,24,"2021-04-25",209000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,1,22,"2021-01-02",326000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,2,100,"2021-03-22",326000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,3,18,"2021-05-11",188000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,4,41,"2021-03-22",130000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,5,125,"2021-01-23",331000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (1,6,24,"2021-02-19",312000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,7,32,"2021-01-14",102000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,8,20,"2021-01-14",128000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,9,111,"2021-01-14",80000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,10,12,"2021-01-14",401000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,11,10,"2021-01-14",684000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (2,12,15,"2021-01-14",1050000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,13,122,"2021-04-25",31500,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,14,123,"2021-04-25",28000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,15,134,"2021-04-25",32000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,16,117,"2021-04-25",30000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,17,123,"2021-04-25",34000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (3,18,20,"2021-04-25",92000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,19,15,"2021-04-25",334000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,20,12,"2021-04-25",239000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,21,23,"2021-04-25",274000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,22,37,"2021-04-25",300000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,23,200,"2021-04-25",34000,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`ghichu`) VALUES (4,24,45,"2021-04-25",209000,NULL);
   
   INSERT INTO `loaiuser` (`tenloai`) VALUES ("Quản lý trưởng"), ("Thủ kho"), ("Nhân viên");
   
@@ -209,6 +210,8 @@ CREATE TABLE `donhang` (
   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
   ("Huỳnh Thị Thanh","1999-03-21","Nữ","0364687732","huynhthithanh","1","2018-03-02","huynhthithanh@gmail.com","Bình Dương","0382349726",3);
   
+  INSERT INTO `khachhang` (`khachhang_id`,`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`)
+  VALUES (0,"NULL","0000-00-00","NULL", "NULL","NULL");
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
   VALUES ("Nguyễn Minh Việt","1983-06-28","Nam", "1111 đường 3/2, Phường 12, Quận 11","0932478390",1999);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
@@ -217,9 +220,9 @@ CREATE TABLE `donhang` (
   INSERT INTO `thucung` (`ten`,`ngaysinh`,`gioitinh`,`mauLong`,`tinhtrangsuckhoe`,`khachhang_id`)
   VALUES ("Ken","2021-01-01","Đực","Trắng","Khỏe mạnh", 1);
   
-  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2018-03-02",3,1);
-  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2019-04-20",3,2);
-  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2020-05-20",3,1);
+  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2018-03-02",3,2);
+  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2019-04-20",3,3);
+  INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2020-05-20",3,2);
   
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 1, 2, 408000, 0);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 8, 1, 160000, 0);

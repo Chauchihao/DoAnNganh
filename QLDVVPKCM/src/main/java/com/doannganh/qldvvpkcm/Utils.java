@@ -6,13 +6,11 @@
 package com.doannganh.qldvvpkcm;
 
 import java.io.InputStream;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 /**
  *
@@ -33,4 +31,15 @@ public class Utils {
         iv.setFitHeight(100);
         return iv;
     }
+    
+    public static String moneyBigDecimalFormat(BigDecimal money){
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return(formatter.format(money)+" VNĐ");
+    }
+    
+    public static String moneyStringFormat(String money){
+        money.replace(",", "").replace(" VNĐ", "");
+        return money;
+    }
+        
 }

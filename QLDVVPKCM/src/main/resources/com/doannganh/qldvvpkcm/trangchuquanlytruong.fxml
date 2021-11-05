@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -20,25 +21,20 @@
    <children>
       <HBox prefHeight="1082.0" prefWidth="1920.0">
          <children>
-            <AnchorPane onMouseClicked="#loadTraCuuHHQLT" prefHeight="1080.0" prefWidth="154.0">
+            <AnchorPane onMouseClicked="#loadTraCuuHHQLT" prefHeight="1080.0" prefWidth="101.0">
                <children>
-                  <VBox prefHeight="1080.0" prefWidth="148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="0.0">
+                  <VBox prefHeight="1080.0" prefWidth="136.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="tên" wrappingWidth="97.18308448791504">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0" text="Trag chủ" wrapText="true">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loadTrangChu" prefHeight="100.0" prefWidth="100.0" text="Trang chủ">
                            <graphic>
-                              <ImageView fitHeight="66.0" fitWidth="215.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="65.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../image/house-icon.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Thống kê">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loadThongKe" prefHeight="100.0" prefWidth="100.0" text="Thống kê">
                            <graphic>
                               <ImageView fitHeight="68.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -74,9 +70,9 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" mouseTransparent="true" prefHeight="100.0" prefWidth="100.0" text="Nhân viên" wrapText="true">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Nhân viên">
                            <graphic>
-                              <ImageView fitHeight="66.0" fitWidth="215.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="64.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../image/employees-icon.png" />
                                  </image>
@@ -89,7 +85,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1080.0" prefWidth="1500.0">
+            <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1080.0" prefWidth="1462.0">
                <children>
                   <Label alignment="CENTER" prefHeight="71.0" prefWidth="1454.0" text="TRANG CHỦ QUẢN LÝ TRƯỞNG" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
@@ -156,6 +152,9 @@
                      </font>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets left="100.0" />
+               </HBox.margin>
             </AnchorPane>
          </children>
       </HBox>

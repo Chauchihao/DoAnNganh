@@ -9,6 +9,7 @@ import com.doannganh.pojo.DonHang;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,23 +27,130 @@ public class DonHangService {
         this.conn = conn;
     }
     
-    public boolean themDH(DonHang dh) throws SQLException {
+    public List<DonHang> getDonHang(String tuKhoa, String traCuu) throws SQLException {
+        if (tuKhoa == null)
+            throw new SQLDataException();
         String sql = "";
-        PreparedStatement stm;
-        if (dh.getKhachhang_id() != 0) {
-            sql = "INSERT INTO donhang(ngayTaoDH,nhanvien_id,khachhang_id)"
-                    + " VALUES(?, ?, ?)";
-            stm = this.conn.prepareStatement(sql);
-            stm.setString(1, dh.getNgaytaodh());
-            stm.setInt(2, dh.getNhanvien_id());
-            stm.setInt(3, dh.getKhachhang_id());
-        } else {
-            sql = "INSERT INTO donhang(ngayTaoDH,nhanvien_id)"
-                    + " VALUES(?, ?)";
-            stm = this.conn.prepareStatement(sql);
-            stm.setString(1, dh.getNgaytaodh());
-            stm.setInt(2, dh.getNhanvien_id());
+        if (traCuu == "" || tuKhoa == "")
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        if (traCuu == "Mã đơn hàng")
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE donhang.donhang_id like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        if (traCuu == "Ngày mua hàng")
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE ngayTaoDH like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        if (traCuu == "Nhân viên")
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE user.hoten like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        if (traCuu == "Khách hàng")
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE khachhang.hoten like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, tuKhoa);
+        ResultSet rs = stm.executeQuery();
+        
+        List<DonHang> donHang = new ArrayList<>();
+        while (rs.next()) {
+            DonHang dh = new DonHang();
+            dh.setDonhang_id(rs.getInt("donhang_id"));
+            dh.setNgaytaodh(rs.getString("ngayTaoDH"));
+            dh.setHoTenNV(rs.getString("user.hoten"));
+            dh.setHoTenKH(rs.getString("khachhang.hoten"));
+            dh.setTongCTDH(rs.getInt("tongCTDH"));
+            dh.setTongTien(rs.getString("tongtien"));
+            
+            donHang.add(dh);
         }
+        return donHang;
+    }
+    
+    public int getIDNVByIDDH(int idDH) throws SQLException {
+        String sql = "SELECT nhanvien_id FROM donhang"
+                    + " WHERE donhang_id=?";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, idDH);
+        ResultSet rs = stm.executeQuery();
+        
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt("nhanvien_id");
+        }
+        return id;
+    }
+    
+    public DonHang getDHByIDDH(int idDH) throws SQLException {
+        String sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE donhang.donhang_id = ?"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, idDH);
+        ResultSet rs = stm.executeQuery();
+        
+        DonHang dh = new DonHang();;
+        while (rs.next()) {
+            dh.setDonhang_id(rs.getInt("donhang_id"));
+            dh.setNgaytaodh(rs.getString("ngayTaoDH"));
+            dh.setNhanvien_id(rs.getInt("nhanvien_id"));
+            dh.setHoTenNV(rs.getString("user.hoten"));
+            dh.setKhachhang_id(rs.getInt("khachhang_id"));
+            dh.setHoTenKH(rs.getString("khachhang.hoten"));
+            dh.setTongCTDH(rs.getInt("tongCTDH"));
+            dh.setTongTien(rs.getString("tongtien"));
+        }
+        return dh;
+    }
+    
+    public boolean themDH(DonHang dh) throws SQLException {
+        String sql = "INSERT INTO donhang(ngayTaoDH,nhanvien_id,khachhang_id)"
+                    + " VALUES(?, ?, ?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, dh.getNgaytaodh());
+        stm.setInt(2, dh.getNhanvien_id());
+        stm.setInt(3, dh.getKhachhang_id());
         
         int row = stm.executeUpdate();
         
@@ -78,9 +186,10 @@ public class DonHangService {
 
             ArrayList<Integer> a = new ArrayList<>();
             String sql = "SELECT * FROM qldvvpkcm.donhang"
-                    + " Where month(ngayTaoDH) = month(?)";
+                     + " Where month(ngayTaoDH) = month(?) and year(ngayTaoDH) = year(?)";
             PreparedStatement stm = this.conn.prepareStatement(sql);
             stm.setString(1, date);
+            stm.setString(2, date);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 a.add(rs.getInt("donhang_id"));

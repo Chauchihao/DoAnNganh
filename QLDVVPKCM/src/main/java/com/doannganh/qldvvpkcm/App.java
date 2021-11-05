@@ -16,9 +16,12 @@ import javafx.stage.Screen;
 public class App extends Application {
 
     private static Scene scene;
+    
+    public static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
+        this.stage = stage;
         scene = new Scene(loadFXML("dangnhap"));
         stage.setScene(scene);
         stage = setSize(stage);
