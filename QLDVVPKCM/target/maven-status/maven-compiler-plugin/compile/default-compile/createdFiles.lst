@@ -15,6 +15,7 @@ com\doannganh\qldvvpkcm\App.class
 com\doannganh\qldvvpkcm\TaoHoaDonController$4.class
 com\doannganh\service\DonHangService.class
 com\doannganh\service\HangHoaService.class
+com\doannganh\qldvvpkcm\HanghoaController.class
 com\doannganh\qldvvpkcm\TraCuuHangHoaThuKhoController.class
 com\doannganh\qldvvpkcm\DoiTraController$3.class
 com\doannganh\qldvvpkcm\SecondaryController.class
