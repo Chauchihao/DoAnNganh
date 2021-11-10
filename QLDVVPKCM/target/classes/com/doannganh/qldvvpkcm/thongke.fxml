@@ -149,7 +149,7 @@
                                     <Insets left="20.0" top="40.0" />
                                  </HBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="cbLoiNhuan" mnemonicParsing="false" onAction="#checkLoiNhuan" prefHeight="36.0" prefWidth="147.0" text="Lợi nhuận">
+                              <CheckBox fx:id="cbChiPhi" mnemonicParsing="false" onAction="#checkChiPhi" prefHeight="36.0" prefWidth="138.0" text="Chi phí">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -157,7 +157,7 @@
                                     <Insets top="40.0" />
                                  </HBox.margin>
                               </CheckBox>
-                              <CheckBox fx:id="cbBoth" mnemonicParsing="false" onAction="#checkBoth" prefHeight="36.0" prefWidth="243.0" text="Doanh Thu &amp; Lợi nhuận">
+                              <CheckBox fx:id="cbLoiNhuan" mnemonicParsing="false" onAction="#checkLoiNhuan" prefHeight="36.0" prefWidth="147.0" text="Lợi nhuận">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

@@ -3,6 +3,7 @@ com\doannganh\qldvvpkcm\TaoHoaDonController$1.class
 com\doannganh\pojo\NhaCungCap.class
 com\doannganh\qldvvpkcm\DangnhapController.class
 com\doannganh\qldvvpkcm\PrimaryController.class
+com\doannganh\pojo\NhaCungCap_HangHoa.class
 com\doannganh\pojo\DonHang.class
 com\doannganh\qldvvpkcm\DoiTraController.class
 com\doannganh\pojo\User.class

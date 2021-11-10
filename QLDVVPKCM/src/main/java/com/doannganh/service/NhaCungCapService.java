@@ -7,6 +7,7 @@ package com.doannganh.service;
 
 import com.doannganh.pojo.NhaCungCap;
 import com.doannganh.pojo.NhaCungCap;
+import com.doannganh.pojo.NhaCungCap_HangHoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -190,5 +191,86 @@ public class NhaCungCapService {
         int row = stm.executeUpdate();
         
         return row > 0;
+    }
+    
+    public int tinhChiPhiByDate(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiByMonth(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where month(ngaynhap) = month(?) and year(ngaynhap) = year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiByYear(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where year(ngaynhap) = year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilDate(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) <= ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilMonth(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) <= ? or (month(ngaynhap) = month(?) and year(ngaynhap) = year(?))";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        stm.setString(3, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilYear(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where year(ngaynhap) <= year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
     }
 }
