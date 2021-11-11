@@ -440,7 +440,7 @@ public class HangHoaService {
         suaKhoaNgoai1();
         return row > 0;
     }
-    public HashMap<HangHoa, Integer> getTopDHBanChay(int top) throws SQLException{
+    public HashMap<HangHoa, Integer> getTopSPBanChay(int top) throws SQLException{
 
         HashMap<HangHoa, Integer> hh = new HashMap<>();
         String sql = "SELECT hanghoa.*, sum(soluong) as soluong\n" 
@@ -471,7 +471,7 @@ public class HangHoaService {
         }
         return hh;
     }
-    public HashMap<HangHoa, Integer> getTopDHBanIt(int top) throws SQLException{
+    public HashMap<HangHoa, Integer> getTopSPBanIt(int top) throws SQLException{
 
         HashMap<HangHoa, Integer> hh = new HashMap<>();
         String sql = "SELECT hanghoa.*, sum(soluong) as soluong\n" 

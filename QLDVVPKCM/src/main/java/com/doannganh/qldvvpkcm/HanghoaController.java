@@ -6,8 +6,10 @@
 package com.doannganh.qldvvpkcm;
 
 import com.doannganh.pojo.HangHoa;
+import com.doannganh.pojo.LoaiHangHoa;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
+import com.doannganh.service.LoaiHangHoaService;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -75,11 +77,19 @@ public class HanghoaController implements Initializable {
 //        
 //    }
     
-    public void loadBarChart(HashMap<HangHoa, Integer> data){
+    public void loadBarChartHH(HashMap<HangHoa, Integer> data){
         barChart.getData().clear();
-        XYChart.Series setData = changeHashToSeries(data);
+        XYChart.Series setData = changeHashToSeriesHH(data);
         barChart.getData().add(setData);
         xBar.setLabel("ID hàng hóa");
+        yBar.setLabel("Số lượng");
+    }
+    
+    public void loadBarChartLHH(HashMap<LoaiHangHoa, Integer> data){
+        barChart.getData().clear();
+        XYChart.Series setData = changeHashToSeriesLHH(data);
+        barChart.getData().add(setData);
+        xBar.setLabel("Tên loại hàng hóa");
         yBar.setLabel("Số lượng");
     }
     
@@ -87,7 +97,7 @@ public class HanghoaController implements Initializable {
         Connection conn = JdbcUtils.getConn();
         HangHoaService hhs = new HangHoaService(conn);
         
-        HashMap<HangHoa,Integer> spBC = hhs.getTopDHBanChay(sl);
+        HashMap<HangHoa,Integer> spBC = hhs.getTopSPBanChay(sl);
          
         return spBC;
     }
@@ -96,19 +106,47 @@ public class HanghoaController implements Initializable {
         Connection conn = JdbcUtils.getConn();
         HangHoaService hhs = new HangHoaService(conn);
         
-        HashMap<HangHoa,Integer> spBC = hhs.getTopDHBanIt(sl);
+        HashMap<HangHoa,Integer> spBC = hhs.getTopSPBanIt(sl);
          
         return spBC;
     }
     
-    public XYChart.Series changeHashToSeries(HashMap<HangHoa,Integer> data){
+    public HashMap<LoaiHangHoa, Integer> loadLoaiSPBanIt(int sl) throws SQLException{
+        Connection conn = JdbcUtils.getConn();
+        LoaiHangHoaService hhs = new LoaiHangHoaService(conn);
+        
+        HashMap<LoaiHangHoa,Integer> spBC = hhs.getTopLoaiSPBanIt(sl);
+         
+        return spBC;
+    }
+
+    public HashMap<LoaiHangHoa, Integer> loadLoaiSPBanChay(int sl) throws SQLException{
+        Connection conn = JdbcUtils.getConn();
+        LoaiHangHoaService hhs = new LoaiHangHoaService(conn);
+        
+        HashMap<LoaiHangHoa,Integer> spBC = hhs.getTopLoaiSPBanChay(sl);
+         
+        return spBC;
+    }
+
+    
+    public XYChart.Series changeHashToSeriesHH(HashMap<HangHoa,Integer> data){
     XYChart.Series setData = new XYChart.Series<>();
     for (Map.Entry<HangHoa,Integer> dt:data.entrySet()){
         setData.getData().add(new XYChart.Data(String.valueOf(dt.getKey().getHanghoa_id()), dt.getValue()));
     } 
     return setData;
     }
-            
+      
+    public XYChart.Series changeHashToSeriesLHH(HashMap<LoaiHangHoa,Integer> data){
+    XYChart.Series setData = new XYChart.Series<>();
+    for (Map.Entry<LoaiHangHoa,Integer> dt:data.entrySet()){
+        setData.getData().add(new XYChart.Data(String.valueOf(dt.getKey().getTenloai()), dt.getValue()));
+    } 
+    return setData;
+    }
+
+    
     @FXML
     void checkLoaiSPBanChay(ActionEvent event) {
         spBanIt.setSelected(false);
@@ -139,21 +177,29 @@ public class HanghoaController implements Initializable {
 
     @FXML
     void loadThongKe(ActionEvent event) throws SQLException {
-        if(!(this.soLuong.getText().matches("\\d+")) || 
-        (this.loaiSPBanChay.isSelected() == false && loaiSPBanIt.isSelected() == false &&
-        spBanChay.isSelected() == false && spBanIt.isSelected() == false) ){
-            if(this.soLuong.getText().equals("")){
-                Utils.getBox("Vui lòng nhập một số!", Alert.AlertType.WARNING).show();
-            }
+        if(this.soLuong.getText().equals("")){
+            Utils.getBox("Vui lòng nhập một số!", Alert.AlertType.WARNING).show();
+        }
+        if(!(this.soLuong.getText().matches("\\d+"))){
             Utils.getBox("Vui lòng chỉ nhập số!", Alert.AlertType.WARNING).show();
             this.soLuong.setText("");
+        } 
+        if(this.loaiSPBanChay.isSelected() == false && loaiSPBanIt.isSelected() == false &&
+            spBanChay.isSelected() == false && spBanIt.isSelected() == false){
+            Utils.getBox("Vui lòng chọn một loại thống kê!", Alert.AlertType.WARNING).show();
         }
         else{
             if(this.spBanChay.isSelected()){
-                loadBarChart(loadSPBanChay(Integer.parseInt(soLuong.getText())));
+                loadBarChartHH(loadSPBanChay(Integer.parseInt(soLuong.getText())));
             }
             if(this.spBanIt.isSelected()){
-                loadBarChart(loadSPBanIt(Integer.parseInt(soLuong.getText())));
+                loadBarChartHH(loadSPBanIt(Integer.parseInt(soLuong.getText())));
+            }
+            if(this.loaiSPBanIt.isSelected()){
+                loadBarChartLHH(loadLoaiSPBanIt(Integer.parseInt(soLuong.getText())));
+            }
+            if(this.loaiSPBanChay.isSelected()){
+                loadBarChartLHH(loadLoaiSPBanChay(Integer.parseInt(soLuong.getText())));
             }
         }
     }
