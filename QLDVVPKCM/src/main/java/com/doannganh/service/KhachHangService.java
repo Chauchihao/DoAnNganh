@@ -160,4 +160,29 @@ public class KhachHangService {
         
         return row > 0;
     }
+    
+    public int slKHT() throws SQLException{
+        String sql = "SELECT Count(donhang_id) as soluong FROM qldvvpkcm.donhang WHERE khachhang_id is null";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        int kq = 0;
+        ResultSet rs = stm.executeQuery();
+        
+        while(rs.next()){
+            kq = rs.getInt("soluong");
+        }
+        return kq;
+    }
+    
+    
+    public int slKHTT() throws SQLException{
+        String sql = "SELECT Count(donhang_id) as soluong FROM qldvvpkcm.donhang WHERE khachhang_id is not null";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        int kq = 0;
+        ResultSet rs = stm.executeQuery();
+        
+        while(rs.next()){
+            kq = rs.getInt("soluong");
+        }
+        return kq;
+    }
 }

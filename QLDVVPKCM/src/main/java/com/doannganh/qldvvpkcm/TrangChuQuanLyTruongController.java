@@ -85,16 +85,16 @@ public class TrangChuQuanLyTruongController implements Initializable {
     private ListView<String> listDH;
     
     @FXML
-    public void loadTraCuuHHQLT() throws IOException {
+    public void loadHangHoa() throws IOException {
         acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
     
     @FXML
-    public void loadHangHoa() throws IOException {
+    public void loadKhachHang() throws IOException {
         acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("khachhang.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
     
