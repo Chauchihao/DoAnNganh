@@ -15,6 +15,7 @@ import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -439,4 +440,67 @@ public class HangHoaService {
         suaKhoaNgoai1();
         return row > 0;
     }
+    public HashMap<HangHoa, Integer> getTopDHBanChay(int top) throws SQLException{
+
+        HashMap<HangHoa, Integer> hh = new HashMap<>();
+        String sql = "SELECT hanghoa.*, sum(soluong) as soluong\n" 
+                +"FROM qldvvpkcm.hanghoa, qldvvpkcm.chitietdonhang\n" 
+                +"WHERE hanghoa.hanghoa_id = chitietdonhang.hanghoa_id\n" 
+                +"GROUP BY hanghoa.hanghoa_id\n" 
+                +"order by soluong desc\n" 
+                +"LIMIT ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, top);
+        ResultSet rs = stm.executeQuery();
+        int sl = 0;
+        while (rs.next()) {
+            HangHoa h = new HangHoa();
+            h.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
+            h.setTenhanghoa(rs.getString("tenhanghoa"));
+            h.setThuonghieu(rs.getString("thuonghieu"));
+            h.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            h.setGianiemyet(rs.getString("gianiemyet"));
+            h.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            h.setNgayhethan(rs.getString("ngayhethan"));
+            h.setHinhanh(rs.getString("hinhanh"));
+            h.setTinhtrang(rs.getBoolean("tinhtrang"));
+            h.setLoaihanghoa_id(rs.getInt("loaihanghoa_id"));
+            sl = rs.getInt("soluong");
+            
+            hh.put(h,sl);
+        }
+        return hh;
+    }
+    public HashMap<HangHoa, Integer> getTopDHBanIt(int top) throws SQLException{
+
+        HashMap<HangHoa, Integer> hh = new HashMap<>();
+        String sql = "SELECT hanghoa.*, sum(soluong) as soluong\n" 
+                +"FROM qldvvpkcm.hanghoa, qldvvpkcm.chitietdonhang\n" 
+                +"WHERE hanghoa.hanghoa_id = chitietdonhang.hanghoa_id\n" 
+                +"GROUP BY hanghoa.hanghoa_id\n" 
+                +"order by soluong asc\n" 
+                +"LIMIT ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, top);
+        ResultSet rs = stm.executeQuery();
+        int sl = 0;
+        while (rs.next()) {
+            HangHoa h = new HangHoa();
+            h.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
+            h.setTenhanghoa(rs.getString("tenhanghoa"));
+            h.setThuonghieu(rs.getString("thuonghieu"));
+            h.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            h.setGianiemyet(rs.getString("gianiemyet"));
+            h.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            h.setNgayhethan(rs.getString("ngayhethan"));
+            h.setHinhanh(rs.getString("hinhanh"));
+            h.setTinhtrang(rs.getBoolean("tinhtrang"));
+            h.setLoaihanghoa_id(rs.getInt("loaihanghoa_id"));
+            sl = rs.getInt("soluong");
+            
+            hh.put(h,sl);
+        }
+        return hh;
+       }
+
 }
