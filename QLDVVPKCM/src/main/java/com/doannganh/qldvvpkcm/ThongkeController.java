@@ -333,17 +333,13 @@ public class ThongkeController implements Initializable {
         if(loaiTK.equals("Ngày")){
             int i = 0;
             while((ngayBD.plusDays(i)).isAfter(ngayKT)== false){
-                int chiPhi = nccs.tinhChiPhiUntilDate((ngayBD.plusDays(i-1)).format(dateFormatter));
-                int doanhThu = ctdhs.getDoanhThuUntilDate((ngayBD.plusDays(i-1)).format(dateFormatter));
-                int ln = doanhThu - chiPhi;
-                
+        
                 int chiPhiHN = nccs.tinhChiPhiUntilDate((ngayBD.plusDays(i)).format(dateFormatter));
                 int doanhThuHN = ctdhs.getDoanhThuUntilDate((ngayBD.plusDays(i)).format(dateFormatter));
                 int lnHN = doanhThuHN - chiPhiHN;
                 
-                if(lnHN - ln != 0 ){
-                    loiNhuan.put(ngayBD.plusDays(i).format(dateFormatter), lnHN - ln);
-                }
+                loiNhuan.put(ngayBD.plusDays(i).format(dateFormatter), lnHN);
+
                 i++;
             }
 
@@ -352,18 +348,13 @@ public class ThongkeController implements Initializable {
             int i = 0;
             while(((ngayBD.plusMonths(i)).isBefore(ngayKT)) == true
                   || ngayBD.plusMonths(i).getMonthValue() == ngayKT.getMonthValue()){
-                int chiPhi = nccs.tinhChiPhiUntilDate((ngayBD.plusMonths(i-1)).format(dateFormatter));
-                int doanhThu = ctdhs.getDoanhThuUntilDate((ngayBD.plusMonths(i-1)).format(dateFormatter));
-                int ln = doanhThu - chiPhi;
-                
+
                 int chiPhiTN = nccs.tinhChiPhiUntilDate((ngayBD.plusMonths(i)).format(dateFormatter));
                 int doanhThuTN = ctdhs.getDoanhThuUntilDate((ngayBD.plusMonths(i)).format(dateFormatter));
                 int lnTN = doanhThuTN - chiPhiTN;
                 
-                if(lnTN - ln != 0 ){
-                    loiNhuan.put((ngayBD.plusMonths(i)).getMonth().toString()
-                            + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), lnTN - ln);
-                }
+                loiNhuan.put((ngayBD.plusMonths(i)).getMonth().toString()
+                        + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), lnTN );
                 i++;
             }
             
@@ -372,15 +363,12 @@ public class ThongkeController implements Initializable {
             int i = 0;
             while(((ngayBD.plusYears(i)).isBefore(ngayKT)) == true
                   || ngayBD.plusYears(i).getYear() == ngayKT.getYear()){
-                int chiPhi = nccs.tinhChiPhiUntilYear((ngayBD.plusYears(i-1)).format(dateFormatter));
-                int doanhThu = ctdhs.getDoanhThuUntilYear((ngayBD.plusYears(i-1)).format(dateFormatter));
-                int ln = doanhThu - chiPhi;
-                
+
                 int chiPhiN = nccs.tinhChiPhiUntilYear((ngayBD.plusYears(i)).format(dateFormatter));
                 int doanhThuN = ctdhs.getDoanhThuUntilYear((ngayBD.plusYears(i)).format(dateFormatter));
                 int lnN = doanhThuN - chiPhiN;
                 
-                loiNhuan.put(Integer.toString(ngayBD.plusYears(i).getYear()), lnN - ln);
+                loiNhuan.put(Integer.toString(ngayBD.plusYears(i).getYear()), lnN );
 
                 i++;
             }
