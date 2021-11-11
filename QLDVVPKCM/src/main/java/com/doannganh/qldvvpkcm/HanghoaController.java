@@ -10,6 +10,7 @@ import com.doannganh.pojo.LoaiHangHoa;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
 import com.doannganh.service.LoaiHangHoaService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -68,6 +70,13 @@ public class HanghoaController implements Initializable {
 
     @FXML
     private NumberAxis yBar;
+    
+    @FXML
+    public void loadTraCuuHHQLT() throws IOException {
+        paneHH.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
+        paneHH.getChildren().add(loader.load());
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

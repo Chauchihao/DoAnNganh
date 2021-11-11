@@ -64,7 +64,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="btCapNhat" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="83.0" text="Cập nhật giá">
+                  <Button fx:id="btCapNhat" contentDisplay="TOP" mnemonicParsing="false" onAction="#loadTraCuuHHQLT" prefHeight="70.0" prefWidth="83.0" text="Cập nhật giá">
                      <HBox.margin>
                         <Insets left="100.0" top="20.0" />
                      </HBox.margin>
