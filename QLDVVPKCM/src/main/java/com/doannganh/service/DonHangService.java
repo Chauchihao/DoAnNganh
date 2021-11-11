@@ -31,7 +31,8 @@ public class DonHangService {
         if (tuKhoa == null)
             throw new SQLDataException();
         String sql = "";
-        if (traCuu == "" || tuKhoa == "")
+        PreparedStatement stm = null;
+        if (traCuu == "" || tuKhoa == "") {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -40,7 +41,9 @@ public class DonHangService {
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
-        if (traCuu == "Mã đơn hàng")
+            stm = this.conn.prepareStatement(sql);
+        }
+        if (traCuu == "Mã đơn hàng") {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -50,7 +53,10 @@ public class DonHangService {
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
-        if (traCuu == "Ngày mua hàng")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Ngày mua hàng") {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -60,7 +66,10 @@ public class DonHangService {
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
-        if (traCuu == "Nhân viên")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Nhân viên") {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -70,7 +79,10 @@ public class DonHangService {
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
-        if (traCuu == "Khách hàng")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Khách hàng") {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -80,9 +92,10 @@ public class DonHangService {
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
         
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, tuKhoa);
         ResultSet rs = stm.executeQuery();
         
         List<DonHang> donHang = new ArrayList<>();

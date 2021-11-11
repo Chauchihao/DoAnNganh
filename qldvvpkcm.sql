@@ -43,10 +43,10 @@ CREATE TABLE `nhacungcap_hanghoa` (
   `hanghoa_id` int NOT NULL,
   `soluong` int NOT NULL,
   `ngaynhap` datetime NOT NULL,
-  `gianhap`  decimal(10,0) NULL,
+  `gianhap`  decimal(10,0) NOT NULL,
   `ghichu` varchar(255) NULL,
   
-  PRIMARY KEY (`nhacungcap_id`, `hanghoa_id`),
+  PRIMARY KEY (`nhacungcap_id`, `hanghoa_id`, `ngaynhap`),
   KEY `FK_NHACUNGCAP_HANGHOA_NHACUNGCAP_idx` (`nhacungcap_id`),
   KEY `FK_NHACUNGCAP_HANGHOA_HANGHOA_idx` (`hanghoa_id`),
   CONSTRAINT `FK_NHACUNGCAP_HANGHOA_NHACUNGCAP` FOREIGN KEY (`nhacungcap_id`) REFERENCES `nhacungcap` (`nhacungcap_id`),
@@ -136,6 +136,7 @@ CREATE TABLE `donhang` (
   `donhang_id` int NOT NULL,
   `nhanvien_id` int NOT NULL,
   `ngaygiocapnhat` datetime NOT NULL,
+  `ghichu` longtext NULL,
   
   PRIMARY KEY (`donhang_id`, `nhanvien_id`, `ngaygiocapnhat`),
   KEY `FK_CAPNHATHOADON_DONHANG_idx` (`donhang_id`),
@@ -210,15 +211,15 @@ CREATE TABLE `donhang` (
   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
   ("Huỳnh Thị Thanh","1999-03-21","Nữ","0364687732","huynhthithanh","1","2018-03-02","huynhthithanh@gmail.com","Bình Dương","0382349726",3);
   
-  INSERT INTO `khachhang` (`khachhang_id`,`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`)
-  VALUES (0,"NULL","0000-00-00","NULL", "NULL","NULL");
+  INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`)
+  VALUES ("NULL","0000-00-00","NULL", "NULL","NULL");
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
   VALUES ("Nguyễn Minh Việt","1983-06-28","Nam", "1111 đường 3/2, Phường 12, Quận 11","0932478390",1999);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
   VALUES ("Hoàng Văn Thu","1968-04-27","Nữ", "333 đường Nguyễn Duy Dương, Phường 4, Quận 10","0793247628",999);
   
   INSERT INTO `thucung` (`ten`,`ngaysinh`,`gioitinh`,`mauLong`,`tinhtrangsuckhoe`,`khachhang_id`)
-  VALUES ("Ken","2021-01-01","Đực","Trắng","Khỏe mạnh", 1);
+  VALUES ("Ken","2021-01-01","Đực","Trắng","Khỏe mạnh", 2);
   
   INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2018-03-02",3,2);
   INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2019-04-20",3,3);
