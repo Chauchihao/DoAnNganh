@@ -5,10 +5,15 @@
  */
 package com.doannganh.qldvvpkcm;
 
+import com.doannganh.pojo.ChiTietDonHang;
+import com.doannganh.pojo.NhaCungCap;
+import com.doannganh.pojo.NhaCungCap_HangHoa;
 import com.doannganh.service.ChiTietDonHangService;
 import com.doannganh.service.DonHangService;
 import com.doannganh.service.JdbcUtils;
+import com.doannganh.service.NhaCungCapService;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,7 +32,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -79,7 +83,7 @@ public class ThongkeController implements Initializable {
     private CheckBox cbLoiNhuan;
 
     @FXML
-    private CheckBox cbBoth;
+    private CheckBox cbChiPhi;
     
     @FXML
     private AnchorPane chartPane;
@@ -127,19 +131,18 @@ public class ThongkeController implements Initializable {
         String loaiTK = this.loaiTK.getValue().toString();
         
         HashMap<String,Integer> data = new HashMap<>();
-        
-        if(this.cbDoanhThu.isSelected() || this.cbLoiNhuan.isSelected()){
-            if(this.cbDoanhThu.isSelected()){
+
+        if(this.cbLoiNhuan.isSelected()){
+            data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
+        } 
+        if(this.cbDoanhThu.isSelected()){
             data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-            }
-            else{
-            }
-           for (Map.Entry<String,Integer> entry:data.entrySet()){
-            pieChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
-            } 
         }
-        else{
-            
+        if(this.cbChiPhi.isSelected()){
+            data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
+        }
+        for (Map.Entry<String,Integer> entry:data.entrySet()){
+            pieChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
         pieChart.getData().forEach(dt-> {
             String percent = moneyFormat((int)dt.getPieValue());
@@ -158,20 +161,19 @@ public class ThongkeController implements Initializable {
         
         HashMap<String,Integer> data = new HashMap<>();
 
-        if(this.cbDoanhThu.isSelected() || this.cbLoiNhuan.isSelected()){
-            if(this.cbDoanhThu.isSelected()){
-                data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-                yLine.setLabel("Doanh thu(VNĐ)");
-            }
-            else{
-                yLine.setLabel("Lợi nhuận(VNĐ)");
-            }
-
-            this.lineChart.getData().addAll(changeHashToSeries(data));
+        if(this.cbDoanhThu.isSelected() ){
+            data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Doanh thu(VNĐ)");
         }
-        else{
-            
+        if(this.cbLoiNhuan.isSelected()){
+            data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Lợi nhuận(VNĐ)");
         }
+        if(this.cbChiPhi.isSelected()){
+            data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Chi phí(VNĐ)");
+        }
+        this.lineChart.getData().addAll(changeHashToSeries(data));
         setVisible(2);
     }
     
@@ -184,19 +186,21 @@ public class ThongkeController implements Initializable {
         
         HashMap<String,Integer> data = new HashMap<>();
    
-        if(this.cbDoanhThu.isSelected() || this.cbLoiNhuan.isSelected()){
-            if(this.cbDoanhThu.isSelected()){
-                data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-                yBar.setLabel("Doanh thu(VNĐ)");
-            }
-            else{
-                yBar.setLabel("Lợi nhuận(VNĐ)");
-            }
-           this.barChart.getData().addAll(changeHashToSeries(data));
+        if(this.cbDoanhThu.isSelected() ){
+            data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Doanh thu(VNĐ)");
         }
-        else{
-            
+        if(this.cbLoiNhuan.isSelected()){
+            data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Lợi nhuận(VNĐ)");
         }
+        if(this.cbChiPhi.isSelected()){
+            data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Chi phí(VNĐ)");
+        }
+        
+        this.barChart.getData().addAll(changeHashToSeries(data));
+
         setVisible(3);
     }
     
@@ -209,19 +213,20 @@ public class ThongkeController implements Initializable {
         
         HashMap<String,Integer> data = new HashMap<>();
    
-        if(this.cbDoanhThu.isSelected() || this.cbLoiNhuan.isSelected()){
-            if(this.cbDoanhThu.isSelected()){
-                data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-                yArea.setLabel("Doanh thu(VNĐ)");
-            }
-            else{
-                yArea.setLabel("Lợi nhuận(VNĐ)");
-            }
-           this.areaChart.getData().addAll(changeHashToSeries(data));
+        if(this.cbDoanhThu.isSelected() ){
+            data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Doanh thu(VNĐ)");
         }
-        else{
-            
+        if(this.cbLoiNhuan.isSelected()){
+            data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Lợi nhuận(VNĐ)");
         }
+        if(this.cbChiPhi.isSelected()){
+            data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
+            yArea.setLabel("Chi phí(VNĐ)");
+        }
+        
+        this.areaChart.getData().addAll(changeHashToSeries(data));
         setVisible(4);
     }
     
@@ -233,30 +238,25 @@ public class ThongkeController implements Initializable {
         HashMap<String,Integer> doanhThu = new HashMap<>();
         if(loaiTK.equals("Ngày")){
             int i = 0;
-                while((ngayBD.plusDays(i)).isAfter(ngayKT)== false){
-                    List<Integer> idDH = dhs.getDHIDByDate((ngayBD.plusDays(i)).format(dateFormatter));
-                    int tong = 0;
-                    for(int j = 0; j < idDH.size(); j++){
-                        tong += ctdhs.tongDHByID(idDH.get(j));
-                    }
-                    if(tong != 0){
-                        doanhThu.put((ngayBD.plusDays(i)).format(dateFormatter), tong);
-                    }
-                    i++;
+            while((ngayBD.plusDays(i)).isAfter(ngayKT)== false){
+                int dt = ctdhs.getDoanhThuByDate((ngayBD.plusDays(i)).format(dateFormatter));
+
+                if(dt != 0){
+                    doanhThu.put((ngayBD.plusDays(i)).format(dateFormatter), dt);
                 }
+                i++;
+            }
         }
         else if(loaiTK.equals("Tháng")){
             int i = 0;
             while(((ngayBD.plusMonths(i)).isBefore(ngayKT)) == true
                   || ngayBD.plusMonths(i).getMonthValue() == ngayKT.getMonthValue()){
-                List<Integer> idDH = dhs.getDHIDByMonth((ngayBD.plusMonths(i)).format(dateFormatter));
-                int tong = 0;
-                for(int j = 0; j < idDH.size(); j++){
-                    tong += ctdhs.tongDHByID(idDH.get(j));
-                }
-                if(tong != 0){
+                
+                int dt = ctdhs.getDoanhThuByMonth(ngayBD.plusMonths(i).format(dateFormatter));
+                
+                if(dt != 0){
                     doanhThu.put((ngayBD.plusMonths(i)).getMonth().toString()
-                            + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), tong);
+                            + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), dt);
                 }
                 i++;
             }
@@ -265,19 +265,119 @@ public class ThongkeController implements Initializable {
             int i = 0;
             while(((ngayBD.plusYears(i)).isBefore(ngayKT)) == true
                   || ngayBD.plusYears(i).getYear() == ngayKT.getYear()){
-                List<Integer> idDH = dhs.getDHIDByYear((ngayBD.plusYears(i)).format(dateFormatter));
-                int tong = 0;
-                for(int j = 0; j < idDH.size(); j++){
-                    tong += ctdhs.tongDHByID(idDH.get(j));
-                }
-                if(tong != 0){
-                    doanhThu.put(Integer.toString(ngayBD.plusYears(i).getYear()), tong);
+                int dt = ctdhs.getDoanhThuByYear((ngayBD.plusYears(i)).format(dateFormatter));
+
+                if(dt != 0){
+                    doanhThu.put(Integer.toString(ngayBD.plusYears(i).getYear()), dt);
                 }
                 i++;
             }
         }
+        conn.close();
         return doanhThu;
     }
+    
+    public HashMap<String,Integer> tinhChiPhi(LocalDate ngayBD, LocalDate ngayKT, String loaiTK) throws SQLException{
+        Connection conn = JdbcUtils.getConn();
+        NhaCungCapService nccs = new NhaCungCapService(conn);
+        
+        HashMap<String,Integer> chiPhi = new HashMap<>();
+        if(loaiTK.equals("Ngày")){
+            int i = 0;
+            while((ngayBD.plusDays(i)).isAfter(ngayKT)== false){
+                int cp = nccs.tinhChiPhiByDate((ngayBD.plusDays(i)).format(dateFormatter));
+
+                if(cp != 0){
+                    chiPhi.put((ngayBD.plusDays(i)).format(dateFormatter), cp );
+                }
+                i++;
+            }
+        }
+        else if(loaiTK.equals("Tháng")){
+            int i = 0;
+            while(((ngayBD.plusMonths(i)).isBefore(ngayKT)) == true
+                  || ngayBD.plusMonths(i).getMonthValue() == ngayKT.getMonthValue()){
+                int cp = nccs.tinhChiPhiByMonth((ngayBD.plusMonths(i)).format(dateFormatter));
+                
+                if(cp != 0){
+                    chiPhi.put((ngayBD.plusMonths(i)).getMonth().toString()
+                            + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), cp);
+                }
+                i++;
+            }
+        }
+        else{
+            int i = 0;
+            while(((ngayBD.plusYears(i)).isBefore(ngayKT)) == true
+                  || ngayBD.plusYears(i).getYear() == ngayKT.getYear()){
+                int cpN = nccs.tinhChiPhiByYear((ngayBD.plusYears(i)).format(dateFormatter));
+
+                if(cpN != 0){
+                    chiPhi.put(Integer.toString(ngayBD.plusYears(i).getYear()), cpN);
+                }
+                i++;
+            } 
+        }
+        conn.close();
+        return chiPhi;
+    }
+    
+    public HashMap<String,Integer> tinhLoiNhuan(LocalDate ngayBD, LocalDate ngayKT, String loaiTK) throws SQLException{
+        Connection conn = JdbcUtils.getConn();
+        DonHangService dhs = new DonHangService(conn);
+        ChiTietDonHangService ctdhs = new ChiTietDonHangService(conn);
+        NhaCungCapService nccs = new NhaCungCapService(conn);
+        
+        HashMap<String,Integer> loiNhuan = new HashMap<>();
+
+        if(loaiTK.equals("Ngày")){
+            int i = 0;
+            while((ngayBD.plusDays(i)).isAfter(ngayKT)== false){
+        
+                int chiPhiHN = nccs.tinhChiPhiUntilDate((ngayBD.plusDays(i)).format(dateFormatter));
+                int doanhThuHN = ctdhs.getDoanhThuUntilDate((ngayBD.plusDays(i)).format(dateFormatter));
+                int lnHN = doanhThuHN - chiPhiHN;
+                
+                loiNhuan.put(ngayBD.plusDays(i).format(dateFormatter), lnHN);
+
+                i++;
+            }
+
+        }
+        else if(loaiTK.equals("Tháng")){
+            int i = 0;
+            while(((ngayBD.plusMonths(i)).isBefore(ngayKT)) == true
+                  || ngayBD.plusMonths(i).getMonthValue() == ngayKT.getMonthValue()){
+
+                int chiPhiTN = nccs.tinhChiPhiUntilDate((ngayBD.plusMonths(i)).format(dateFormatter));
+                int doanhThuTN = ctdhs.getDoanhThuUntilDate((ngayBD.plusMonths(i)).format(dateFormatter));
+                int lnTN = doanhThuTN - chiPhiTN;
+                
+                loiNhuan.put((ngayBD.plusMonths(i)).getMonth().toString()
+                        + "-".concat(Integer.toString(ngayBD.plusMonths(i).getYear())), lnTN );
+                i++;
+            }
+            
+        }
+        else{
+            int i = 0;
+            while(((ngayBD.plusYears(i)).isBefore(ngayKT)) == true
+                  || ngayBD.plusYears(i).getYear() == ngayKT.getYear()){
+
+                int chiPhiN = nccs.tinhChiPhiUntilYear((ngayBD.plusYears(i)).format(dateFormatter));
+                int doanhThuN = ctdhs.getDoanhThuUntilYear((ngayBD.plusYears(i)).format(dateFormatter));
+                int lnN = doanhThuN - chiPhiN;
+                
+                loiNhuan.put(Integer.toString(ngayBD.plusYears(i).getYear()), lnN );
+
+                i++;
+            }
+        }
+        
+        conn.close();
+        return loiNhuan;
+    }
+    
     
     public XYChart.Series changeHashToSeries(HashMap<String,Integer> data){
         
@@ -342,23 +442,24 @@ public class ThongkeController implements Initializable {
     }
     
     @FXML
-    void checkBoth(ActionEvent event) {
+    void checkChiPhi(ActionEvent event) {
         cbDoanhThu.setSelected(false);
         cbLoiNhuan.setSelected(false);
     }
     @FXML
     void checkDoanhThu(ActionEvent event) {
-        cbBoth.setSelected(false);
+        cbChiPhi.setSelected(false);
         cbLoiNhuan.setSelected(false);
     }
     @FXML
     void checkLoiNhuan(ActionEvent event) {
         cbDoanhThu.setSelected(false);
-        cbBoth.setSelected(false);
+        cbChiPhi.setSelected(false);
     }
     
     public String moneyFormat(int money){
         DecimalFormat formatter = new DecimalFormat("###,###,###");
         return(formatter.format(money)+" VNĐ");
     }
+    
 }

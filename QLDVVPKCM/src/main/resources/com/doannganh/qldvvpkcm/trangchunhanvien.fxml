@@ -15,7 +15,6 @@
          <children>
             <VBox prefHeight="1080.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="218.0" text="Thoát" />
                   <Button contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadTaoHoaDon" prefHeight="100.0" prefWidth="100.0" text="Đơn hàng">
                      <graphic>
                         <ImageView fitHeight="67.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
@@ -34,6 +33,25 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadQuanLyKhachHang" prefHeight="100.0" prefWidth="100.0" text="Khách hàng">
+                     <graphic>
+                        <ImageView fitHeight="67.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/customer.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#loadQuanLyThuCung" prefHeight="100.0" prefWidth="100.0" text="Thú cưng">
+                     <graphic>
+                        <ImageView fitHeight="67.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/pet-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#logoutHandler" prefHeight="26.0" prefWidth="218.0" text="Thoát" />
                </children>
             </VBox>
             <AnchorPane fx:id="acpLoad" minHeight="0.0" minWidth="0.0" prefHeight="1080.0" prefWidth="1820.0">

@@ -52,6 +52,30 @@ public class ChiTietDonHangService {
         return chiTietDonHang;
     }
     
+    public ChiTietDonHang getCTDHByIDHHDH(int idDH, int idHH) throws SQLException {
+        String sql = "SELECT *, tenhanghoa, (soluong * dongia * (1 - giamgia)) AS thanhtien"
+                + " FROM chitietdonhang, hanghoa"
+                + " WHERE donhang_id = ? AND chitietdonhang.hanghoa_id = ?"
+                + " AND chitietdonhang.hanghoa_id = hanghoa.hanghoa_id"
+                + " ORDER BY donhang_id";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, idDH);
+        stm.setInt(2, idHH);
+        ResultSet rs = stm.executeQuery();
+        
+        ChiTietDonHang ctdh = new ChiTietDonHang();
+        while (rs.next()) {
+            ctdh.setHanghoa_id(rs.getInt("hanghoa_id"));
+            ctdh.setTenhang(rs.getString("tenhanghoa"));
+            ctdh.setSoluong(rs.getString("soluong"));
+            ctdh.setDongia(rs.getString("dongia"));
+            ctdh.setGiamgia(rs.getString("giamgia"));
+            ctdh.setThanhtien(rs.getString("thanhtien"));
+        }
+        return ctdh;
+    }
+    
     public boolean themCTDH(ChiTietDonHang ctdh) throws SQLException {
         
         //suaKhoaNgoai0();
@@ -66,6 +90,18 @@ public class ChiTietDonHangService {
         //suaKhoaNgoai0();
         int row = stm.executeUpdate();
         //suaKhoaNgoai1();
+        return row > 0;
+    }
+    
+    public boolean suaSoLuongCTDH(ChiTietDonHang ctdh) throws SQLException {
+        
+        String sql = "UPDATE chitietdonhang SET soluong = ?"
+                + " WHERE donhang_id = ? AND hanghoa_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, ctdh.getSoluong());
+        stm.setInt(2, ctdh.getDonhang_id());
+        stm.setInt(3, ctdh.getHanghoa_id());
+        int row = stm.executeUpdate();
         return row > 0;
     }
     
@@ -111,7 +147,7 @@ public class ChiTietDonHangService {
     }
     
     public int tongDHByID(int id) throws SQLException{
-        String sql = "SELECT sum(dongia*(1-giamgia)) as tong FROM qldvvpkcm.chitietdonhang " 
+        String sql = "SELECT sum((dongia*(1-giamgia))* soluong) as tong FROM qldvvpkcm.chitietdonhang " 
                 + "Where donhang_id = ?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         stm.setInt(1, id);
@@ -121,5 +157,99 @@ public class ChiTietDonHangService {
             tong = rs.getInt("tong");
         }
         return tong;
+    }
+    
+    public int getDoanhThuByDate(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia)) * soluong) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE date(ngayTaoDH) = ?"
+                + "and qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
+    }
+    
+    public int getDoanhThuByMonth(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia)) * soluong) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id\n" 
+                +"and month(ngayTaoDH) = month(?) and year(ngayTaoDH) = year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
+    }
+    
+    public int getDoanhThuByYear(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia) * soluong)) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE year(ngayTaoDH) = year(?)"
+                + " and qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
+    }
+    
+    public int getDoanhThuUntilDate(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia)) * soluong) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE date(ngayTaoDH) <= ?"
+                + "and qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
+    }
+    
+    
+    public int getDoanhThuUntilMonth(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia)) * soluong) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id\n" 
+                +"and (date(ngayTaoDH) <= ? or (month(ngayTaoDH) = month(?) and year(ngayTaoDH) = year(?)))";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        stm.setString(3, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
+    }
+    
+    public int getDoanhThuUntilYear(String date) throws SQLException{
+        String sql = "SELECT sum((dongia*(1-giamgia)) * soluong) as doanhThu " 
+                +"FROM qldvvpkcm.chitietdonhang, qldvvpkcm.donhang\n" 
+                + "WHERE qldvvpkcm.donhang.donhang_id = qldvvpkcm.chitietdonhang.donhang_id\n" 
+                +"and year(ngayTaoDH) <= year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int dt = 0;
+        while(rs.next()){
+            dt = rs.getInt("doanhThu");
+        }
+        return dt;
     }
 }

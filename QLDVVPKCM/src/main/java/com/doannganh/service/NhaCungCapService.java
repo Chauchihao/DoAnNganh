@@ -7,6 +7,7 @@ package com.doannganh.service;
 
 import com.doannganh.pojo.NhaCungCap;
 import com.doannganh.pojo.NhaCungCap;
+import com.doannganh.pojo.NhaCungCap_HangHoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,26 +51,33 @@ public class NhaCungCapService {
         if (tuKhoa == null)
             throw new SQLDataException();
         String sql = "";
-        if (traCuu == "" || tuKhoa == "")
+        PreparedStatement stm = null;
+        if (traCuu == "" || tuKhoa == "") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
-        if (traCuu == "Mã nhà cung cấp")
+            stm = this.conn.prepareStatement(sql);
+        }
+        if (traCuu == "Mã nhà cung cấp") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE nhacungcap.nhacungcap_id like concat('%', ?, '%')"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
-        if (traCuu == "Tên công ty")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Tên công ty") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tencongty like concat('%', ?, '%')"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
         
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, tuKhoa);
         ResultSet rs = stm.executeQuery();
         
         List<NhaCungCap> nhaCungCap = new ArrayList<>();
@@ -190,5 +198,86 @@ public class NhaCungCapService {
         int row = stm.executeUpdate();
         
         return row > 0;
+    }
+    
+    public int tinhChiPhiByDate(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiByMonth(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where month(ngaynhap) = month(?) and year(ngaynhap) = year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiByYear(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where year(ngaynhap) = year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilDate(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) <= ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilMonth(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) <= ? or (month(ngaynhap) = month(?) and year(ngaynhap) = year(?))";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        stm.setString(2, date);
+        stm.setString(3, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
+    }
+    
+    public int tinhChiPhiUntilYear(String date) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where year(ngaynhap) <= year(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, date);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
     }
 }

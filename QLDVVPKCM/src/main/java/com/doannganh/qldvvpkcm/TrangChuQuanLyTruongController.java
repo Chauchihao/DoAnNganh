@@ -91,6 +91,13 @@ public class TrangChuQuanLyTruongController implements Initializable {
         acpLoad.getChildren().add(loader.load());
     }
     
+    @FXML
+    public void loadHangHoa() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
     public void loadBarchart(){
         try {
             XYChart.Series setData = new XYChart.Series<>();

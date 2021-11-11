@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="paneHH" prefHeight="800.0" prefWidth="1400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="com.doannganh.qldvvpkcm.HanghoaController">
+   <children>
+      <VBox prefHeight="800.0" prefWidth="1400.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="70.0" prefWidth="1260.0" text="Hàng hóa">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="120.0" prefWidth="1400.0">
+               <children>
+                  <AnchorPane prefHeight="98.0" prefWidth="864.0">
+                     <children>
+                        <Button fx:id="btThongKe" layoutX="758.0" layoutY="27.0" mnemonicParsing="false" onAction="#loadThongKe" prefHeight="58.0" prefWidth="91.0" text="Thống kê">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="soLuong" layoutX="80.0" layoutY="49.0" prefHeight="32.0" prefWidth="40.0" />
+                        <CheckBox fx:id="mhBanChay" layoutX="155.0" layoutY="19.0" mnemonicParsing="false" onAction="#checkMatHangBanChay" prefHeight="40.0" prefWidth="273.0" text="mặt hàng bán chạy nhất">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="lhBanChay" layoutX="155.0" layoutY="77.0" mnemonicParsing="false" onAction="#checkLoaiHangBanChay" text="loại hàng bán chạy nhất">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="lhBanIt" layoutX="465.0" layoutY="77.0" mnemonicParsing="false" onAction="#checkLoaiHangBanIt" text="loại hàng bán ít nhất">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="mhBanIt" layoutX="465.0" layoutY="25.0" mnemonicParsing="false" onAction="#checkMatHangBanIt" text="mặt hàng bán ít nhất">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </CheckBox>
+                        <Label layoutX="26.0" layoutY="51.0" text="Top">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="btCapNhat" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.0" prefWidth="83.0" text="Cập nhật giá">
+                     <HBox.margin>
+                        <Insets left="100.0" top="20.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="44.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../image/price-change-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="567.0" prefWidth="1400.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
