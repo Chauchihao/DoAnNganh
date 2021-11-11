@@ -42,6 +42,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -49,6 +50,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.PopupWindow;
 import javafx.util.Callback;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -121,7 +123,11 @@ public class TaoHoaDonController implements Initializable {
         
         this.tbHangHoa.setRowFactory(obj -> {
             TableRow r = new TableRow();
+            Tooltip tt = new Tooltip("Nhấn đúp chuột để sửa");
+            tt.setAnchorLocation(PopupWindow.AnchorLocation.WINDOW_BOTTOM_LEFT);
+            
             r.setOnMouseClicked(evt -> {
+                r.setTooltip(tt);
                 HangHoa hh = this.tbHangHoa.getSelectionModel().getSelectedItem();
                 int rindex = this.tbHangHoa.getSelectionModel().getSelectedIndex();
                 boolean trung = false;
@@ -148,7 +154,12 @@ public class TaoHoaDonController implements Initializable {
                     }
                     
                 }
-                Image img = new Image(getClass().getResourceAsStream(hh.getHinhanh()));
+                
+                Image img;
+                if (hh.getHinhanh() != null)
+                    img = new Image(getClass().getResourceAsStream(hh.getHinhanh()));
+                else
+                    img = new Image(getClass().getResourceAsStream("/image/pet-icon.png"));
 
                 ivHangHoa.setImage(img);
                 ivHangHoa.setFitHeight(515);
@@ -585,7 +596,7 @@ public class TaoHoaDonController implements Initializable {
             Connection conn = JdbcUtils.getConn();
             UserService s = new UserService(conn);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/qldvvpkcm", "root", "123456");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/qldvvpkcm", "root", "12345678");
             String reportPath = "/report/HoaDon.jrxml";
             Map<String, Object> params = new HashMap<>();  
             params.put("donhang_id", dh.getDonhang_id());  

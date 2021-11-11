@@ -339,9 +339,9 @@ public class DoiTraController implements Initializable {
         }
     }
     
-    public void doiHang(ActionEvent evt) throws IOException {
+    public void traHang(ActionEvent evt) throws IOException {
         if (chonCTDH.size() <= 0)
-            Utils.getBox("Vui lòng chọn hàng hóa cần đổi!!!", Alert.AlertType.WARNING).show();
+            Utils.getBox("Vui lòng chọn hàng hóa cần trả!!!", Alert.AlertType.WARNING).show();
         else {
             VBox vb = new VBox();
             AnchorPane ap = new AnchorPane();
@@ -522,9 +522,9 @@ public class DoiTraController implements Initializable {
         }
     }
     
-    public void traHang(ActionEvent evt) throws IOException {
+    public void doiHang(ActionEvent evt) throws IOException {
         if (chonCTDH.size() <= 0)
-            Utils.getBox("Vui lòng chọn hàng hóa cần trả!!!", Alert.AlertType.WARNING).show();
+            Utils.getBox("Vui lòng chọn hàng hóa cần đổi!!!", Alert.AlertType.WARNING).show();
         else {
             HBox hb = new HBox();
             VBox vb = new VBox();
