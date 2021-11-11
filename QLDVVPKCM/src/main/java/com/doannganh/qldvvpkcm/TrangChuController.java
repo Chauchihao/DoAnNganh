@@ -77,6 +77,20 @@ public class TrangChuController implements Initializable {
         acpLoad.getChildren().add(loader.load());
     }
     
+    @FXML
+    public void loadQuanLyKhachHang() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("quanlykhachhang.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
+    @FXML
+    public void loadQuanLyThuCung() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("quanlythucung.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }

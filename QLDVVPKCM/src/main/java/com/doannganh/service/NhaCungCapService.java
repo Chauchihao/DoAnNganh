@@ -51,26 +51,33 @@ public class NhaCungCapService {
         if (tuKhoa == null)
             throw new SQLDataException();
         String sql = "";
-        if (traCuu == "" || tuKhoa == "")
+        PreparedStatement stm = null;
+        if (traCuu == "" || tuKhoa == "") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
-        if (traCuu == "Mã nhà cung cấp")
+            stm = this.conn.prepareStatement(sql);
+        }
+        if (traCuu == "Mã nhà cung cấp") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE nhacungcap.nhacungcap_id like concat('%', ?, '%')"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
-        if (traCuu == "Tên công ty")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Tên công ty") {
             sql = "SELECT nhacungcap.*, COUNT(hanghoa_id) AS tongmathang"
                 + " FROM nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tencongty like concat('%', ?, '%')"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " GROUP BY nhacungcap_id ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
         
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, tuKhoa);
         ResultSet rs = stm.executeQuery();
         
         List<NhaCungCap> nhaCungCap = new ArrayList<>();

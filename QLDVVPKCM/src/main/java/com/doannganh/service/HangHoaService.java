@@ -62,14 +62,17 @@ public class HangHoaService {
         if (tuKhoa == null)
             throw new SQLDataException();
         String sql = "";
-        if (traCuu == "" || tuKhoa == "")
+        PreparedStatement stm = null;
+        if (traCuu == "" || tuKhoa == "")  {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        if (traCuu == "Mã hàng")
+            stm = this.conn.prepareStatement(sql);
+        }
+        if (traCuu == "Mã hàng") {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.hanghoa_id like concat('%', ?, '%')"
@@ -77,7 +80,10 @@ public class HangHoaService {
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        if (traCuu == "Tên hàng")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Tên hàng") {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tenhanghoa like concat('%', ?, '%')"
@@ -85,7 +91,10 @@ public class HangHoaService {
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        if (traCuu == "Thương hiệu")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Thương hiệu") {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE thuonghieu like concat('%', ?, '%')"
@@ -93,7 +102,10 @@ public class HangHoaService {
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        if (traCuu == "Loại hàng")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Loại hàng") {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tenloai like concat('%', ?, '%')"
@@ -101,7 +113,10 @@ public class HangHoaService {
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        if (traCuu == "Nhà cung cấp")
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if (traCuu == "Nhà cung cấp") {
             sql = "SELECT hanghoa.*, tenloai, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE tencongty like concat('%', ?, '%')"
@@ -109,8 +124,10 @@ public class HangHoaService {
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " ORDER BY hanghoa.hanghoa_id";
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setString(1, tuKhoa);
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        
         ResultSet rs = stm.executeQuery();
         
         List<HangHoa> hangHoa = new ArrayList<>();
