@@ -174,15 +174,15 @@
             <AnchorPane fx:id="chartPane" prefHeight="759.0" prefWidth="1462.0">
                <children>
                   <PieChart fx:id="pieChart" layoutX="145.0" layoutY="4.0" prefHeight="480.0" prefWidth="542.0" visible="false" />
-                  <BarChart fx:id="barChart" layoutX="57.0" layoutY="29.0" prefHeight="489.0" prefWidth="1006.0" visible="false">
+                  <BarChart fx:id="barChart" layoutX="86.0" layoutY="29.0" prefHeight="435.0" prefWidth="977.0" visible="false">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" fx:id="xBar" />
+                      <CategoryAxis side="BOTTOM" tickLength="15.0" fx:id="xBar" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis fx:id="yBar" side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <LineChart fx:id="lineChart" layoutX="61.0" layoutY="3.0" prefHeight="506.0" prefWidth="1000.0" visible="false">
+                  <LineChart fx:id="lineChart" layoutX="61.0" layoutY="3.0" prefHeight="449.0" prefWidth="1000.0" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="xLine" />
                     </xAxis>
@@ -190,7 +190,7 @@
                       <NumberAxis fx:id="yLine" side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <AreaChart fx:id="areaChart" layoutX="100.0" layoutY="9.0" prefHeight="506.0" prefWidth="936.0" visible="false">
+                  <AreaChart fx:id="areaChart" layoutX="100.0" layoutY="9.0" prefHeight="450.0" prefWidth="936.0" visible="false">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" fx:id="xArea" />
                     </xAxis>

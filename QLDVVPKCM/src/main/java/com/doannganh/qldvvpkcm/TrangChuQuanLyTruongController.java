@@ -113,6 +113,9 @@ public class TrangChuQuanLyTruongController implements Initializable {
                 }
                 setData.getData().add(new XYChart.Data(ngay.get(i),tong));
             }
+            setData.setName("Doanh thu");
+            this.doanhThu.setLabel("Tổng tiền(VNĐ)");
+            this.ngay.setLabel("Ngày");
             this.barChart.getData().addAll(setData);
         } catch (SQLException ex) {
             Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
