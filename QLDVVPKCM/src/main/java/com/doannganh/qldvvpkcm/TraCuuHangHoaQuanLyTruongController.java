@@ -289,8 +289,5 @@ public class TraCuuHangHoaQuanLyTruongController implements Initializable {
         }
     }
     
-    public void clearHandler(ActionEvent evt) throws IOException {
-        if (!this.txtTraCuu.getText().isEmpty())
-            this.txtTraCuu.setText("");
-    }
+    
 }

@@ -17,7 +17,7 @@
             <TextField fx:id="txtTraCuu" prefHeight="35.0" prefWidth="723.0" />
          </children>
       </HBox>
-      <Button fx:id="btDoi" layoutX="777.0" layoutY="481.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="73.0" text="Đổi" />
+      <Button fx:id="btDoi" layoutX="777.0" layoutY="481.0" mnemonicParsing="false" onAction="#doiHang" prefHeight="51.0" prefWidth="73.0" text="Đổi" />
       <Button fx:id="btTra" layoutX="777.0" layoutY="559.0" mnemonicParsing="false" onAction="#traHang" prefHeight="51.0" prefWidth="73.0" text="Trả" />
    </children>
 </AnchorPane>
