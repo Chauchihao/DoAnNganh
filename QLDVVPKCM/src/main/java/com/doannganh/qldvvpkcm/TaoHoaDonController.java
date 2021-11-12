@@ -148,7 +148,12 @@ public class TaoHoaDonController implements Initializable {
                     }
                     
                 }
-                Image img = new Image(getClass().getResourceAsStream(hh.getHinhanh()));
+                
+                Image img = null;
+                if (hh.getHinhanh() == null)
+                    img = new Image(getClass().getResourceAsStream("/image/default-image.png"));
+                else
+                    img = new Image(getClass().getResourceAsStream(hh.getHinhanh()));
 
                 ivHangHoa.setImage(img);
                 ivHangHoa.setFitHeight(515);
