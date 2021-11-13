@@ -101,16 +101,23 @@ public class ThongkeController implements Initializable {
     private NumberAxis yBar;
 
     @FXML
-    private LineChart<?, ?> lineChart;
+    private LineChart<String, Number> lineChart;
     
     @FXML
     private NumberAxis yLine;
     
     @FXML
-    private AreaChart<?, ?> areaChart;
+    private CategoryAxis xLine;
     
     @FXML
+    private AreaChart<String, Number> areaChart;
+    
+    @FXML
+    private CategoryAxis xArea;
+
+    @FXML
     private NumberAxis yArea;
+
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
      
@@ -131,16 +138,33 @@ public class ThongkeController implements Initializable {
         String loaiTK = this.loaiTK.getValue().toString();
         
         HashMap<String,Integer> data = new HashMap<>();
+        String title = "Biểu đồ";
 
         if(this.cbLoiNhuan.isSelected()){
             data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
+            title += " lợi nhuận";
         } 
         if(this.cbDoanhThu.isSelected()){
             data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
+            title += " doanh thu";
         }
         if(this.cbChiPhi.isSelected()){
             data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
+            title += " chi phí";
         }
+        
+        if(this.loaiTK.getValue().equals("Ngày")){
+            title += " theo ngày";
+        }
+        if(this.loaiTK.getValue().equals("Tháng")){
+            title += " theo tháng";
+        }
+        if(this.loaiTK.getValue().equals("Năm")){
+            title += " theo năm";
+        }
+        
+        pieChart.setTitle(title);
+        
         for (Map.Entry<String,Integer> entry:data.entrySet()){
             pieChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
         }
@@ -159,24 +183,67 @@ public class ThongkeController implements Initializable {
         LocalDate ngayKT = this.ngayKT.getValue();
         String loaiTK = this.loaiTK.getValue().toString();
         
-        HashMap<String,Integer> dataDT = new HashMap<>();
-        HashMap<String,Integer> dataLN = new HashMap<>();
-        HashMap<String,Integer> dataCP = new HashMap<>();
-
+        XYChart.Series<String, Number> dataDT =  new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> dataLN = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> dataCP = new XYChart.Series<String, Number>();
+        
         if(this.cbDoanhThu.isSelected() ){
-            
-            dataDT = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Doanh thu(VNĐ)");
+            dataDT = changeHashToSeries(tinhDoanhThu(ngayBD, ngayKT, loaiTK));
+            dataDT.setName(" Doanh thu ");
+            this.lineChart.getData().add(dataDT);
         }
         if(this.cbLoiNhuan.isSelected()){
-            dataLN = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Lợi nhuận(VNĐ)");
+            dataLN = changeHashToSeries(tinhLoiNhuan(ngayBD, ngayKT, loaiTK));
+            dataLN.setName(" Lợi nhuận ");
+            this.lineChart.getData().add(dataLN);
         }
         if(this.cbChiPhi.isSelected()){
-            dataCP = tinhChiPhi(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Chi phí(VNĐ)");
+            dataCP = changeHashToSeries(tinhChiPhi(ngayBD, ngayKT, loaiTK));
+            dataCP.setName(" Chi phí ");
+            this.lineChart.getData().add(dataCP);
         }
-        this.lineChart.getData().addAll(changeHashToSeries(dataDT),changeHashToSeries(dataLN), changeHashToSeries(dataCP));
+ 
+        yLine.setLabel("Tổng tiền(VNĐ)");
+        String title = "Biểu đồ";
+        if(this.loaiTK.getValue().equals("Ngày")){
+            xLine.setLabel("Ngày");
+            if(!(dataDT.getName() == null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            lineChart.setTitle(title + "theo ngày");
+        }
+        if(this.loaiTK.getValue().equals("Tháng")){
+            xLine.setLabel("Tháng");
+            if(!(dataDT.getName()== null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            lineChart.setTitle(title + "theo tháng");
+        }
+        if(this.loaiTK.getValue().equals("Năm")){
+            xLine.setLabel("Năm");
+            if(!(dataDT.getName() == null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            lineChart.setTitle(title + "theo năm");
+        }
         setVisible(2);
     }
     
@@ -187,7 +254,7 @@ public class ThongkeController implements Initializable {
         LocalDate ngayKT = this.ngayKT.getValue();
         String loaiTK = this.loaiTK.getValue().toString();
    
-        XYChart.Series<String, Number> dataDT =  new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> dataDT =  new XYChart.Series<String,Number>();
         XYChart.Series<String, Number> dataLN = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> dataCP = new XYChart.Series<String, Number>();
         
@@ -208,10 +275,10 @@ public class ThongkeController implements Initializable {
         }
  
         yBar.setLabel("Tổng tiền(VNĐ)");
-        
+        String title = "Biểu đồ";
         if(this.loaiTK.getValue().equals("Ngày")){
             xBar.setLabel("Ngày");
-            String title = "Biểu đồ ";
+
             if(!(dataDT.getName() == null)){
                 title += dataDT.getName();
             }
@@ -221,11 +288,10 @@ public class ThongkeController implements Initializable {
             if(!(dataCP.getName()== null)){
                 title += dataCP.getName();
             }
-            barChart.setTitle(title + " theo ngày");
+            barChart.setTitle(title + "theo ngày");
         }
         if(this.loaiTK.getValue().equals("Tháng")){
             xBar.setLabel("Tháng");
-            String title = "Biểu đồ ";
             if(!(dataDT.getName()== null)){
                 title += dataDT.getName();
             }
@@ -235,11 +301,10 @@ public class ThongkeController implements Initializable {
             if(!(dataCP.getName()== null)){
                 title += dataCP.getName();
             }
-            barChart.setTitle(title + " theo tháng");
+            barChart.setTitle(title + "theo tháng");
         }
         if(this.loaiTK.getValue().equals("Năm")){
             xBar.setLabel("Năm");
-            String title = "Biểu đồ ";
             if(!(dataDT.getName() == null)){
                 title += dataDT.getName();
             }
@@ -249,7 +314,7 @@ public class ThongkeController implements Initializable {
             if(!(dataCP.getName()== null)){
                 title += dataCP.getName();
             }
-            barChart.setTitle(title + " theo năm");
+            barChart.setTitle(title + "theo năm");
         }
         
         setVisible(3);
@@ -263,23 +328,69 @@ public class ThongkeController implements Initializable {
         LocalDate ngayKT = this.ngayKT.getValue();
         String loaiTK = this.loaiTK.getValue().toString();
         
-        HashMap<String,Integer> data = new HashMap<>();
-   
+        XYChart.Series<String, Number> dataDT =  new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> dataLN = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> dataCP = new XYChart.Series<String, Number>();
+        
         if(this.cbDoanhThu.isSelected() ){
-            XYChart.Series dataDT = new XYChart.Series<>();
-            data = tinhDoanhThu(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Doanh thu(VNĐ)");
+            dataDT = changeHashToSeries(tinhDoanhThu(ngayBD, ngayKT, loaiTK));
+            dataDT.setName(" Doanh thu ");
+            this.areaChart.getData().add(dataDT);
         }
         if(this.cbLoiNhuan.isSelected()){
-            data = tinhLoiNhuan(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Lợi nhuận(VNĐ)");
+            dataLN = changeHashToSeries(tinhLoiNhuan(ngayBD, ngayKT, loaiTK));
+            dataLN.setName(" Lợi nhuận ");
+            this.areaChart.getData().add(dataLN);
         }
         if(this.cbChiPhi.isSelected()){
-            data = tinhChiPhi(ngayBD, ngayKT, loaiTK);
-            yArea.setLabel("Chi phí(VNĐ)");
+            dataCP = changeHashToSeries(tinhChiPhi(ngayBD, ngayKT, loaiTK));
+            dataCP.setName(" Chi phí ");
+            this.areaChart.getData().add(dataCP);
+        }
+ 
+        yArea.setLabel("Tổng tiền(VNĐ)");
+        String title = "Biểu đồ";
+        if(this.loaiTK.getValue().equals("Ngày")){
+            xArea.setLabel("Ngày");
+            
+            if(!(dataDT.getName() == null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            areaChart.setTitle(title + "theo ngày");
+        }
+        if(this.loaiTK.getValue().equals("Tháng")){
+            xArea.setLabel("Tháng");
+            if(!(dataDT.getName()== null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            areaChart.setTitle(title + "theo tháng");
+        }
+        if(this.loaiTK.getValue().equals("Năm")){
+            xArea.setLabel("Năm");
+            if(!(dataDT.getName() == null)){
+                title += dataDT.getName();
+            }
+            if(!(dataLN.getName()== null)){
+                title += dataLN.getName();
+            }
+            if(!(dataCP.getName()== null)){
+                title += dataCP.getName();
+            }
+            areaChart.setTitle(title + "theo năm");
         }
         
-        this.areaChart.getData().addAll(changeHashToSeries(data));
         setVisible(4);
     }
     
@@ -499,7 +610,7 @@ public class ThongkeController implements Initializable {
         if(cbDoanhThu.isSelected() || cbLoiNhuan.isSelected()){
             btPieChart.setDisable(true);
         }
-        else
+        else if(!(cbChiPhi.isSelected() || cbLoiNhuan.isSelected()))
             btPieChart.setDisable(false);
     }
     @FXML
@@ -507,7 +618,7 @@ public class ThongkeController implements Initializable {
         if(cbChiPhi.isSelected() || cbLoiNhuan.isSelected()){
             btPieChart.setDisable(true);
         }
-        else
+        else if(!(cbChiPhi.isSelected() || cbLoiNhuan.isSelected()))
             btPieChart.setDisable(false);
     }
     @FXML
@@ -515,7 +626,7 @@ public class ThongkeController implements Initializable {
         if(cbDoanhThu.isSelected() || cbChiPhi.isSelected()){
              btPieChart.setDisable(true);
         }
-        else
+        else if(!(cbChiPhi.isSelected() || cbLoiNhuan.isSelected()))
             btPieChart.setDisable(false);
     }
     
