@@ -23,9 +23,9 @@
    <children>
       <VBox prefHeight="1080.0" prefWidth="1462.0">
          <children>
-            <AnchorPane prefHeight="297.0" prefWidth="1462.0">
+            <AnchorPane prefHeight="260.0" prefWidth="1462.0">
                <children>
-                  <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="298.0" prefWidth="1462.0">
+                  <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="256.0" prefWidth="1462.0">
                      <children>
                         <HBox prefHeight="98.0" prefWidth="1462.0">
                            <children>
@@ -42,55 +42,55 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox prefHeight="90.0" prefWidth="1462.0">
+                        <HBox prefHeight="71.0" prefWidth="1462.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="115.0" prefWidth="220.0" text="Bộ lọc">
+                              <Label alignment="CENTER" prefHeight="49.0" prefWidth="214.0" text="Bộ lọc">
                                  <font>
-                                    <Font size="40.0" />
+                                    <Font size="32.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="94.0" prefWidth="163.0" text="Ngày bắt đầu:">
+                              <Label alignment="CENTER" prefHeight="58.0" prefWidth="162.0" text="Ngày bắt đầu:">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
                               <DatePicker fx:id="ngayBD" onAction="#selectedNgayBD" prefHeight="30.0" prefWidth="192.0">
                                  <HBox.margin>
-                                    <Insets top="30.0" />
+                                    <Insets top="15.0" />
                                  </HBox.margin>
                               </DatePicker>
-                              <Label alignment="CENTER" prefHeight="122.0" prefWidth="161.0" text="Ngày kết thúc:">
+                              <Label alignment="CENTER" prefHeight="59.0" prefWidth="151.0" text="Ngày kết thúc:">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
                               <DatePicker fx:id="ngayKT" onAction="#selectedNgayKT" prefHeight="30.0" prefWidth="192.0">
                                  <HBox.margin>
-                                    <Insets top="30.0" />
+                                    <Insets top="15.0" />
                                  </HBox.margin>
                               </DatePicker>
-                              <Label alignment="CENTER" prefHeight="122.0" prefWidth="161.0" text="Thống kê theo:">
+                              <Label alignment="CENTER" prefHeight="62.0" prefWidth="161.0" text="Thống kê theo:">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
                               <ComboBox fx:id="loaiTK" prefHeight="32.0" prefWidth="150.0">
                                  <HBox.margin>
-                                    <Insets top="30.0" />
+                                    <Insets top="15.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
                         </HBox>
-                        <HBox prefHeight="129.0" prefWidth="1462.0">
+                        <HBox prefHeight="87.0" prefWidth="1462.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="107.0" prefWidth="216.0" text="Dạng biểu đồ">
+                              <Label alignment="CENTER" prefHeight="74.0" prefWidth="292.0" text="Dạng biểu đồ">
                                  <font>
                                     <Font size="29.0" />
                                  </font>
                               </Label>
                               <Button fx:id="btPieChart" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#loadPieChart" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
                                  <HBox.margin>
-                                    <Insets top="30.0" />
+                                    <Insets top="15.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -102,7 +102,7 @@
                               </Button>
                               <Button fx:id="btLineChart" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadLineChart" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
                                  <HBox.margin>
-                                    <Insets left="50.0" top="30.0" />
+                                    <Insets left="50.0" top="15.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <ImageView fitHeight="44.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
@@ -114,7 +114,7 @@
                               </Button>
                               <Button fx:id="btBarChart" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadBarChart" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
                                  <HBox.margin>
-                                    <Insets left="50.0" top="30.0" />
+                                    <Insets left="50.0" top="15.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
@@ -126,7 +126,7 @@
                               </Button>
                               <Button fx:id="btAreaChart" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadAreaChart" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
                                  <HBox.margin>
-                                    <Insets left="50.0" top="30.0" />
+                                    <Insets left="50.0" top="15.0" />
                                  </HBox.margin>
                                  <graphic>
                                     <ImageView fitHeight="37.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -136,7 +136,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Label alignment="CENTER_RIGHT" prefHeight="111.0" prefWidth="138.0" text="Dữ liệu:">
+                              <Label alignment="CENTER_RIGHT" prefHeight="77.0" prefWidth="136.0" text="Dữ liệu:">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
@@ -146,7 +146,7 @@
                                     <Font size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="20.0" top="40.0" />
+                                    <Insets left="20.0" top="22.0" />
                                  </HBox.margin>
                               </CheckBox>
                               <CheckBox fx:id="cbChiPhi" mnemonicParsing="false" onAction="#checkChiPhi" prefHeight="36.0" prefWidth="138.0" text="Chi phí">
@@ -154,7 +154,7 @@
                                     <Font size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets top="40.0" />
+                                    <Insets top="22.0" />
                                  </HBox.margin>
                               </CheckBox>
                               <CheckBox fx:id="cbLoiNhuan" mnemonicParsing="false" onAction="#checkLoiNhuan" prefHeight="36.0" prefWidth="147.0" text="Lợi nhuận">
@@ -162,7 +162,7 @@
                                     <Font size="18.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets top="40.0" />
+                                    <Insets top="22.0" />
                                  </HBox.margin>
                               </CheckBox>
                            </children>
@@ -171,7 +171,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="chartPane" prefHeight="759.0" prefWidth="1462.0">
+            <AnchorPane fx:id="chartPane" prefHeight="799.0" prefWidth="1462.0">
                <children>
                   <PieChart fx:id="pieChart" layoutX="145.0" layoutY="4.0" prefHeight="480.0" prefWidth="542.0" visible="false" />
                   <BarChart fx:id="barChart" layoutX="86.0" layoutY="29.0" prefHeight="435.0" prefWidth="977.0" visible="false">

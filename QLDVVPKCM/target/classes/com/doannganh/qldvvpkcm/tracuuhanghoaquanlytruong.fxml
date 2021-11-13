@@ -8,19 +8,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TraCuuHangHoaQuanLyTruongController">
+<AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.TraCuuHangHoaQuanLyTruongController">
    <children>
-      <Label alignment="CENTER" layoutX="441.0" layoutY="14.0" text="TRA CỨU HÀNG HÓA" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="441.0" layoutY="14.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Bold" size="35.0" />
          </font>
       </Label>
-      <TableView fx:id="tbHangHoa" editable="true" layoutX="12.0" layoutY="180.0" prefHeight="440.0" prefWidth="1219.0" tableMenuButtonVisible="true" />
-      <HBox layoutX="104.0" layoutY="77.0" prefHeight="35.0" prefWidth="858.0">
+      <TableView fx:id="tbHangHoa" editable="true" layoutX="68.0" layoutY="183.0" prefHeight="576.0" prefWidth="1266.0" tableMenuButtonVisible="true" />
+      <HBox layoutX="108.0" layoutY="116.0" prefHeight="35.0" prefWidth="858.0">
          <children>
             <ComboBox fx:id="cbTraCuu" prefHeight="36.0" prefWidth="142.0" />
             <TextField fx:id="txtTraCuu" prefHeight="35.0" prefWidth="723.0" />
          </children>
       </HBox>
+      <Label alignment="CENTER" layoutX="551.0" layoutY="35.0" prefHeight="55.0" prefWidth="314.0" text="CẬP NHẬT GIÁ">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

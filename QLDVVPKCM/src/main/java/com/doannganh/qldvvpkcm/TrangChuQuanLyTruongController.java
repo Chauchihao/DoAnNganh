@@ -32,6 +32,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
@@ -51,6 +52,7 @@ public class TrangChuQuanLyTruongController implements Initializable {
      */
     
     static User nd;
+    
     @FXML 
     private AnchorPane acpLoad;
     
@@ -84,17 +86,27 @@ public class TrangChuQuanLyTruongController implements Initializable {
     @FXML
     private ListView<String> listDH;
     
-    @FXML
-    public void loadHangHoa() throws IOException {
-        acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
-        acpLoad.getChildren().add(loader.load());
-    }
     
     @FXML
     public void loadKhachHang() throws IOException {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("khachhang.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
+    
+    @FXML
+    void loadHangHoa(ActionEvent event) throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
+    
+        @FXML
+    public void loadCapNhat() throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
     

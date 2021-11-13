@@ -6,30 +6,24 @@
 package com.doannganh.qldvvpkcm;
 
 import com.doannganh.pojo.HangHoa;
-import com.doannganh.pojo.LoaiHangHoa;
-import com.doannganh.service.HangHoaService;
-import com.doannganh.service.JdbcUtils;
-import com.doannganh.service.LoaiHangHoaService;
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
 
 /**
  * FXML Controller class
@@ -37,180 +31,111 @@ import javafx.scene.layout.AnchorPane;
  * @author LENOVO
  */
 public class HanghoaController implements Initializable {
-
     @FXML
     private AnchorPane paneHH;
 
     @FXML
-    private Button btThongKe;
+    private AnchorPane table;
 
     @FXML
-    private TextField soLuong;
+    private TextField txtMaHH;
 
     @FXML
-    private CheckBox spBanChay;
+    private TextField txtTenHH;
 
     @FXML
-    private CheckBox loaiSPBanChay;
+    private TextField txtLoaiHH;
 
     @FXML
-    private CheckBox loaiSPBanIt;
+    private TextField txtSoLuong;
 
     @FXML
-    private CheckBox spBanIt;
+    private TextField txtGiaNhap;
 
     @FXML
-    private Button btCapNhat;
+    private TextField txtGiaNiemYet;
 
     @FXML
-    private BarChart<?, ?> barChart;
-    
-    @FXML
-    private CategoryAxis xBar;
+    private DatePicker NgaySX;
 
     @FXML
-    private NumberAxis yBar;
-    
+    private DatePicker NgayHH;
+
     @FXML
-    public void loadTraCuuHHQLT() throws IOException {
-        paneHH.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
-        paneHH.getChildren().add(loader.load());
+    private TextField txtTinhTrang;
+
+    @FXML
+    private TextField txtThuongHieu;
+
+    @FXML
+    private TextField txtNSX;
+
+    @FXML
+    private TextField txtSLDB;
+
+    @FXML
+    private TableView<HangHoa> tbHH;
+
+    @FXML
+    void loadTableHH(ActionEvent event) {
+
     }
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        loadTable();
     }    
-//    public HashMap<String,Integer> loadDataMatHang(int top){
-//        
-//    }
-    
-    public void loadBarChartHH(HashMap<HangHoa, Integer> data){
-        barChart.getData().clear();
-        XYChart.Series setData = changeHashToSeriesHH(data);
-        barChart.getData().add(setData);
-        xBar.setLabel("ID hàng hóa");
-        yBar.setLabel("Số lượng");
-    }
-    
-    public void loadBarChartLHH(HashMap<LoaiHangHoa, Integer> data){
-        barChart.getData().clear();
-        XYChart.Series setData = changeHashToSeriesLHH(data);
-        barChart.getData().add(setData);
-        xBar.setLabel("Tên loại hàng hóa");
-        yBar.setLabel("Số lượng");
-    }
-    
-    public HashMap<HangHoa, Integer> loadSPBanChay(int sl) throws SQLException{
-        Connection conn = JdbcUtils.getConn();
-        HangHoaService hhs = new HangHoaService(conn);
+    private void loadTable(){
+        TableColumn<HangHoa, Integer> colMaHangHoa = new TableColumn("Mã Hàng");
+        colMaHangHoa.setCellValueFactory(new PropertyValueFactory("hanghoa_id"));
         
-        HashMap<HangHoa,Integer> spBC = hhs.getTopSPBanChay(sl);
-         
-        return spBC;
-    }
-    
-    public HashMap<HangHoa, Integer> loadSPBanIt(int sl) throws SQLException{
-        Connection conn = JdbcUtils.getConn();
-        HangHoaService hhs = new HangHoaService(conn);
+        TableColumn<HangHoa, String> colTenHangHoa = new TableColumn("Tên Hàng");
+        colTenHangHoa.setCellValueFactory(new PropertyValueFactory("tenhanghoa"));
         
-        HashMap<HangHoa,Integer> spBC = hhs.getTopSPBanIt(sl);
-         
-        return spBC;
-    }
-    
-    public HashMap<LoaiHangHoa, Integer> loadLoaiSPBanIt(int sl) throws SQLException{
-        Connection conn = JdbcUtils.getConn();
-        LoaiHangHoaService hhs = new LoaiHangHoaService(conn);
+        TableColumn<HangHoa, String> colThuongHieu = new TableColumn("Thương Hiệu");
+        colThuongHieu.setCellValueFactory(new PropertyValueFactory("thuonghieu"));
         
-        HashMap<LoaiHangHoa,Integer> spBC = hhs.getTopLoaiSPBanIt(sl);
-         
-        return spBC;
-    }
-
-    public HashMap<LoaiHangHoa, Integer> loadLoaiSPBanChay(int sl) throws SQLException{
-        Connection conn = JdbcUtils.getConn();
-        LoaiHangHoaService hhs = new LoaiHangHoaService(conn);
+        TableColumn<HangHoa, BigDecimal> colSoLuong = new TableColumn("Số Lượng");
+        colSoLuong.setCellValueFactory(new PropertyValueFactory("soluongtrongkho"));
+        colSoLuong.setStyle( "-fx-alignment: CENTER-RIGHT;");
         
-        HashMap<LoaiHangHoa,Integer> spBC = hhs.getTopLoaiSPBanChay(sl);
-         
-        return spBC;
-    }
+        TableColumn<HangHoa, BigDecimal> colGiaNhap = new TableColumn("Giá Nhập");
+        colGiaNhap.setCellValueFactory(new PropertyValueFactory("gianhap"));
+        colGiaNhap.setStyle( "-fx-alignment: CENTER-RIGHT;");
+        
+        TableColumn<HangHoa, BigDecimal> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
+        colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("gianiemyet"));
+        colGiaNiemYet.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
-    
-    public XYChart.Series changeHashToSeriesHH(HashMap<HangHoa,Integer> data){
-    XYChart.Series setData = new XYChart.Series<>();
-    for (Map.Entry<HangHoa,Integer> dt:data.entrySet()){
-        setData.getData().add(new XYChart.Data(String.valueOf(dt.getKey().getHanghoa_id()), dt.getValue()));
-    } 
-    return setData;
-    }
-      
-    public XYChart.Series changeHashToSeriesLHH(HashMap<LoaiHangHoa,Integer> data){
-    XYChart.Series setData = new XYChart.Series<>();
-    for (Map.Entry<LoaiHangHoa,Integer> dt:data.entrySet()){
-        setData.getData().add(new XYChart.Data(String.valueOf(dt.getKey().getTenloai()), dt.getValue()));
-    } 
-    return setData;
-    }
-
-    
-    @FXML
-    void checkLoaiSPBanChay(ActionEvent event) {
-        spBanIt.setSelected(false);
-        spBanChay.setSelected(false);
-        loaiSPBanIt.setSelected(false);
-    }
-
-    @FXML
-    void checkLoaiSPBanIt(ActionEvent event) {
-        loaiSPBanChay.setSelected(false);
-        spBanChay.setSelected(false);
-        spBanIt.setSelected(false);
-    }
-
-    @FXML
-    void checkSPBanChay(ActionEvent event) {
-        loaiSPBanChay.setSelected(false);
-        loaiSPBanIt.setSelected(false);
-        spBanIt.setSelected(false);
-    }
-
-    @FXML
-    void checkSPBanIt(ActionEvent event) {
-        loaiSPBanChay.setSelected(false);
-        spBanChay.setSelected(false);
-        loaiSPBanIt.setSelected(false);
-    }
-
-    @FXML
-    void loadThongKe(ActionEvent event) throws SQLException {
-        if(this.soLuong.getText().equals("")){
-            Utils.getBox("Vui lòng nhập một số!", Alert.AlertType.WARNING).show();
-        }
-        if(!(this.soLuong.getText().matches("\\d+"))){
-            Utils.getBox("Vui lòng chỉ nhập số!", Alert.AlertType.WARNING).show();
-            this.soLuong.setText("");
-        } 
-        if(this.loaiSPBanChay.isSelected() == false && loaiSPBanIt.isSelected() == false &&
-            spBanChay.isSelected() == false && spBanIt.isSelected() == false){
-            Utils.getBox("Vui lòng chọn một loại thống kê!", Alert.AlertType.WARNING).show();
-        }
-        else{
-            if(this.spBanChay.isSelected()){
-                loadBarChartHH(loadSPBanChay(Integer.parseInt(soLuong.getText())));
-            }
-            if(this.spBanIt.isSelected()){
-                loadBarChartHH(loadSPBanIt(Integer.parseInt(soLuong.getText())));
-            }
-            if(this.loaiSPBanIt.isSelected()){
-                loadBarChartLHH(loadLoaiSPBanIt(Integer.parseInt(soLuong.getText())));
-            }
-            if(this.loaiSPBanChay.isSelected()){
-                loadBarChartLHH(loadLoaiSPBanChay(Integer.parseInt(soLuong.getText())));
-            }
-        }
+        TableColumn<HangHoa, java.util.Date> colNgaySanXuat = new TableColumn("Ngày Sản Xuất");
+        colNgaySanXuat.setCellValueFactory(new PropertyValueFactory("ngaysanxuat"));
+        
+        TableColumn<HangHoa, java.util.Date> colNgayHetHan = new TableColumn("Ngày Hết Hạn");
+        colNgayHetHan.setCellValueFactory(new PropertyValueFactory("ngayhethan"));
+        
+        
+        TableColumn<HangHoa, Boolean> colTinhTrang = new TableColumn("Tình trạng");
+        colTinhTrang.setCellValueFactory(new PropertyValueFactory("tinhtrang"));
+        //colTinhTrang.setEditable(false);
+        List l = new ArrayList<>();
+        l.add(0,false);
+        l.add(1,true);
+        ObservableList listTT = FXCollections.observableList(l);
+        colTinhTrang.setCellFactory((TableColumn<HangHoa, Boolean> p) -> {
+            ComboBoxTableCell<HangHoa, Boolean> cell = new ComboBoxTableCell<>(listTT);
+            return cell;
+        });
+        
+        TableColumn<HangHoa, String> colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
+        colLoaiHangHoa.setCellValueFactory(new PropertyValueFactory("tenloaihang"));
+        
+        TableColumn<HangHoa, String> colNhaCungCap= new TableColumn("Nhà Cung Cấp");
+        colNhaCungCap.setCellValueFactory(new PropertyValueFactory("nhacungcap"));
+        
+        this.tbHH.getColumns().addAll(colMaHangHoa, colTenHangHoa, colLoaiHangHoa
+                , colSoLuong, colGiaNhap, colGiaNiemYet, colNgaySanXuat, colNgayHetHan
+                , colTinhTrang, colThuongHieu, colNhaCungCap);
     }
 
     
