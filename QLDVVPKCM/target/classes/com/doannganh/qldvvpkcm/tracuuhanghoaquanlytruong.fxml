@@ -16,7 +16,7 @@
          </font>
       </Label>
       <TableView fx:id="tbHangHoa" editable="true" layoutX="68.0" layoutY="183.0" prefHeight="576.0" prefWidth="1266.0" tableMenuButtonVisible="true" />
-      <HBox layoutX="108.0" layoutY="116.0" prefHeight="35.0" prefWidth="858.0">
+      <HBox layoutX="67.0" layoutY="116.0" prefHeight="35.0" prefWidth="899.0">
          <children>
             <ComboBox fx:id="cbTraCuu" prefHeight="36.0" prefWidth="142.0" />
             <TextField fx:id="txtTraCuu" prefHeight="35.0" prefWidth="723.0" />

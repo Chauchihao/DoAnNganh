@@ -26,7 +26,7 @@ public class HangHoa {
     private int loaihanghoa_id;
     private String tenloaihang;
     private String nhacungcap;
-
+    private int slDaBan;
     /**
      * @return the hanghoa_id
      */
@@ -207,6 +207,20 @@ public class HangHoa {
      */
     public void setNhacungcap(String nhacungcap) {
         this.nhacungcap = nhacungcap;
+    }
+
+    /**
+     * @return the slDaBan
+     */
+    public int getSlDaBan() {
+        return slDaBan;
+    }
+
+    /**
+     * @param slDaBan the slDaBan to set
+     */
+    public void setSlDaBan(int slDaBan) {
+        this.slDaBan = slDaBan;
     }
 
     

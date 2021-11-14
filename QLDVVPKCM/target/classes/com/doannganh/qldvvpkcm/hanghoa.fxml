@@ -29,80 +29,78 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtMaHH" layoutX="68.0" layoutY="32.0" prefHeight="26.0" prefWidth="74.0" />
-                  <Label layoutX="172.0" layoutY="1.0" prefHeight="26.0" prefWidth="95.0" text="Tên hàng hóa">
+                  <Label layoutX="212.0" layoutY="1.0" prefHeight="26.0" prefWidth="95.0" text="Tên hàng hóa">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtTenHH" layoutX="152.0" layoutY="32.0" prefHeight="26.0" prefWidth="134.0" />
-                  <Label layoutX="310.0" prefHeight="26.0" prefWidth="95.0" text="Loại hàng hóa">
+                  <TextField fx:id="txtTenHH" layoutX="152.0" layoutY="32.0" prefHeight="26.0" prefWidth="215.0" />
+                  <Label layoutX="372.0" layoutY="1.0" prefHeight="26.0" prefWidth="95.0" text="Loại hàng hóa">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtLoaiHH" layoutX="290.0" layoutY="32.0" prefHeight="26.0" prefWidth="134.0" />
-                  <Label layoutX="428.0" prefHeight="26.0" prefWidth="60.0" text="Số lượng">
+                  <TextField fx:id="txtLoaiHH" layoutX="372.0" layoutY="32.0" prefHeight="26.0" prefWidth="95.0" />
+                  <Label layoutX="520.0" prefHeight="26.0" prefWidth="60.0" text="Số lượng">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtSoLuong" layoutX="450.0" layoutY="33.0" prefHeight="26.0" prefWidth="32.0" />
-                  <Label layoutX="507.0" prefHeight="26.0" prefWidth="66.0" text="Giá nhập">
+                  <TextField fx:id="txtSoLuong" layoutX="534.0" layoutY="31.0" prefHeight="26.0" prefWidth="32.0" />
+                  <Label layoutX="713.0" prefHeight="26.0" prefWidth="66.0" text="Giá nhập">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtGiaNhap" layoutX="488.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
-                  <Label layoutX="592.0" layoutY="32.0" prefHeight="26.0" prefWidth="32.0" text="VNĐ" />
-                  <Label layoutX="632.0" layoutY="3.0" prefHeight="26.0" prefWidth="87.0" text="Giá niêm yết">
+                  <TextField fx:id="txtGiaNhap" layoutX="619.0" layoutY="31.0" prefHeight="26.0" prefWidth="66.0" />
+                  <Label layoutX="791.0" layoutY="-1.0" prefHeight="26.0" prefWidth="87.0" text="Giá niêm yết">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtGiaNiemYet" layoutX="624.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
-                  <Label layoutX="728.0" layoutY="33.0" prefHeight="26.0" prefWidth="32.0" text="VNĐ" />
-                  <Label layoutX="877.0" layoutY="3.0" prefHeight="26.0" prefWidth="95.0" text="Ngày hết hạn">
+                  <TextField fx:id="txtGiaNiemYet" layoutX="791.0" layoutY="31.0" prefHeight="26.0" prefWidth="87.0" />
+                  <Label layoutX="983.0" layoutY="-1.0" prefHeight="26.0" prefWidth="95.0" text="Ngày hết hạn">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="760.0" layoutY="3.0" prefHeight="26.0" prefWidth="95.0" text="Ngày sản xuất">
+                  <Label layoutX="880.0" layoutY="-1.0" prefHeight="26.0" prefWidth="95.0" text="Ngày sản xuất">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="NgaySX" layoutX="760.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
-                  <DatePicker fx:id="NgayHH" layoutX="877.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
-                  <Label layoutX="428.0" layoutY="34.0" prefHeight="26.0" prefWidth="22.0" text="=&lt;">
+                  <DatePicker fx:id="NgaySX" layoutX="880.0" layoutY="31.0" prefHeight="26.0" prefWidth="95.0" />
+                  <DatePicker fx:id="NgayHH" layoutX="979.0" layoutY="31.0" prefHeight="26.0" prefWidth="95.0" />
+                  <Label layoutX="509.0" layoutY="32.0" prefHeight="26.0" prefWidth="22.0" text="=&lt;">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="988.0" layoutY="3.0" prefHeight="26.0" prefWidth="74.0" text="Tình trạng">
+                  <Label layoutX="1079.0" prefHeight="26.0" prefWidth="74.0" text="Tình trạng">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtTinhTrang" layoutX="992.0" layoutY="32.0" prefHeight="26.0" prefWidth="66.0" />
-                  <Label layoutX="1076.0" layoutY="3.0" prefHeight="26.0" prefWidth="87.0" text="Thương hiệu">
+                  <TextField fx:id="txtTinhTrang" layoutX="1079.0" layoutY="31.0" prefHeight="26.0" prefWidth="60.0" />
+                  <Label layoutX="1157.0" prefHeight="26.0" prefWidth="87.0" text="Thương hiệu">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtThuongHieu" layoutX="1068.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
-                  <Label layoutX="1188.0" layoutY="3.0" prefHeight="26.0" prefWidth="87.0" text="Nhà sản xuất">
+                  <TextField fx:id="txtThuongHieu" layoutX="1149.0" layoutY="31.0" prefHeight="26.0" prefWidth="95.0" />
+                  <Label layoutX="1267.0" prefHeight="26.0" prefWidth="95.0" text="Nhà cung cấp">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNSX" layoutX="1180.0" layoutY="32.0" prefHeight="26.0" prefWidth="104.0" />
+                  <TextField fx:id="txtNSX" layoutX="1253.0" layoutY="31.0" prefHeight="26.0" prefWidth="105.0" />
                   <Label layoutX="14.0" layoutY="27.0" prefHeight="36.0" prefWidth="54.0" text="Lọc:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtSLDB" layoutX="1303.0" layoutY="32.0" prefHeight="26.0" prefWidth="54.0" />
-                  <Label layoutX="1283.0" layoutY="3.0" prefHeight="26.0" prefWidth="111.0" text="Số lượng đã bán">
+                  <TextField fx:id="txtSLDB" layoutX="709.0" layoutY="31.0" prefHeight="26.0" prefWidth="74.0" />
+                  <Label layoutX="597.0" layoutY="1.0" prefHeight="26.0" prefWidth="111.0" text="Số lượng đã bán">
                      <font>
                         <Font size="15.0" />
                      </font>

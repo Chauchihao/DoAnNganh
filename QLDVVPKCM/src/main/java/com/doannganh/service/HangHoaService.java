@@ -182,6 +182,87 @@ public class HangHoaService {
         return hh;
     }
     
+    
+    public List<HangHoa> getHHQLT(String key, String loaiTC) throws SQLException{
+        String sql = "SELECT hanghoa.*, tenloai, gianhap, tencongty, sum(chitietdonhang.soluong) as soluongdb"
+                    +" FROM qldvvpkcm.hanghoa, qldvvpkcm.loaihanghoa, qldvvpkcm.nhacungcap, "
+                    + "qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.chitietdonhang ";
+        
+        if(loaiTC.equals("") && key.equals("")){
+            sql += " WHERE";
+        }
+        
+        if(loaiTC.equals("Mã")){
+            sql += " WHERE hanghoa.hanghoa_id like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Tên")){
+            sql += " WHERE loaihanghoa.tenloai like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Loại")){
+            sql += " WHERE loaihanghoa.tenloai like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Số lượng")){
+            sql += " WHERE hanghoa.soluongtrongkho like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Số lượng đã bán")){
+            sql += " WHERE soluongdb like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Giá nhập")){
+            sql += " WHERE `nhacungcap_hanghoa`.`gianhap` like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Giá niêm yết")){
+            sql += " WHERE hanghoa.gianiemyet like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Ngày sx")){
+            sql += " WHERE hanghoa.ngaysanxuat like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Ngày hh")){
+            sql += " WHERE hanghoa.ngayhethan like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Tình trạng")){
+            sql += " WHERE hanghoa.tinhtrang like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Thương hiệu")){
+            sql += " WHERE hanghoa.thuonghieu like concat('%', ?, '%') AND";
+        }
+        if(loaiTC.equals("Nhà cung cấp")){
+            sql += " WHERE nhacungcap.tencongty like concat('%', ?, '%') AND";
+        }
+        sql +=" hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
+            +" AND chitietdonhang.hanghoa_id = hanghoa.hanghoa_id"
+            +" AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+            +" AND nhacungcap_hanghoa.nhacungcap_id = nhacungcap.nhacungcap_id"
+            +" GROUP BY hanghoa.hanghoa_id"
+            +" ORDER BY hanghoa.hanghoa_id asc";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        if(!(loaiTC.equals("") && key.equals(""))){
+            stm.setString(1, key);
+        }
+        
+        List<HangHoa> hangHoa = new ArrayList<>();
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            HangHoa hh = new HangHoa();
+            
+            hh.setHanghoa_id(rs.getInt("hanghoa.hanghoa_id"));
+            hh.setTenhanghoa(rs.getString("tenhanghoa"));
+            hh.setThuonghieu(rs.getString("thuonghieu"));
+            hh.setSoluongtrongkho(rs.getString("soluongtrongkho"));
+            hh.setGianhap(rs.getString("gianhap"));
+            hh.setGianiemyet(rs.getString("gianiemyet"));
+            hh.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            hh.setNgayhethan(rs.getString("ngayhethan"));
+            hh.setHinhanh(rs.getString("hinhanh"));
+            hh.setTinhtrang(rs.getBoolean("tinhtrang"));
+            hh.setTenloaihang(rs.getString("tenloai"));
+            hh.setNhacungcap(rs.getString("tencongty"));
+            hh.setSlDaBan(rs.getInt("soluongdb"));
+            
+            hangHoa.add(hh);
+        }
+        return hangHoa;
+    }
+    
     public int getIDByTenHang(String th) throws SQLException {
         String sql= "SELECT hanghoa_id FROM hanghoa WHERE tenhanghoa =?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
