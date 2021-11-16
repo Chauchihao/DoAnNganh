@@ -23,6 +23,7 @@ public class User {
     private String email;
     private String diachi;
     private String sdt;
+    private boolean trangthai;
     private int loaiuser_id;
 
     /**
@@ -193,5 +194,18 @@ public class User {
         this.loaiuser_id = loaiuser_id;
     }
 
-    
+    /**
+     * @return the trangthai
+     */
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    /**
+     * @param trangthai the trangthai to set
+     */
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
+    }
+
 }

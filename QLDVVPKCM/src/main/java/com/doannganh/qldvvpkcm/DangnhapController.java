@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,11 +30,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -54,6 +57,9 @@ public class DangnhapController implements Initializable {
     @FXML private PasswordField txtMatKhau;
     @FXML private Button btDangNhap;
     @FXML private AnchorPane apDangNhap;
+    @FXML private VBox vb;
+    @FXML private Label lbDangNhap;
+    Label lb = new Label("");
     public static User nd;
     
     @Override
@@ -109,32 +115,58 @@ public class DangnhapController implements Initializable {
     public boolean dangnhap() {
         try {
             Connection conn = JdbcUtils.getConn();
-            if (this.cbLoaiUser.getSelectionModel().isEmpty())
-                Utils.getBox("Vui lòng chọn loại tài khoản!!!", Alert.AlertType.WARNING).show();
-                else if (this.txtTaiKhoan.getText().isEmpty()) 
-                    Utils.getBox("Vui lòng điền tài khoản!!!", Alert.AlertType.WARNING).show();
-                    else if (this.txtMatKhau.getText().isEmpty()) 
-                        Utils.getBox("Vui lòng điền mật khẩu!!!", Alert.AlertType.WARNING).show();
-                        else {
-                            UserService s = new UserService(conn);
-                            User u = new User();
-                            u.setLoaiuser_id(this.cbLoaiUser.getSelectionModel().getSelectedItem().getLoaiuser_id());
-                            u.setTaikhoan(this.txtTaiKhoan.getText());
-                            u.setMatkhau(this.txtMatKhau.getText());
-                            
-                            if (s.getUser(u.getTaikhoan()) == null)
-                                    Utils.getBox("Tên tài khoản không tồn tại!!!", Alert.AlertType.WARNING).show();
-                                else if (s.getUser(u.getTaikhoan()).getLoaiuser_id()!= u.getLoaiuser_id())
-                                        Utils.getBox("Vui lòng chọn đúng loại tài khoản hoặc nhập đúng tài khoản!!!", Alert.AlertType.WARNING).show();
-                                else if (s.login(u)) {
-                                    nd = s.getUser(u.getTaikhoan());
-                                    return true;
-                                }
-                                else {
-                                    Utils.getBox("Đăng nhập thất bại!!!", Alert.AlertType.WARNING).show();
-                                    return false;
-                                }
-                        }
+            //this.lb.setStyle(this.vb.getChildren().get(0).getStyle());
+            this.lb.setAlignment(Pos.CENTER);
+            this.lb.setPrefWidth(this.vb.getPrefWidth());
+            this.lb.setStyle("-fx-background-color: cornsilk;" +
+                "-fx-padding: 10;" +
+                "-fx-border-color: black;" +
+                "-fx-border-width: 5;" +
+                "-fx-font-size: 20;");
+            if (this.cbLoaiUser.getSelectionModel().isEmpty()) {
+                this.vb.getChildren().remove(this.lb);
+                this.lb.setText("Vui lòng chọn loại tài khoản!!!");
+                this.vb.getChildren().add(1, this.lb);
+            } else if (this.txtTaiKhoan.getText().isEmpty())  {
+                this.vb.getChildren().remove(this.lb);
+                this.lb.setText("Vui lòng nhập tài khoản!!!");
+                this.vb.getChildren().add(1, this.lb);
+            } else if (this.txtMatKhau.getText().isEmpty()) {
+                    this.vb.getChildren().remove(this.lb);
+                    this.lb.setText("Vui lòng nhập mật khẩu!!!");
+                    this.vb.getChildren().add(1, lb);
+            } else {
+                UserService s = new UserService(conn);
+                User u = new User();
+                u.setLoaiuser_id(this.cbLoaiUser.getSelectionModel().getSelectedItem().getLoaiuser_id());
+                u.setTaikhoan(this.txtTaiKhoan.getText());
+                u.setMatkhau(this.txtMatKhau.getText());
+
+                if (s.getUser(u.getTaikhoan()) == null) {
+                    this.vb.getChildren().remove(this.lb);
+                    this.lb.setText("Tài khoản không tồn tại!!!");
+                    this.vb.getChildren().add(1, lb);
+                } else if (s.getUser(u.getTaikhoan()).getLoaiuser_id()!= u.getLoaiuser_id()) {
+                    this.vb.getChildren().remove(this.lb);
+                    this.lb.setText("Sai loại tài khoản hoặc tài khoản!!!");
+                    this.vb.getChildren().add(1, lb);
+                } else if (s.login(u)) {
+                    if ((s.getUser(u.getTaikhoan()).isTrangthai()== true)) {
+                        nd = s.getUser(u.getTaikhoan());
+                        return true;
+                    } else {
+                        this.vb.getChildren().remove(this.lb);
+                        this.lb.setText("Tài khoản đã bị khóa!!");
+                        this.vb.getChildren().add(1, lb);
+                        return false;
+                    }
+                } else {
+                    this.vb.getChildren().remove(this.lb);
+                    this.lb.setText("Sai tài khoản hoặc mật khẩu!!!");
+                    this.vb.getChildren().add(1, lb);
+                    return false;
+                }
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(DangnhapController.class.getName()).log(Level.SEVERE, null, ex);

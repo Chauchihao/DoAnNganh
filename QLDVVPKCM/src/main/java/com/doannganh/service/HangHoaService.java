@@ -184,7 +184,7 @@ public class HangHoaService {
     
     
     public List<HangHoa> getHHQLT(String key, String loaiTC) throws SQLException{
-        String sql = "SELECT hanghoa.*, tenloai, gianhap, tencongty, sum(chitietdonhang.soluong) as soluongdb"
+        String sql = "SELECT hanghoa.*, tenloai, ngaysanxuat, ngayhethan, gianhap, tencongty, sum(chitietdonhang.soluong) as soluongdb"
                     +" FROM qldvvpkcm.hanghoa, qldvvpkcm.loaihanghoa, qldvvpkcm.nhacungcap, "
                     + "qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.chitietdonhang ";
         
@@ -196,7 +196,7 @@ public class HangHoaService {
             sql += " WHERE hanghoa.hanghoa_id like concat('%', ?, '%') AND";
         }
         if(loaiTC.equals("Tên")){
-            sql += " WHERE loaihanghoa.tenloai like concat('%', ?, '%') AND";
+            sql += " WHERE hanghoa.tenhanghoa like concat('%', ?, '%') AND";
         }
         if(loaiTC.equals("Loại")){
             sql += " WHERE loaihanghoa.tenloai like concat('%', ?, '%') AND";
@@ -205,10 +205,10 @@ public class HangHoaService {
             sql += " WHERE hanghoa.soluongtrongkho like concat('%', ?, '%') AND";
         }
         if(loaiTC.equals("Số lượng đã bán")){
-            sql += " WHERE soluongdb like concat('%', ?, '%') AND";
+            sql += " WHERE";
         }
         if(loaiTC.equals("Giá nhập")){
-            sql += " WHERE `nhacungcap_hanghoa`.`gianhap` like concat('%', ?, '%') AND";
+            sql += " WHERE nhacungcap_hanghoa.gianhap like concat('%', ?, '%') AND";
         }
         if(loaiTC.equals("Giá niêm yết")){
             sql += " WHERE hanghoa.gianiemyet like concat('%', ?, '%') AND";
@@ -232,13 +232,16 @@ public class HangHoaService {
             +" AND chitietdonhang.hanghoa_id = hanghoa.hanghoa_id"
             +" AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
             +" AND nhacungcap_hanghoa.nhacungcap_id = nhacungcap.nhacungcap_id"
-            +" GROUP BY hanghoa.hanghoa_id"
-            +" ORDER BY hanghoa.hanghoa_id asc";
-        PreparedStatement stm = this.conn.prepareStatement(sql);
-        if(!(loaiTC.equals("") && key.equals(""))){
-            stm.setString(1, key);
+            +" GROUP BY hanghoa.hanghoa_id";
+        if(loaiTC.equals("Số lượng đã bán")){
+            sql += " HAVING soluongdb like concat('%', ?, '%') ";
         }
-        
+        else
+            sql += " ORDER BY hanghoa.hanghoa_id asc";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        if(!(loaiTC.equals("") && key.equals(""))){         
+            stm.setString(1, key);
+        } 
         List<HangHoa> hangHoa = new ArrayList<>();
         ResultSet rs = stm.executeQuery();
         while(rs.next()){

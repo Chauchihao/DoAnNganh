@@ -37,7 +37,7 @@ public class UserService {
     
     public User getUser(String taiKhoan) throws SQLException {
         String sql = "SELECT user_id, hoten, ngaysinh, gioitinh, cmnd, taikhoan"
-                + ", ngayVaoLam, email, diachi, sdt, loaiuser_id"
+                + ", ngayVaoLam, email, diachi, sdt, trangthai, loaiuser_id"
                 + " FROM user WHERE taikhoan=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         stm.setString(1, taiKhoan);
@@ -56,13 +56,14 @@ public class UserService {
             u.setEmail(rs.getString("email"));
             u.setDiachi(rs.getString("diachi"));
             u.setSdt(rs.getString("sdt"));
+            u.setTrangthai(rs.getBoolean("trangthai"));
             u.setLoaiuser_id(rs.getInt("loaiuser_id"));
         }
         return u;
     }
     public User getUserByID(int id) throws SQLException {
         String sql = "SELECT user_id, hoten, ngaysinh, gioitinh, cmnd, taikhoan"
-                + ", ngayVaoLam, email, diachi, sdt, loaiuser_id"
+                + ", ngayVaoLam, email, diachi, sdt, trangthai, loaiuser_id"
                 + " FROM user WHERE user_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         stm.setInt(1, id);
@@ -81,6 +82,7 @@ public class UserService {
             u.setEmail(rs.getString("email"));
             u.setDiachi(rs.getString("diachi"));
             u.setSdt(rs.getString("sdt"));
+            u.setTrangthai(rs.getBoolean("trangthai"));
             u.setLoaiuser_id(rs.getInt("loaiuser_id"));
         }
         return u;

@@ -46,10 +46,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 
@@ -125,7 +127,7 @@ public class ThongkeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadCBData();
         this.ngayKT.setValue(LocalDate.now());
-        this.ngayBD.setValue(LocalDate.of(2021, 01, 11));
+        this.ngayBD.setValue(LocalDate.now().minusDays(15));
         this.cbDoanhThu.setSelected(true);    
     }    
      
@@ -564,7 +566,30 @@ public class ThongkeController implements Initializable {
     void selectedNgayBD(ActionEvent event) {
         if((this.ngayBD.getValue()).isAfter(LocalDate.now())){
             Utils.getBox("Vui lòng chọn ngày trong quá khứ!!!", Alert.AlertType.INFORMATION).show();
-            this.ngayBD.setValue(LocalDate.of(2021, 01, 11));
+            this.ngayBD.setValue(LocalDate.now().minusDays(15));
+        }
+        if(loaiTK.getValue().equals("Ngày")){
+            final Callback<DatePicker, DateCell> dayCellFactory = 
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isBefore(
+                                        ngayBD.getValue().plusDays(15))
+                                    ) {
+                                        setDisable(true);
+                                        setStyle("-fx-background-color: #ffc0cb;");
+                                        ngayKT.setValue(ngayBD.getValue().plusDays(15));
+                                }   
+                        }
+                    };
+                }
+            };
+            ngayKT.setDayCellFactory(dayCellFactory);
         }
     }
 
@@ -573,6 +598,29 @@ public class ThongkeController implements Initializable {
         if((this.ngayKT.getValue()).isBefore(this.ngayBD.getValue())){
             Utils.getBox("Vui lòng chọn ngày sau ngày bắt đầu!!!", Alert.AlertType.INFORMATION).show();
             this.ngayKT.setValue(LocalDate.now());
+        }
+        if(loaiTK.getValue().equals("Ngày")){
+            final Callback<DatePicker, DateCell> dayCellFactory = 
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (item.isBefore(
+                                        ngayKT.getValue().minusDays(15))
+                                    ) {
+                                        setDisable(true);
+                                        setStyle("-fx-background-color: #ffc0cb;");
+                                        ngayBD.setValue(ngayKT.getValue().minusDays(15));
+                                }   
+                        }
+                    };
+                }
+            };
+            ngayBD.setDayCellFactory(dayCellFactory);
         }
     }
     
@@ -629,6 +677,7 @@ public class ThongkeController implements Initializable {
         else if(!(cbChiPhi.isSelected() || cbLoiNhuan.isSelected()))
             btPieChart.setDisable(false);
     }
+    
     
     public String moneyFormat(int money){
         DecimalFormat formatter = new DecimalFormat("###,###,###");

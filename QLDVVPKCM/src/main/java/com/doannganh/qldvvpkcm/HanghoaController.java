@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -195,7 +196,7 @@ public class HanghoaController implements Initializable {
         TableColumn<HangHoa, String> colThuongHieu = new TableColumn("Thương Hiệu");
         colThuongHieu.setCellValueFactory(new PropertyValueFactory("thuonghieu"));
         
-        TableColumn<HangHoa, BigDecimal> colSoLuong = new TableColumn("Số Lượng Trong Kho");
+        TableColumn<HangHoa, Integer> colSoLuong = new TableColumn("Số Lượng Trong Kho");
         colSoLuong.setCellValueFactory(new PropertyValueFactory("soluongtrongkho"));
         colSoLuong.setStyle( "-fx-alignment: CENTER-RIGHT;");
         
@@ -254,5 +255,9 @@ public class HanghoaController implements Initializable {
         HangHoaService s = new HangHoaService(conn);
         this.tbHH.setItems(FXCollections.observableList(s.getHHQLT(key, loaiTC)));
         conn.close();
+    }
+    public String moneyFormat(int money){
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
+        return(formatter.format(money)+" VNĐ");
     }
 }

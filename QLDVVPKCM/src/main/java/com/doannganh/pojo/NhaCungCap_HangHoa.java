@@ -10,8 +10,12 @@ public class NhaCungCap_HangHoa {
     private int nhacungcap_id;
     private int hanghoa_id;
     private int soLuong;
+    private String ngaysanxuat;
+    private String ngayhethan;
     private String ngaynhap;
     private String gianhap;
+    private int nhanvien_id;
+    private String ghichu;
 
     /**
      * @return the nhacungcap_id
@@ -56,6 +60,34 @@ public class NhaCungCap_HangHoa {
     }
 
     /**
+     * @return the ngaysanxuat
+     */
+    public String getNgaysanxuat() {
+        return ngaysanxuat;
+    }
+
+    /**
+     * @param ngaysanxuat the ngaysanxuat to set
+     */
+    public void setNgaysanxuat(String ngaysanxuat) {
+        this.ngaysanxuat = ngaysanxuat;
+    }
+
+    /**
+     * @return the ngayhethan
+     */
+    public String getNgayhethan() {
+        return ngayhethan;
+    }
+
+    /**
+     * @param ngayhethan the ngayhethan to set
+     */
+    public void setNgayhethan(String ngayhethan) {
+        this.ngayhethan = ngayhethan;
+    }
+
+    /**
      * @return the ngaynhap
      */
     public String getNgaynhap() {
@@ -82,4 +114,33 @@ public class NhaCungCap_HangHoa {
     public void setGianhap(String gianhap) {
         this.gianhap = gianhap;
     }
+
+    /**
+     * @return the nhanvien_id
+     */
+    public int getNhanvien_id() {
+        return nhanvien_id;
+    }
+
+    /**
+     * @param nhanvien_id the nhanvien_id to set
+     */
+    public void setNhanvien_id(int nhanvien_id) {
+        this.nhanvien_id = nhanvien_id;
+    }
+
+    /**
+     * @return the ghichu
+     */
+    public String getGhichu() {
+        return ghichu;
+    }
+
+    /**
+     * @param ghichu the ghichu to set
+     */
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
+
 }

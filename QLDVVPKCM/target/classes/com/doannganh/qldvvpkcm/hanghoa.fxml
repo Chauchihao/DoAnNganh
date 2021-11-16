@@ -52,7 +52,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtGiaNhap" layoutX="619.0" layoutY="31.0" prefHeight="26.0" prefWidth="66.0" />
+                  <TextField fx:id="txtGiaNhap" layoutX="713.0" layoutY="31.0" prefHeight="26.0" prefWidth="66.0" />
                   <Label layoutX="791.0" layoutY="-1.0" prefHeight="26.0" prefWidth="87.0" text="Giá niêm yết">
                      <font>
                         <Font size="15.0" />
@@ -71,11 +71,6 @@
                   </Label>
                   <DatePicker fx:id="NgaySX" layoutX="880.0" layoutY="31.0" prefHeight="26.0" prefWidth="95.0" />
                   <DatePicker fx:id="NgayHH" layoutX="979.0" layoutY="31.0" prefHeight="26.0" prefWidth="95.0" />
-                  <Label layoutX="509.0" layoutY="32.0" prefHeight="26.0" prefWidth="22.0" text="=&lt;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="1079.0" prefHeight="26.0" prefWidth="74.0" text="Tình trạng">
                      <font>
                         <Font size="15.0" />
@@ -99,7 +94,7 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtSLDB" layoutX="709.0" layoutY="31.0" prefHeight="26.0" prefWidth="74.0" />
+                  <TextField fx:id="txtSLDB" layoutX="622.0" layoutY="31.0" prefHeight="26.0" prefWidth="44.0" />
                   <Label layoutX="597.0" layoutY="1.0" prefHeight="26.0" prefWidth="111.0" text="Số lượng đã bán">
                      <font>
                         <Font size="15.0" />

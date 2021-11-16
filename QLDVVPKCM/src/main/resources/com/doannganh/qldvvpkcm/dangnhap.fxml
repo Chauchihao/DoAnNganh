@@ -13,9 +13,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="apDangNhap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.DangnhapController">
    <children>
-      <VBox layoutX="591.0" layoutY="166.0" prefHeight="352.0" prefWidth="338.0">
+      <VBox fx:id="vb" layoutX="591.0" layoutY="166.0" prefHeight="352.0" prefWidth="338.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="340.0" text="ĐĂNG NHẬP" textAlignment="CENTER">
+            <Label fx:id="lbDangNhap" alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="340.0" text="ĐĂNG NHẬP" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="56.0" />
                </font>

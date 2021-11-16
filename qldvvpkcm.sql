@@ -28,6 +28,7 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `diachi` varchar(255) NOT NULL,
   `sdt` varchar(11) NOT NULL,
+  `tinhtrang` bool NOT NULL DEFAULT true,
   `loaiuser_id` int NOT NULL,
   
   PRIMARY KEY (`user_id`),
@@ -54,8 +55,6 @@ CREATE TABLE `hanghoa` (
   `thuonghieu` varchar(255) NOT NULL,
   `soluongtrongkho` int NULL,
   `gianiemyet` decimal(10,0) NOT NULL,
-  `ngaysanxuat` date NULL,
-  `ngayhethan` date NULL,
   `hinhanh` varchar(255) NULL,
   `tinhtrang` bool NOT NULL DEFAULT True,
   `loaihanghoa_id` int NULL,
@@ -70,6 +69,8 @@ CREATE TABLE `nhacungcap_hanghoa` (
   `hanghoa_id` int NOT NULL,
   `soluong` int NOT NULL,
   `ngaynhap` datetime NOT NULL,
+  `ngaysanxuat` date NULL,
+  `ngayhethan` date NULL,
   `gianhap`  decimal(10,0) NOT NULL,
   `nhanvien_id` int NOT NULL,
   `ghichu` varchar(255) NULL,
@@ -153,16 +154,16 @@ CREATE TABLE `donhang` (
   
   INSERT INTO `loaiuser` (`tenloai`) VALUES ("Quản lý trưởng"), ("Thủ kho"), ("Nhân viên");
   
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
-  ("Trương Phong","1990-01-01","Nam","0222334455","truongphong","1","2018-03-02","truongphong@gmail.com","Quận 7, TP.HCM","0793278239",1);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
-  ("Phạm Luân","1980-04-27","Nam","033445567788","phamluan","1","2018-03-02","phamluan@gmail.com","Gò Vấp, TP.HCM","0987654321",2);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
-  ("Trần Như Tâm","1997-03-14","Nữ","0374832938","trannhutam","1","2018-03-02","trannhutam@gmail.com","TP.Thủ Đức","0792348918",2);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
-  ("Huỳnh Thị Thanh","1999-03-21","Nữ","0364687732","huynhthithanh","1","2018-03-02","huynhthithanh@gmail.com","Bình Dương","0382349726",3);
-   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`loaiuser_id`) VALUES
-  ("Phùng Thiện Nhất","2000-04-03","Nam","0337422034","phungthiennhat","1","2020-05-03","phungthiennhat@gmail.com","Quận Bình Thạnh","0921648324",3);
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  ("Trương Phong","1990-01-01","Nam","0222334455","truongphong","1","2018-03-02","truongphong@gmail.com","Quận 7, TP.HCM","0793278239",true,1);
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  ("Phạm Luân","1980-04-27","Nam","033445567788","phamluan","1","2018-03-02","phamluan@gmail.com","Gò Vấp, TP.HCM","0987654321",true,2);
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  ("Trần Như Tâm","1997-03-14","Nữ","0374832938","trannhutam","1","2018-03-02","trannhutam@gmail.com","TP.Thủ Đức","0792348918",true,2);
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  ("Huỳnh Thị Thanh","1999-03-21","Nữ","0364687732","huynhthithanh","1","2018-03-02","huynhthithanh@gmail.com","Bình Dương","0382349726",true,3);
+   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  ("Phùng Thiện Nhất","2000-04-03","Nam","0337422034","phungthiennhat","1","2020-05-03","phungthiennhat@gmail.com","Quận Bình Thạnh","0921648324",true,3);
   
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("Milu Shop","371 Nguyễn Kiệm, Phường 3, Quận Gò Vấp","TP Hồ Chí Minh","Việt Nam","sales@cityzoo.vn","0834502000");
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("City Zoo","146D4 Nguyễn Văn Hưởng, Phường Thảo Điền, Quận 2","TP Hồ Chí Minh","Việt Nam","sales@cityzoo.vn","0834502000");
@@ -170,75 +171,75 @@ CREATE TABLE `donhang` (
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("DOCA","Lô 19 Đ.04, KCN Châu Đức, Xã Nghĩa Thành, Huyện Châu Đức,","Tỉnh Bà Rịa - Vũng Tàu","Việt Nam","docavn79.com@gmail.com","02546299797");
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("Fusion Group","Lô L1-06B-07B-08B Khu du lịch sinh thái cao cấp An Khánh, xã An Khánh, huyện Hoài Đức","Hà Nội","Việt Nam","Info@fusiongroup.vn","0436367676");
   
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh","Milu Shop", 1000,120000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cạo lông, cắt tỉa","Milu Shop", 1000,150000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cắt móng, mài móng","Milu Shop", 1000,40000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh tai, nhổ lông tai","Milu Shop", 1000,40000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (1 màu)","Milu Shop", 1000,200000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (2 màu)","Milu Shop", 1000,250000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (1 màu)","Milu Shop", 1000,250000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (2 màu)","Milu Shop", 1000,300000,NULL,NULL,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("THỨC ĂN ƯỚT ROYAL CANIN MAXI ADULT","ROYAL CANIN", 20,408000,"2020-12-31","2022-12-31","/image/ThucAnUotRoyalCaninMaxiAdult.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR JUNIOR PASTE - GEL DINH DƯỠNG CHO CHÓ CON","beaphar",100,162000,"2021-03-20","2022-03-20", "/image/BeapharJuniorPaste.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR MULTI VITAMIN TOP 10 - VITAMIN TỔNG HỢP CHO CHÓ","beaphar",18,236000,"2021-05-09","2022-05-09","/image/BeapharMultiVitaminTop10.gif",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR DUO ACTIVE JUNIOR PASTE CAT - GEL DINH DƯỠNG CHO MÈO CON","beaphar",39,162000,"2021-03-20","2022-03-20","/image/BeapharDuoActiveJuniorPasteCat.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR LACTOL KITTY MILK - SỮA CHO MÈO CON","beaphar",125,502000,"2021-01-21","2022-01-21","/image/BeapharLactolKittyMilk.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("ROYAL CANIN URINARY CARE WET - HỖ TRỢ SỨC KHỎE TIẾT NIỆU","ROYAL CANIN", 24,391000,"2021-02-17","2022-02-17","/image/RoyalCaninUrinaryCareWet.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Grain Free cao cấp cho Chó - Gà tây, cá trích, trứng gà và rau củ quả tự nhiên','Nutrience',32,128000,'2021-01-12','2022-01-12','/image/NTGrainFreeCaoCapCho.png',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Subzero cho Chó - Thịt bò, cá hồi và rau củ quả tự nhiên (Cho mọi giống chó ở mọi lứa tuổi)','Nutrience',19,160000,'2021-01-12','2022-01-12','/image/NTSubzeroCho.png',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Original cho Chó con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)','Nutrience',111,120000,'2021-01-12','2022-01-12','/image/NTOriginalChoCon.png',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Original cho Mèo con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)','Nutrience',12,520000,'2021-01-12','2022-01-12','/image/NTOriginalMeoCon.png',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Original cho Mèo trưởng thành - Thịt gà và rau củ quả tự nhiên','Nutrience',10,900000,'2021-01-12','2022-01-12','/image/NTOriginalMeoTruongThanh.png',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('NT Subzero cho Mèo - Thịt gà, cá hồi, cá trích và rau củ quả tự nhiên (Cho mọi giống mèo ở mọi lứa tuổi)','Nutrience',15,1400000,'2022-01-12','2021-01-12','/image/NTSubzeroMeo.png',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức Ăn Cho Chó Mọi Lứa Tuổi - Doca Dog 450gr','FRESH TRINO',122,45000,'2021-04-23','2022-04-23','/image/DocaDog450gr.jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức Ăn Chó Trưởng Thành - Regular Dog 7 450gr','FRESH TRINO',113,40000,'2021-04-23','2022-04-23','/image/RegularDog7450gr.jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức Ăn Chó Con - Alphatrino 450gr','FRESH TRINO',134,45900,'2021-04-23','2022-04-23','/image/AlphatrinoPuppy450gr.jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức Ăn Mèo Trưởng Thành - Brutrino 450gr','FRESH TRINO',117,43200,'2021-04-23 ','2022-04-23','/image/BrutrinoCat450gr.jpg',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức Ăn Mèo Con - Neutrino Cat 450gr','FRESH TRINO',123,49400,'2021-04-23','2022-04-23','/image/NeutrinoCat450gr.jpg',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Sữa Mẹ Khô Cho Mèo - Msbilac Gold Cat 330gr','Châu Thành JSC',20,120000,'2021-04-23','2022-04-23','/image/MsbilacGoldCat330gr.jpg',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức ăn hạt hữu cơ cho chó ANF 6 Free vị cá hồi 2kg','ANF',14,440000,'2021-02-11','2022-02-11','/image/ANF6FreeViCaHoi2KgCho .jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Hạt Dinh Dưỡng Không Ngũ Cốc Vị Vịt Nutriwell Dành Cho Chó Mọi Lứa Tuổi 1.5kg','Jeil PetFood',12,310000,'2021-03-29','2022-03-29','/image/NutriWellGrainFreeViThit1.5KgCho.jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Hạt Thức ăn Chức Năng Tốt Cho Sức Khỏe đường Ruột Nature\'s Kitchen (dành Cho Chó Mọi Lứa Tuổi)','ANF',23,360000,'2021-02-11','2022-02-11','/image/Nature\'sKitchenDog.jpg',1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Thức ăn cho mèo mọi lứa tuổi 5kg - Today\'s dinner','Farmsco Corporation',37,395000,'2021-04-19','2022-04-19','/image/Today\'sdinner5KgCat.png',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Bánh thưởng dinh dưỡng cho mèo Gozip vị cá ngừ','Jeil PetFood',200,48000,'2021-03-29','2022-03-29','/image/GozipViCaNgu60gMeo.jpg',1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('TRAVEL - Balo vận chuyển','Pawise',100,547000,NULL,NULL,'/image/DogBackPack.jpg',1,4);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Cát Vệ Sinh Mèo Siêu Khử Mùi - Diamond Feline 7kg','Diamond Feline',200,200000,NULL,NULL,'/image/CatVeSinhMeoSieuKhuMuiDiamondFeline7Kg.jpg',1,4);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`ngaysanxuat`,`ngayhethan`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ('Sữa Tắm Chó Mèo Mượt Da Lông - DC Guard 500ml','DC Guard',50,130000,'2021-10-27','2022-10-27','/image/SuaTamChoMeoMuotDaLongDCGuard500ml.jpg',1,4);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh","Milu Shop", 1000,120000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cạo lông, cắt tỉa","Milu Shop", 1000,150000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cắt móng, mài móng","Milu Shop", 1000,40000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh tai, nhổ lông tai","Milu Shop", 1000,40000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (1 màu)","Milu Shop", 1000,200000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (2 màu)","Milu Shop", 1000,250000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (1 màu)","Milu Shop", 1000,250000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (2 màu)","Milu Shop", 1000,300000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("THỨC ĂN ƯỚT ROYAL CANIN MAXI ADULT","ROYAL CANIN", 20,408000,"/image/ThucAnUotRoyalCaninMaxiAdult.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR JUNIOR PASTE - GEL DINH DƯỠNG CHO CHÓ CON","beaphar",100,162000,"/image/BeapharJuniorPaste.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR MULTI VITAMIN TOP 10 - VITAMIN TỔNG HỢP CHO CHÓ","beaphar",18,236000,"/image/BeapharMultiVitaminTop10.gif",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR DUO ACTIVE JUNIOR PASTE CAT - GEL DINH DƯỠNG CHO MÈO CON","beaphar",39,162000,"/image/BeapharDuoActiveJuniorPasteCat.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR LACTOL KITTY MILK - SỮA CHO MÈO CON","beaphar",125,502000,"/image/BeapharLactolKittyMilk.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("ROYAL CANIN URINARY CARE WET - HỖ TRỢ SỨC KHỎE TIẾT NIỆU","ROYAL CANIN", 24,391000,"/image/RoyalCaninUrinaryCareWet.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Grain Free cao cấp cho Chó - Gà tây, cá trích, trứng gà và rau củ quả tự nhiên","Nutrience",32,128000,"/image/NTGrainFreeCaoCapCho.png",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Subzero cho Chó - Thịt bò, cá hồi và rau củ quả tự nhiên (Cho mọi giống chó ở mọi lứa tuổi)","Nutrience",19,160000,"/image/NTSubzeroCho.png",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Chó con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",111,120000,"/image/NTOriginalChoCon.png",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",12,520000,"/image/NTOriginalMeoCon.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo trưởng thành - Thịt gà và rau củ quả tự nhiên","Nutrience",10,900000,"/image/NTOriginalMeoTruongThanh.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Subzero cho Mèo - Thịt gà, cá hồi, cá trích và rau củ quả tự nhiên (Cho mọi giống mèo ở mọi lứa tuổi)","Nutrience",15,1400000,"/image/NTSubzeroMeo.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Cho Chó Mọi Lứa Tuổi - Doca Dog 450gr","FRESH TRINO",122,45000,"/image/DocaDog450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Trưởng Thành - Regular Dog 7 450gr","FRESH TRINO",113,40000,"/image/RegularDog7450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Con - Alphatrino 450gr","FRESH TRINO",134,45900,"/image/AlphatrinoPuppy450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Trưởng Thành - Brutrino 450gr","FRESH TRINO",117,43200,"/image/BrutrinoCat450gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Con - Neutrino Cat 450gr","FRESH TRINO",123,49400,"/image/NeutrinoCat450gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Sữa Mẹ Khô Cho Mèo - Msbilac Gold Cat 330gr","Châu Thành JSC",20,120000,"/image/MsbilacGoldCat330gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức ăn hạt hữu cơ cho chó ANF 6 Free vị cá hồi 2kg","ANF",14,440000,"/image/ANF6FreeViCaHoi2KgCho .jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Hạt Dinh Dưỡng Không Ngũ Cốc Vị Vịt Nutriwell Dành Cho Chó Mọi Lứa Tuổi 1.5kg","Jeil PetFood",12,310000,"/image/NutriWellGrainFreeViThit1.5KgCho.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Hạt Thức ăn Chức Năng Tốt Cho Sức Khỏe đường Ruột Nature\"s Kitchen (dành Cho Chó Mọi Lứa Tuổi)","ANF",23,360000,"/image/Nature\"sKitchenDog.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức ăn cho mèo mọi lứa tuổi 5kg - Today\"s dinner","Farmsco Corporation",37,395000,"/image/Today\"sdinner5KgCat.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Bánh thưởng dinh dưỡng cho mèo Gozip vị cá ngừ","Jeil PetFood",200,48000,"/image/GozipViCaNgu60gMeo.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("TRAVEL - Balo vận chuyển","Pawise",100,547000,"/image/DogBackPack.jpg",1,4);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Cát Vệ Sinh Mèo Siêu Khử Mùi - Diamond Feline 7kg","Diamond Feline",200,200000,"/image/CatVeSinhMeoSieuKhuMuiDiamondFeline7Kg.jpg",1,4);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Sữa Tắm Chó Mèo Mượt Da Lông - DC Guard 500ml","DC Guard",50,130000,"/image/SuaTamChoMeoMuotDaLongDCGuard500ml.jpg",1,4);
   
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,1,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,2,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,3,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,4,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,5,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,6,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,7,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,8,1000,"2018-03-02",0,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,9,100,"2021-03-22",326000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,10,18,"2021-05-11",188000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,11,41,"2021-03-22",130000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,12,125,"2021-01-23",331000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,13,24,"2021-02-19",312000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,14,32,"2021-01-14",102000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,15,20,"2021-01-14",128000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,16,111,"2021-01-14",80000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,17,12,"2021-01-14",401000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,18,10,"2021-01-14",684000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,19,15,"2021-01-14",1050000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,20,122,"2021-04-25",31500,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,21,123,"2021-04-25",28000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,22,134,"2021-04-25",32000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,23,117,"2021-04-25",30000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,24,123,"2021-04-25",34000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,25,20,"2021-04-25",92000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,26,15,"2021-04-25",334000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,27,12,"2021-04-25",239000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,28,23,"2021-04-25",274000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,29,37,"2021-04-25",300000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,30,200,"2021-04-25",34000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,31,45,"2021-04-25",209000,3,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,32,100,"2021-10-27",382900,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,33,200,"2021-10-27",130000,2,NULL);
-  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,34,50,"2021-10-27",101400,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,1,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,2,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,3,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,4,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,5,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,6,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,7,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (1,8,1000,NULL,NULL,"2018-03-02",0,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,9,100,"2020-12-31","2022-12-31","2021-03-22",326000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,10,18,"2021-03-20","2022-03-20","2021-05-11",188000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,11,41,"2021-05-09","2022-05-09","2021-03-22",130000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,12,125,"2021-03-20","2022-03-20","2021-01-23",331000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,13,24,"2021-01-21","2022-01-21","2021-02-19",312000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,14,32,"2021-02-17","2022-02-17","2021-01-14",102000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,15,20,"2022-01-12","2021-01-12","2021-01-14",128000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,16,111,"2022-01-12","2021-01-12","2021-01-14",80000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,17,12,"2022-01-12","2021-01-12","2021-01-14",401000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,18,10,"2022-01-12","2021-01-12","2021-01-14",684000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (3,19,15,"2022-01-12","2021-01-12","2021-01-14",1050000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,20,122,"2021-04-23","2022-04-23","2021-04-25",31500,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,21,123,"2021-04-23","2022-04-23","2021-04-25",28000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,22,134,"2021-04-23","2022-04-23","2021-04-25",32000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,23,117,"2021-04-23","2022-04-23","2021-04-25",30000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,24,123,"2021-04-23","2022-04-23","2021-04-25",34000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,25,20,"2021-04-23","2022-04-23","2021-04-25",92000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,26,15,"2021-04-23","2022-04-23","2021-04-25",334000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,27,12,"2021-02-11","2022-02-11","2021-04-25",239000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,28,23,"2021-03-29","2022-03-29","2021-04-25",274000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,29,37,"2021-02-11","2022-02-11","2021-04-25",300000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,30,200,"2021-04-19","2022-04-19","2021-04-25",34000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (5,31,45,"2021-03-29","2022-03-29","2021-04-25",209000,3,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (2,32,100,NULL,NULL,"2021-10-27",382900,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,33,200,NULL,NULL,"2021-10-27",130000,2,NULL);
+  INSERT INTO `nhacungcap_hanghoa` (`nhacungcap_id`,`hanghoa_id`,`soluong`,`ngaysanxuat`,`ngayhethan`,`ngaynhap`,`gianhap`,`nhanvien_id`,`ghichu`) VALUES (4,34,50,"2021-10-27","2022-10-27","2021-10-27",101400,2,NULL);
   
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`)
   VALUES ("NULL","0000-00-00","NULL", "NULL","NULL");
