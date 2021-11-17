@@ -5,7 +5,6 @@
  */
 package com.doannganh.service;
 
-import com.doannganh.pojo.HangHoa;
 import com.doannganh.pojo.LoaiHangHoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,55 +66,50 @@ public class LoaiHangHoaService {
         return ten;
     }
     
-    public HashMap<LoaiHangHoa, Integer> getTopLoaiSPBanChay(int top) throws SQLException{
-
-        HashMap<LoaiHangHoa, Integer> hh = new HashMap<>();
-        String sql = "SELECT distinct loaihanghoa.*, sum(soluong) as soluong\n" 
-                +"FROM qldvvpkcm.hanghoa, qldvvpkcm.chitietdonhang,  qldvvpkcm.loaihanghoa\n" 
-                +"WHERE  hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id\n" 
-                +"and hanghoa.hanghoa_id = chitietdonhang.hanghoa_id\n" 
-                +"GROUP BY loaihanghoa.loaihanghoa_id\n" 
-                +"order by soluong desc\n" 
-                +"LIMIT ?";
+    public int getSLDB(int id) throws SQLException{
+        String sql = "SELECT ifnull(sum(chitietdonhang.soluong), 0) as soluongdb "
+                   + "FROM qldvvpkcm.chitietdonhang, qldvvpkcm.hanghoa, qldvvpkcm.loaihanghoa "
+                   + "WHERE  hanghoa.loaihanghoa_id  = ? "
+                   + "AND loaihanghoa.loaihanghoa_id = hanghoa.loaihanghoa_id "
+                   + "AND chitietdonhang.hanghoa_id = hanghoa.hanghoa_id";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setInt(1, top);
+        stm.setInt(1, id);
+        int sldb = 0;
         ResultSet rs = stm.executeQuery();
-        int sl = 0;
         while (rs.next()) {
-            LoaiHangHoa h = new LoaiHangHoa();
-            h.setLoaihanghoa_id(rs.getInt("loaihanghoa_id"));
-            h.setTenloai(rs.getString("tenloai"));
-            sl = rs.getInt("soluong");
-            
-            hh.put(h,sl);
+            sldb = rs.getInt("soluongdb");
         }
-        return hh;
-       }
-
-    public HashMap<LoaiHangHoa, Integer> getTopLoaiSPBanIt(int top) throws SQLException{
-
-        HashMap<LoaiHangHoa, Integer> hh = new HashMap<>();
-        String sql = "SELECT distinct loaihanghoa.*, sum(soluong) as soluong\n" 
-                +"FROM qldvvpkcm.hanghoa, qldvvpkcm.chitietdonhang,  qldvvpkcm.loaihanghoa\n" 
-                +"WHERE  hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id\n" 
-                +"and hanghoa.hanghoa_id = chitietdonhang.hanghoa_id\n" 
-                +"GROUP BY loaihanghoa.loaihanghoa_id\n" 
-                +"order by soluong asc\n" 
-                +"LIMIT ?";
+        return sldb;   
+    }
+    
+    public int getSLDN(int id) throws SQLException{
+        String sql = "SELECT ifnull(sum(soluong), 0) as soluongdn\n" 
+                    +"FROM qldvvpkcm.hanghoa, qldvvpkcm.nhacungcap_hanghoa\n" 
+                    +"WHERE hanghoa.loaihanghoa_id  = ?\n" 
+                    +"AND nhacungcap_hanghoa.hanghoa_id = hanghoa.hanghoa_id";
         PreparedStatement stm = this.conn.prepareStatement(sql);
-        stm.setInt(1, top);
+        stm.setInt(1, id);
+        int sldn = 0;
         ResultSet rs = stm.executeQuery();
-        int sl = 0;
         while (rs.next()) {
-            LoaiHangHoa h = new LoaiHangHoa();
-            h.setLoaihanghoa_id(rs.getInt("loaihanghoa_id"));
-            h.setTenloai(rs.getString("tenloai"));
-            sl = rs.getInt("soluong");
-            
-            hh.put(h,sl);
+            sldn = rs.getInt("soluongdn");
         }
-        return hh;
-       }
+        return sldn;   
+    }
+    
+    public int getSLTK(int id) throws SQLException{
+        String sql = "SELECT ifnull(sum(soluongtrongkho), 0) as soluongtk\n" 
+                    +"FROM  qldvvpkcm.hanghoa\n" 
+                    +"WHERE  hanghoa.loaihanghoa_id  = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        int sltk = 0;
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            sltk = rs.getInt("soluongtk");
+        }
+        return sltk;   
+    }
     /*public List getTenLoai() throws SQLException {
         Statement stm = this.conn.createStatement();
         ResultSet r = stm.executeQuery("SELECT tenloai FROM loaihanghoa");

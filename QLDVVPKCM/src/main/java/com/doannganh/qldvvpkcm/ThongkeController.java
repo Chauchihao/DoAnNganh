@@ -127,6 +127,8 @@ public class ThongkeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadCBData();
         this.ngayKT.setValue(LocalDate.now());
+        this.ngayKT.setEditable(false);
+        this.ngayBD.setEditable(false);
         this.ngayBD.setValue(LocalDate.now().minusDays(15));
         this.cbDoanhThu.setSelected(true);    
     }    

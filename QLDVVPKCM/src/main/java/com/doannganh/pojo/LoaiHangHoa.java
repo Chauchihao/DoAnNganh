@@ -12,6 +12,9 @@ package com.doannganh.pojo;
 public class LoaiHangHoa {
     private int loaihanghoa_id;
     private String tenloai;
+    private int sldb;
+    private int sldn;
+    private int sltk;
     
     @Override
     public String toString() {
@@ -44,6 +47,48 @@ public class LoaiHangHoa {
      */
     public void setTenloai(String tenloai) {
         this.tenloai = tenloai;
+    }
+
+    /**
+     * @return the sldb
+     */
+    public int getSldb() {
+        return sldb;
+    }
+
+    /**
+     * @param sldb the sldb to set
+     */
+    public void setSldb(int sldb) {
+        this.sldb = sldb;
+    }
+
+    /**
+     * @return the sldn
+     */
+    public int getSldn() {
+        return sldn;
+    }
+
+    /**
+     * @param sldn the sldn to set
+     */
+    public void setSldn(int sldn) {
+        this.sldn = sldn;
+    }
+
+    /**
+     * @return the sltk
+     */
+    public int getSltk() {
+        return sltk;
+    }
+
+    /**
+     * @param sltk the sltk to set
+     */
+    public void setSltk(int sltk) {
+        this.sltk = sltk;
     }
 
     
