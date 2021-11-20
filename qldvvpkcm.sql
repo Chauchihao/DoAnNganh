@@ -28,7 +28,7 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `diachi` varchar(255) NOT NULL,
   `sdt` varchar(11) NOT NULL,
-  `tinhtrang` bool NOT NULL DEFAULT true,
+  `trangthai` bool NOT NULL DEFAULT true,
   `loaiuser_id` int NOT NULL,
   
   PRIMARY KEY (`user_id`),
@@ -154,15 +154,15 @@ CREATE TABLE `donhang` (
   
   INSERT INTO `loaiuser` (`tenloai`) VALUES ("Quản lý trưởng"), ("Thủ kho"), ("Nhân viên");
   
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`trangthai`,`loaiuser_id`) VALUES
   ("Trương Phong","1990-01-01","Nam","0222334455","truongphong","1","2018-03-02","truongphong@gmail.com","Quận 7, TP.HCM","0793278239",true,1);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`trangthai`,`loaiuser_id`) VALUES
   ("Phạm Luân","1980-04-27","Nam","033445567788","phamluan","1","2018-03-02","phamluan@gmail.com","Gò Vấp, TP.HCM","0987654321",true,2);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`trangthai`,`loaiuser_id`) VALUES
   ("Trần Như Tâm","1997-03-14","Nữ","0374832938","trannhutam","1","2018-03-02","trannhutam@gmail.com","TP.Thủ Đức","0792348918",true,2);
-  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+  INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`trangthai`,`loaiuser_id`) VALUES
   ("Huỳnh Thị Thanh","1999-03-21","Nữ","0364687732","huynhthithanh","1","2018-03-02","huynhthithanh@gmail.com","Bình Dương","0382349726",true,3);
-   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`tinhtrang`,`loaiuser_id`) VALUES
+   INSERT INTO `user` (`hoten`,`ngaysinh`,`gioitinh`,`cmnd`,`taikhoan`,`matkhau`,`ngayVaoLam`,`email`,`diachi`,`sdt`,`trangthai`,`loaiuser_id`) VALUES
   ("Phùng Thiện Nhất","2000-04-03","Nam","0337422034","phungthiennhat","1","2020-05-03","phungthiennhat@gmail.com","Quận Bình Thạnh","0921648324",true,3);
   
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("Milu Shop","371 Nguyễn Kiệm, Phường 3, Quận Gò Vấp","TP Hồ Chí Minh","Việt Nam","sales@cityzoo.vn","0834502000");
@@ -171,38 +171,38 @@ CREATE TABLE `donhang` (
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("DOCA","Lô 19 Đ.04, KCN Châu Đức, Xã Nghĩa Thành, Huyện Châu Đức,","Tỉnh Bà Rịa - Vũng Tàu","Việt Nam","docavn79.com@gmail.com","02546299797");
   INSERT INTO `nhacungcap` (`tencongty`,`diachi`,`tinhthanh`,`quocgia`,`email`,`sodt`) VALUES ("Fusion Group","Lô L1-06B-07B-08B Khu du lịch sinh thái cao cấp An Khánh, xã An Khánh, huyện Hoài Đức","Hà Nội","Việt Nam","Info@fusiongroup.vn","0436367676");
   
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh","Milu Shop", 1000,120000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cạo lông, cắt tỉa","Milu Shop", 1000,150000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh","Milu Shop", 999,120000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cạo lông, cắt tỉa","Milu Shop", 999,150000,NULL,1,1);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ cắt móng, mài móng","Milu Shop", 1000,40000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh tai, nhổ lông tai","Milu Shop", 1000,40000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (1 màu)","Milu Shop", 1000,200000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (2 màu)","Milu Shop", 1000,250000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ vệ sinh tai, nhổ lông tai","Milu Shop", 999,40000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (1 màu)","Milu Shop", 999,200000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 2 tai (2 màu)","Milu Shop", 999,250000,NULL,1,1);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (1 màu)","Milu Shop", 1000,250000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (2 màu)","Milu Shop", 1000,300000,NULL,1,1);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("THỨC ĂN ƯỚT ROYAL CANIN MAXI ADULT","ROYAL CANIN", 20,408000,"/image/ThucAnUotRoyalCaninMaxiAdult.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR JUNIOR PASTE - GEL DINH DƯỠNG CHO CHÓ CON","beaphar",100,162000,"/image/BeapharJuniorPaste.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR MULTI VITAMIN TOP 10 - VITAMIN TỔNG HỢP CHO CHÓ","beaphar",18,236000,"/image/BeapharMultiVitaminTop10.gif",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR DUO ACTIVE JUNIOR PASTE CAT - GEL DINH DƯỠNG CHO MÈO CON","beaphar",39,162000,"/image/BeapharDuoActiveJuniorPasteCat.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR LACTOL KITTY MILK - SỮA CHO MÈO CON","beaphar",125,502000,"/image/BeapharLactolKittyMilk.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("ROYAL CANIN URINARY CARE WET - HỖ TRỢ SỨC KHỎE TIẾT NIỆU","ROYAL CANIN", 24,391000,"/image/RoyalCaninUrinaryCareWet.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Grain Free cao cấp cho Chó - Gà tây, cá trích, trứng gà và rau củ quả tự nhiên","Nutrience",32,128000,"/image/NTGrainFreeCaoCapCho.png",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Dịch vụ nhuộm 4 chân (2 màu)","Milu Shop", 999,300000,NULL,1,1);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("THỨC ĂN ƯỚT ROYAL CANIN MAXI ADULT","ROYAL CANIN", 10,408000,"/image/ThucAnUotRoyalCaninMaxiAdult.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR JUNIOR PASTE - GEL DINH DƯỠNG CHO CHÓ CON","beaphar",18,162000,"/image/BeapharJuniorPaste.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR MULTI VITAMIN TOP 10 - VITAMIN TỔNG HỢP CHO CHÓ","beaphar",11,236000,"/image/BeapharMultiVitaminTop10.gif",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR DUO ACTIVE JUNIOR PASTE CAT - GEL DINH DƯỠNG CHO MÈO CON","beaphar",11,162000,"/image/BeapharDuoActiveJuniorPasteCat.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("BEAPHAR LACTOL KITTY MILK - SỮA CHO MÈO CON","beaphar",24,502000,"/image/BeapharLactolKittyMilk.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("ROYAL CANIN URINARY CARE WET - HỖ TRỢ SỨC KHỎE TIẾT NIỆU","ROYAL CANIN", 10,391000,"/image/RoyalCaninUrinaryCareWet.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Grain Free cao cấp cho Chó - Gà tây, cá trích, trứng gà và rau củ quả tự nhiên","Nutrience",20,128000,"/image/NTGrainFreeCaoCapCho.png",1,2);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Subzero cho Chó - Thịt bò, cá hồi và rau củ quả tự nhiên (Cho mọi giống chó ở mọi lứa tuổi)","Nutrience",19,160000,"/image/NTSubzeroCho.png",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Chó con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",111,120000,"/image/NTOriginalChoCon.png",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",12,520000,"/image/NTOriginalMeoCon.png",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo trưởng thành - Thịt gà và rau củ quả tự nhiên","Nutrience",10,900000,"/image/NTOriginalMeoTruongThanh.png",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Subzero cho Mèo - Thịt gà, cá hồi, cá trích và rau củ quả tự nhiên (Cho mọi giống mèo ở mọi lứa tuổi)","Nutrience",15,1400000,"/image/NTSubzeroMeo.png",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Cho Chó Mọi Lứa Tuổi - Doca Dog 450gr","FRESH TRINO",122,45000,"/image/DocaDog450gr.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Trưởng Thành - Regular Dog 7 450gr","FRESH TRINO",113,40000,"/image/RegularDog7450gr.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Con - Alphatrino 450gr","FRESH TRINO",134,45900,"/image/AlphatrinoPuppy450gr.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Trưởng Thành - Brutrino 450gr","FRESH TRINO",117,43200,"/image/BrutrinoCat450gr.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Con - Neutrino Cat 450gr","FRESH TRINO",123,49400,"/image/NeutrinoCat450gr.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Sữa Mẹ Khô Cho Mèo - Msbilac Gold Cat 330gr","Châu Thành JSC",20,120000,"/image/MsbilacGoldCat330gr.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức ăn hạt hữu cơ cho chó ANF 6 Free vị cá hồi 2kg","ANF",14,440000,"/image/ANF6FreeViCaHoi2KgCho .jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Chó con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",12,120000,"/image/NTOriginalChoCon.png",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo con - Thịt gà và rau củ quả tự nhiên (Dưới 12 tháng tuổi)","Nutrience",8,520000,"/image/NTOriginalMeoCon.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Original cho Mèo trưởng thành - Thịt gà và rau củ quả tự nhiên","Nutrience",7,900000,"/image/NTOriginalMeoTruongThanh.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("NT Subzero cho Mèo - Thịt gà, cá hồi, cá trích và rau củ quả tự nhiên (Cho mọi giống mèo ở mọi lứa tuổi)","Nutrience",5,1400000,"/image/NTSubzeroMeo.png",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Cho Chó Mọi Lứa Tuổi - Doca Dog 450gr","FRESH TRINO",5,45000,"/image/DocaDog450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Trưởng Thành - Regular Dog 7 450gr","FRESH TRINO",16,40000,"/image/RegularDog7450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Chó Con - Alphatrino 450gr","FRESH TRINO",14,45900,"/image/AlphatrinoPuppy450gr.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Trưởng Thành - Brutrino 450gr","FRESH TRINO",12,43200,"/image/BrutrinoCat450gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức Ăn Mèo Con - Neutrino Cat 450gr","FRESH TRINO",3,49400,"/image/NeutrinoCat450gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Sữa Mẹ Khô Cho Mèo - Msbilac Gold Cat 330gr","Châu Thành JSC",4,120000,"/image/MsbilacGoldCat330gr.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức ăn hạt hữu cơ cho chó ANF 6 Free vị cá hồi 2kg","ANF",5,440000,"/image/ANF6FreeViCaHoi2KgCho .jpg",1,2);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Hạt Dinh Dưỡng Không Ngũ Cốc Vị Vịt Nutriwell Dành Cho Chó Mọi Lứa Tuổi 1.5kg","Jeil PetFood",12,310000,"/image/NutriWellGrainFreeViThit1.5KgCho.jpg",1,2);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Hạt Thức ăn Chức Năng Tốt Cho Sức Khỏe đường Ruột Nature\"s Kitchen (dành Cho Chó Mọi Lứa Tuổi)","ANF",23,360000,"/image/Nature\"sKitchenDog.jpg",1,2);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Hạt Thức ăn Chức Năng Tốt Cho Sức Khỏe đường Ruột Nature\"s Kitchen (dành Cho Chó Mọi Lứa Tuổi)","ANF",11,360000,"/image/Nature\"sKitchenDog.jpg",1,2);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Thức ăn cho mèo mọi lứa tuổi 5kg - Today\"s dinner","Farmsco Corporation",37,395000,"/image/Today\"sdinner5KgCat.png",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Bánh thưởng dinh dưỡng cho mèo Gozip vị cá ngừ","Jeil PetFood",200,48000,"/image/GozipViCaNgu60gMeo.jpg",1,3);
-  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("TRAVEL - Balo vận chuyển","Pawise",100,547000,"/image/DogBackPack.jpg",1,4);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Bánh thưởng dinh dưỡng cho mèo Gozip vị cá ngừ","Jeil PetFood",10,48000,"/image/GozipViCaNgu60gMeo.jpg",1,3);
+  INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("TRAVEL - Balo vận chuyển","Pawise",30,547000,"/image/DogBackPack.jpg",1,4);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Cát Vệ Sinh Mèo Siêu Khử Mùi - Diamond Feline 7kg","Diamond Feline",200,200000,"/image/CatVeSinhMeoSieuKhuMuiDiamondFeline7Kg.jpg",1,4);
   INSERT INTO `hanghoa` (`tenhanghoa`,`thuonghieu`,`soluongtrongkho`,`gianiemyet`,`hinhanh`,`tinhtrang`,`loaihanghoa_id`) VALUES ("Sữa Tắm Chó Mèo Mượt Da Lông - DC Guard 500ml","DC Guard",50,130000,"/image/SuaTamChoMeoMuotDaLongDCGuard500ml.jpg",1,4);
   
@@ -244,23 +244,23 @@ CREATE TABLE `donhang` (
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`)
   VALUES ("NULL","0000-00-00","NULL", "NULL","NULL");
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Nguyễn Minh Việt","1983-06-28","Nam", "1111 đường 3/2, Phường 12, Quận 11","0932478390",416);
+  VALUES ("Nguyễn Minh Việt","1983-06-28","Nam", "1111 đường 3/2, Phường 12, Quận 11","0932478390",43892);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Hoàng Văn Thu","1968-04-27","Nữ", "333 đường Nguyễn Duy Dương, Phường 4, Quận 10","0793247628",851);
+  VALUES ("Hoàng Văn Thu","1968-04-27","Nữ", "333 đường Nguyễn Duy Dương, Phường 4, Quận 10","0793247628",28219);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
   VALUES ("Nguyễn Hoàng","1994-04-25","Nam", "Quận 2","0934783203",300);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Lại Văn Ba","1962-03-26","Nam", "Quận Gò Vấp","0932473592",3878);
+  VALUES ("Lại Văn Ba","1962-03-26","Nam", "Quận Gò Vấp","0932473592",1512);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
   VALUES ("Huỳnh Thị Tuyết Nhi","2000-02-14","Nữ", "Ninh Thuận","0994732629",250);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Trương Thu Thảo","1998-04-15","Nữ", "Bình Dương","0792348900",6300);
+  VALUES ("Trương Thu Thảo","1998-04-15","Nữ", "Bình Dương","0792348900",900);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Phan Thị Ngọc","2002-04-14","Nữ", "Quận 3","0793274932",400);
+  VALUES ("Phan Thị Ngọc","2002-04-14","Nữ", "Quận 3","0793274932",120);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Võ Chí Năng","2003-09-28","Nam", "Quận Bình Tân","0932479592",49);
+  VALUES ("Võ Chí Năng","2003-09-28","Nam", "Quận Bình Tân","0932479592",99);
   INSERT INTO `khachhang` (`hoten`,`ngaysinh`,`gioitinh`,`diachi`,`sdt`,`diemtichluy`)
-  VALUES ("Tô Văn Bé","2001-03-20","Nam", "Quận 8","0932567409",17060);
+  VALUES ("Tô Văn Bé","2001-03-20","Nam", "Quận 8","0932567409",6080);
   
   
   INSERT INTO `thucung` (`ten`,`ngaysinh`,`gioitinh`,`mauLong`,`tinhtrangsuckhoe`,`khachhang_id`)
@@ -299,38 +299,38 @@ CREATE TABLE `donhang` (
   INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2021-11-10",4,10);
   INSERT INTO `donhang`(`ngayTaoDH`,`nhanvien_id`,`khachhang_id`) VALUES ("2021-11-11",5,2);
   
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 9, 2, 408000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 16, 1, 160000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 27, 1, 440000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (2, 12, 2, 130000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (2, 32, 3, 275000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 9, 90, 408000, 0.15);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 16, 100, 160000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (1, 27, 2, 440000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (2, 12, 114, 130000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (2, 32, 70, 275000, 0.15);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (3, 27, 1, 440000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (4, 14, 10, 391000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (4, 14, 22, 391000, 0.1);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (5, 17, 5, 120000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (6, 18, 1, 520000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (7, 19, 3, 900000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (8, 20, 4, 1400000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (9, 21, 10, 45000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (10, 22, 21, 40000, 0.1);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (11, 23, 18, 459000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (12, 24, 27, 43200, 0.1);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (13, 25, 12, 49400, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (6, 18, 2, 520000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (7, 19, 7, 900000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (8, 20, 113, 1400000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (9, 21, 112, 45000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (10, 22, 114, 40000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (11, 23, 101, 459000, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (12, 24, 10, 43200, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (13, 25, 15, 49400, 0);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (14, 08, 1, 300000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (15, 31, 101, 48000, 0.2);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (16, 11, 20, 236000, 0.1);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (17, 10, 55, 162000, 0.15);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (15, 31, 35, 48000, 0.1);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (16, 11, 30, 236000, 0.1);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (17, 10, 87, 162000, 0.15);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (18, 06, 1, 250000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (19, 19, 7, 900000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (19, 19, 1, 900000, 0);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (20, 20, 4, 1400000, 0);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (21, 21, 6, 45000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (22, 22, 10, 40000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (23, 23, 29, 45900, 0.1);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (24, 24, 30, 43200, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (25, 25, 1, 49400, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (26, 26, 9, 120000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (22, 22, 3, 40000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (23, 23, 2, 45900, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (24, 24, 101, 43200, 0.2);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (25, 25, 2, 49400, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (26, 26, 11, 120000, 0);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (27, 27, 4, 440000, 0);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (27, 29, 50, 360000, 0.15);
-  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (28, 22, 10, 40000, 0.15);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (27, 29, 12, 360000, 0);
+  INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (28, 22, 1, 40000, 0.5);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (28, 1, 1, 120000, 0.5);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (28, 2, 1, 150000, 0.5);
   INSERT INTO `chitietdonhang`(`donhang_id`,`hanghoa_id`,`soluong`,`dongia`,`giamgia`) VALUES (28, 4, 1, 40000, 0.5);

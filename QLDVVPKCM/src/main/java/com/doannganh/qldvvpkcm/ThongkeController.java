@@ -570,29 +570,29 @@ public class ThongkeController implements Initializable {
             Utils.getBox("Vui lòng chọn ngày trong quá khứ!!!", Alert.AlertType.INFORMATION).show();
             this.ngayBD.setValue(LocalDate.now().minusDays(15));
         }
-        if(loaiTK.getValue().equals("Ngày")){
-            final Callback<DatePicker, DateCell> dayCellFactory = 
-                new Callback<DatePicker, DateCell>() {
-                    @Override
-                    public DateCell call(final DatePicker datePicker) {
-                        return new DateCell() {
-                            @Override
-                            public void updateItem(LocalDate item, boolean empty) {
-                                super.updateItem(item, empty);
-
-                                if (item.isBefore(
-                                        ngayBD.getValue().plusDays(15))
-                                    ) {
-                                        setDisable(true);
-                                        setStyle("-fx-background-color: #ffc0cb;");
-                                        ngayKT.setValue(ngayBD.getValue().plusDays(15));
-                                }   
-                        }
-                    };
-                }
-            };
-            ngayKT.setDayCellFactory(dayCellFactory);
-        }
+//        if(loaiTK.getValue().equals("Ngày")){
+//            final Callback<DatePicker, DateCell> dayCellFactory = 
+//                new Callback<DatePicker, DateCell>() {
+//                    @Override
+//                    public DateCell call(final DatePicker datePicker) {
+//                        return new DateCell() {
+//                            @Override
+//                            public void updateItem(LocalDate item, boolean empty) {
+//                                super.updateItem(item, empty);
+//
+//                                if (item.isBefore(
+//                                        ngayBD.getValue().plusDays(15))
+//                                    ) {
+//                                        setDisable(true);
+//                                        setStyle("-fx-background-color: #ffc0cb;");
+//                                        ngayKT.setValue(ngayBD.getValue().plusDays(15));
+//                                }   
+//                        }
+//                    };
+//                }
+//            };
+//            ngayKT.setDayCellFactory(dayCellFactory);
+//        }
     }
 
     @FXML
@@ -601,29 +601,29 @@ public class ThongkeController implements Initializable {
             Utils.getBox("Vui lòng chọn ngày sau ngày bắt đầu!!!", Alert.AlertType.INFORMATION).show();
             this.ngayKT.setValue(LocalDate.now());
         }
-        if(loaiTK.getValue().equals("Ngày")){
-            final Callback<DatePicker, DateCell> dayCellFactory = 
-                new Callback<DatePicker, DateCell>() {
-                    @Override
-                    public DateCell call(final DatePicker datePicker) {
-                        return new DateCell() {
-                            @Override
-                            public void updateItem(LocalDate item, boolean empty) {
-                                super.updateItem(item, empty);
-
-                                if (item.isBefore(
-                                        ngayKT.getValue().minusDays(15))
-                                    ) {
-                                        setDisable(true);
-                                        setStyle("-fx-background-color: #ffc0cb;");
-                                        ngayBD.setValue(ngayKT.getValue().minusDays(15));
-                                }   
-                        }
-                    };
-                }
-            };
-            ngayBD.setDayCellFactory(dayCellFactory);
-        }
+//        if(loaiTK.getValue().equals("Ngày")){
+//            final Callback<DatePicker, DateCell> dayCellFactory = 
+//                new Callback<DatePicker, DateCell>() {
+//                    @Override
+//                    public DateCell call(final DatePicker datePicker) {
+//                        return new DateCell() {
+//                            @Override
+//                            public void updateItem(LocalDate item, boolean empty) {
+//                                super.updateItem(item, empty);
+//
+//                                if (item.isBefore(
+//                                        ngayKT.getValue().minusDays(15))
+//                                    ) {
+//                                        setDisable(true);
+//                                        setStyle("-fx-background-color: #ffc0cb;");
+//                                        ngayBD.setValue(ngayKT.getValue().minusDays(15));
+//                                }   
+//                        }
+//                    };
+//                }
+//            };
+//            ngayBD.setDayCellFactory(dayCellFactory);
+//        }
     }
     
     public void setVisible(int i){

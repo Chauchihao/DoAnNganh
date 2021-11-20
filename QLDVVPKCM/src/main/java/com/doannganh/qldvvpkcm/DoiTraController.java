@@ -447,7 +447,7 @@ public class DoiTraController implements Initializable {
                             } 
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(TraCuuHangHoaQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(DoiTraController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
                 return r;
@@ -608,7 +608,7 @@ public class DoiTraController implements Initializable {
                         ChiTietDonHang ctdh = tbCapNhat.getSelectionModel().getSelectedItem();
                         
                     } catch (SQLException ex) {
-                        Logger.getLogger(TraCuuHangHoaQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(DoiTraController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
                 return r;

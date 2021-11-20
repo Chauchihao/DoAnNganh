@@ -1,8 +1,6 @@
 com\doannganh\qldvvpkcm\TaoHoaDonController$1.class
 com\doannganh\qldvvpkcm\QuanLyThuCungController$2.class
 com\doannganh\qldvvpkcm\QuanLyKhachHangController$1.class
-com\doannganh\qldvvpkcm\ThongkeController$2.class
-com\doannganh\qldvvpkcm\ThongkeController$2$1.class
 com\doannganh\qldvvpkcm\DoiTraController.class
 com\doannganh\qldvvpkcm\QuanLyKhachHangController$4.class
 com\doannganh\pojo\CapNhatHoaDon.class
@@ -29,6 +27,7 @@ com\doannganh\service\JdbcUtils.class
 com\doannganh\qldvvpkcm\QuanLyThuCungController.class
 com\doannganh\qldvvpkcm\QuanLyKhachHangController$2.class
 com\doannganh\qldvvpkcm\QuanLyThuCungController$3.class
+com\doannganh\qldvvpkcm\NhanvienController.class
 com\doannganh\pojo\LoaiHangHoa.class
 com\doannganh\service\LoaiUserService.class
 com\doannganh\qldvvpkcm\QuanLyThuCungController$1$1.class
@@ -50,14 +49,12 @@ com\doannganh\service\HangHoaService.class
 com\doannganh\qldvvpkcm\DoiTraController$6.class
 com\doannganh\qldvvpkcm\SecondaryController.class
 com\doannganh\qldvvpkcm\TaoHoaDonController$3.class
-com\doannganh\qldvvpkcm\ThongkeController$1$1.class
 com\doannganh\qldvvpkcm\KhachhangController.class
 com\doannganh\qldvvpkcm\TaoHoaDonController.class
 com\doannganh\qldvvpkcm\QuanLyKhachHangController$6.class
 com\doannganh\pojo\ChiTietDonHang.class
 com\doannganh\qldvvpkcm\QuanLyThuCungController$1.class
 com\doannganh\qldvvpkcm\KhachhangController$1$1.class
-com\doannganh\qldvvpkcm\ThongkeController$1.class
 com\doannganh\service\NhaCungCapService.class
 com\doannganh\qldvvpkcm\TaoHoaDonController$2.class
 com\doannganh\qldvvpkcm\TrangChuQuanLyTruongController.class
@@ -66,4 +63,3 @@ com\doannganh\pojo\LoaiUser.class
 com\doannganh\qldvvpkcm\DoiTraController$7.class
 com\doannganh\qldvvpkcm\QuanLyKhachHangController$5.class
 com\doannganh\service\CapNhatHoaDonService.class
-com\doannganh\qldvvpkcm\TraCuuHangHoaQuanLyTruongController.class

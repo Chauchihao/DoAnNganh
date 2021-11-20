@@ -25,19 +25,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 
 /**
@@ -96,19 +91,19 @@ public class TrangChuQuanLyTruongController implements Initializable {
     
     
     @FXML
+    void loadNhanVien(ActionEvent event) throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("nhanvien.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
+    @FXML
     void loadHangHoa(ActionEvent event) throws IOException {
         acpLoad.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("hanghoa.fxml"));
         acpLoad.getChildren().add(loader.load());
     }
     
-    
-        @FXML
-    public void loadCapNhat() throws IOException {
-        acpLoad.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
-        acpLoad.getChildren().add(loader.load());
-    }
     
     public void loadBarchart(){
         try {
@@ -223,22 +218,6 @@ public class TrangChuQuanLyTruongController implements Initializable {
         acpLoad.getChildren().add(loader.load());
     }
     
-    public void traCuuHangHoaQuanLyTruongHandler(ActionEvent evt) throws IOException{
-        try {
-            Parent tchh;
-            Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("tracuuhanghoaquanlytruong.fxml"));
-            tchh = loader.load();
-            Scene scene = new Scene(tchh);
-            TraCuuHangHoaQuanLyTruongController controller = loader.getController();
-            controller.setTTUser(nd);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(TrangChuQuanLyTruongController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public static String moneyFormat(int money){
         DecimalFormat formatter = new DecimalFormat("###,###,###");

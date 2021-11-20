@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -109,6 +108,27 @@ public class LoaiHangHoaService {
             sltk = rs.getInt("soluongtk");
         }
         return sltk;   
+    }
+    
+    public boolean suaTenLoaiHH(int id, String ten)  throws SQLException {
+        String sql ="UPDATE loaihanghoa SET tenloai=? WHERE loaihanghoa_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, ten);
+        stm.setInt(2, id);
+        int row = stm.executeUpdate();
+        
+        return row > 0;
+    }
+    
+    public boolean themLoaiHH(String loaihh) throws SQLException {
+        String sql = "INSERT INTO loaihanghoa(tenloai)"
+                    + " VALUES(?)";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, loaihh);
+        
+        int row = stm.executeUpdate();
+        
+        return row > 0;
     }
     /*public List getTenLoai() throws SQLException {
         Statement stm = this.conn.createStatement();

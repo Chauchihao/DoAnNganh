@@ -228,7 +228,6 @@ public class HangHoaService {
         sql +=" hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
             +" AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
             +" AND nhacungcap_hanghoa.nhacungcap_id = nhacungcap.nhacungcap_id"
-            +" GROUP BY hanghoa.hanghoa_id"
             + " ORDER BY hanghoa.hanghoa_id asc";
         PreparedStatement stm = this.conn.prepareStatement(sql);
         if(!(loaiTC.equals("") && key.equals(""))){         

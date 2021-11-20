@@ -9,6 +9,7 @@ import com.doannganh.pojo.HangHoa;
 import com.doannganh.pojo.LoaiHangHoa;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
+import com.doannganh.service.KhachHangService;
 import com.doannganh.service.LoaiHangHoaService;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +34,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -72,7 +75,10 @@ public class HanghoaController implements Initializable {
 
     @FXML
     private TextField txtGiaNiemYet;
-
+    
+    @FXML
+    private TextField txtTenLoaiHH;
+    
     @FXML
     private DatePicker NgaySX;
 
@@ -96,10 +102,12 @@ public class HanghoaController implements Initializable {
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    ObservableList<String> listLoaiHH = null;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            listLoaiHH = getListLoaiHH();
             loadTableLoaiHH();
             loadLoaiHHQLT();
             try {
@@ -245,7 +253,7 @@ public class HanghoaController implements Initializable {
             Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void loadTableHH(){
+    private void loadTableHH() throws SQLException{
         TableColumn<HangHoa, Integer> colMaHangHoa = new TableColumn("Mã Hàng");
         colMaHangHoa.setCellValueFactory(new PropertyValueFactory("hanghoa_id"));
         
@@ -265,7 +273,7 @@ public class HanghoaController implements Initializable {
         colGiaNhap.setCellValueFactory(new PropertyValueFactory("gianhap"));
         colGiaNhap.setStyle( "-fx-alignment: CENTER-RIGHT;");
         
-        TableColumn<HangHoa, BigDecimal> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
+        TableColumn<HangHoa, String> colGiaNiemYet = new TableColumn("Giá Niêm Yết");
         colGiaNiemYet.setCellValueFactory(new PropertyValueFactory("gianiemyet"));
         colGiaNiemYet.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
@@ -281,14 +289,57 @@ public class HanghoaController implements Initializable {
         TableColumn<HangHoa, Boolean> colTinhTrang = new TableColumn("Tình trạng");
         colTinhTrang.setCellValueFactory(new PropertyValueFactory("tinhtrang"));
         colTinhTrang.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        //colTinhTrang.setEditable(false);
+        
         List l = new ArrayList<>();
-        l.add(0,"Ngừng bán");
-        l.add(1,"Đang bán");
+        l.add(true);
+        l.add(false);
+        
         ObservableList listTT = FXCollections.observableList(l);
-        colTinhTrang.setCellFactory((TableColumn<HangHoa, Boolean> p) -> {
-            ComboBoxTableCell<HangHoa, Boolean> cell = new ComboBoxTableCell<>(listTT);
-            return cell;
+//        colTinhTrang.setCellFactory((TableColumn<HangHoa, Boolean> p) -> {
+//            ComboBoxTableCell<HangHoa, Boolean> cell = new ComboBoxTableCell<>(listTT);
+//            return cell;
+//        });
+
+        
+        colTinhTrang.setCellFactory(ComboBoxTableCell.forTableColumn(listTT));
+        
+//        colTinhTrang.setCellFactory(tc -> new TableCell<HangHoa, Boolean>() {
+//            @Override
+//            protected void updateItem(Boolean value, boolean empty) {
+//                super.updateItem(value, empty) ;
+//                if (empty) {
+//                    setText(null);
+//                } else {
+//                    if (value == true)
+//                        setText("Đang bán");
+//                    else
+//                        setText("Ngừng bán");
+//                }
+//            }
+//        });
+        
+        colTinhTrang.setOnEditCommit((var evt) -> {
+            try {
+                Connection conn = JdbcUtils.getConn();
+                HangHoaService hhs = new HangHoaService(conn);
+                HangHoa hh = evt.getRowValue();
+                Boolean c = evt.getOldValue();
+                Boolean m = evt.getNewValue();
+                hh.setTinhtrang(m);
+                if (m.equals(c)) {
+                    hh.setTinhtrang(c);
+                } else {
+                    if (hhs.suaTinhTrang(hh.getHanghoa_id(), hh.isTinhtrang())) {
+                        Utils.getBox("Cập nhật thành công!", Alert.AlertType.INFORMATION).show();
+                    } else {
+                        hh.setTinhtrang(c);
+                        Utils.getBox("Cập nhật thất bại!!!", Alert.AlertType.ERROR).show();
+                    }
+                }
+                this.tbHH.refresh();
+            } catch (SQLException ex) {
+                Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
         TableColumn<HangHoa, String> colLoaiHangHoa = new TableColumn("Loại Hàng Hóa");
@@ -320,7 +371,7 @@ public class HanghoaController implements Initializable {
                 } else if (m.equals(c)) {
                     hh.setTenhanghoa(c);
                 } else {
-                    if (hhs.suaTenHH(hh.getHanghoa_id(), hh.getTenhanghoa())) {
+                    if (hhs.suaTenHH(hh.getHanghoa_id(), m)) {
                         Utils.getBox("Cập nhật tên hàng hóa thành công!", Alert.AlertType.INFORMATION).show();
                     } else {
                         hh.setTenhanghoa(c);
@@ -333,9 +384,87 @@ public class HanghoaController implements Initializable {
             }   
 
         });
+        listLoaiHH.clear();
+        listLoaiHH.addAll(getListLoaiHH());
+        colLoaiHangHoa.setCellFactory(ComboBoxTableCell.forTableColumn(listLoaiHH ));
+        colLoaiHangHoa.setOnEditCommit((var evt) -> {
+            try {
+                Connection conn = JdbcUtils.getConn();
+                HangHoaService hhs = new HangHoaService(conn);
+                LoaiHangHoaService lhs = new LoaiHangHoaService(conn);
+                
+                HangHoa hh = evt.getRowValue();
+                String c = String.valueOf(hh.getTenloaihang());
+                String m = "";
+                if (!"".equals(evt.getNewValue()))
+                    m = evt.getNewValue();
+                hh.setTenloaihang(m);
+                if (m.equals(c)) {
+                    hh.setTenloaihang(c);
+                } else {
+                    if (hhs.suaLoaiHH(hh.getHanghoa_id(),lhs.getLoaiHHByTen(m))) {
+                        hh.setTenloaihang(m);
+                        Utils.getBox("Cập nhật Loại hàng hóa thành công!!!", Alert.AlertType.INFORMATION).show();
+                        loadHHQLT("","");
+                    } else {
+                        hh.setTenloaihang(c);
+                        Utils.getBox("Cập nhật loại hàng hóa thất bại!!!", Alert.AlertType.ERROR).show();
+                    }
+                }
+                this.tbHH.refresh();
+            } catch (SQLException ex) {
+                Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        colGiaNiemYet.setCellFactory(TextFieldTableCell.forTableColumn());
+        colGiaNiemYet.setOnEditCommit((var evt) -> {
+            try {
+                Connection conn = JdbcUtils.getConn();
+                HangHoaService hhs = new HangHoaService(conn);
+                HangHoa hh = evt.getRowValue();
+                String c = hh.getGianiemyet();
+                String m = "";
+                if (!"".equals(evt.getNewValue()))
+                    m = evt.getNewValue();
+                hh.setGianiemyet(m);
+                if (m == "") {
+                    hh.setGianiemyet(c);
+                    Utils.getBox("Vui lòng không để trống!", Alert.AlertType.WARNING).show();
+                } else if (!m.matches("\\d+")){
+                    Utils.getBox("Vui lòng chỉ nhập số!", Alert.AlertType.WARNING).show();
+                    hh.setGianiemyet(c);
+                }   
+                else {
+                    if (m.length() > 9)
+                        Utils.getBox("Vui lòng nhập giá niêm yết < 1.000.000.000", Alert.AlertType.WARNING).show();
+                    else if (Integer.parseInt(m) < 10000){
+                            hh.setGianiemyet(c);
+                            Utils.getBox("Vui lòng nhập giá niêm yết >= 10.000", Alert.AlertType.WARNING).show();
+                    }
+                    else if (Integer.parseInt(m) <= Integer.parseInt(hh.getGianhap())) {
+                        Utils.getBox("Vui lòng nhập giá niêm yết > giá nhập: " + hh.getGianhap(), Alert.AlertType.WARNING).show();
+                        hh.setGianiemyet(c);
+                }
+                else if (m.equals(c)) {
+                    hh.setGianiemyet(c);
+                } else {
+                    if (hhs.suaGiaNiemYet(hh.getHanghoa_id(), m)){
+                        Utils.getBox("Cập nhật giá niêm yết thành công!", Alert.AlertType.INFORMATION).show();
+                    } else {
+                        hh.setTenhanghoa(c);
+                        Utils.getBox("Cập nhật giá niêm yết thất bại!!!", Alert.AlertType.ERROR).show();
+                    }
+                }
+                this.tbHH.refresh();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         this.tbHH.getColumns().addAll(colMaHangHoa, colTenHangHoa, colLoaiHangHoa
-            , colSoLuong,colSLDaBan, colGiaNhap, colGiaNiemYet, colNgaySanXuat, colNgayHetHan
-            , colTinhTrang, colThuongHieu, colNhaCungCap);
+                    , colSoLuong,colSLDaBan, colGiaNhap, colGiaNiemYet, colNgaySanXuat, colNgayHetHan
+                    , colTinhTrang, colThuongHieu, colNhaCungCap);
 }
 
     private void loadTableLoaiHH(){
@@ -345,23 +474,73 @@ public class HanghoaController implements Initializable {
         TableColumn<LoaiHangHoa, String> colTenLoaiHH = new TableColumn("Tên Loại HH");
         colTenLoaiHH.setCellValueFactory(new PropertyValueFactory("tenloai"));  
         
+        colTenLoaiHH.setCellFactory(TextFieldTableCell.forTableColumn());
+        colTenLoaiHH.setOnEditCommit((var evt) -> {
+            try {
+                Connection conn = JdbcUtils.getConn();
+                LoaiHangHoaService lhhs = new LoaiHangHoaService(conn);
+                LoaiHangHoa lhh = evt.getRowValue();
+                String c = lhh.getTenloai();
+                String m = "";
+                if (!"".equals(evt.getNewValue()))
+                    m = evt.getNewValue();
+                lhh.setTenloai(m);
+                if (m == "") {
+                    lhh.setTenloai(c);
+                    Utils.getBox("Vui lòng không để trống!", Alert.AlertType.WARNING).show();
+                } else if (m.equals(c)) {
+                    lhh.setTenloai(c);
+                } else {
+                    if (lhhs.suaTenLoaiHH(lhh.getLoaihanghoa_id(), m)) {
+                        Utils.getBox("Cập nhật tên loại hàng hóa thành công!", Alert.AlertType.INFORMATION).show();
+                    } else {
+                        lhh.setTenloai(c);
+                        Utils.getBox("Cập nhật tên loại hàng hóa thất bại!!!", Alert.AlertType.ERROR).show();
+                    }
+                }
+                this.tbLoaiHH.refresh();
+                loadHHQLT("", "");
+            } catch (SQLException ex) {
+                Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         TableColumn<LoaiHangHoa, Integer> colSLDB = new TableColumn("Số Lượng Đã Bán");
-        colSLDB.setCellValueFactory(new PropertyValueFactory("sldb"));
-        
-        TableColumn<LoaiHangHoa, Integer> colSLDN = new TableColumn("Số Lượng Đã Nhập");
-        colSLDN.setCellValueFactory(new PropertyValueFactory("sldn"));
-        colSLDN.setStyle( "-fx-alignment: CENTER-RIGHT;");
-        
-        TableColumn<LoaiHangHoa, Integer> colSLTK = new TableColumn("Số Lượng Trong Kho");
-        colSLTK.setCellValueFactory(new PropertyValueFactory("sltk"));
-        colSLTK.setStyle( "-fx-alignment: CENTER-RIGHT;");
+            colSLDB.setCellValueFactory(new PropertyValueFactory("sldb"));
+
+            TableColumn<LoaiHangHoa, Integer> colSLDN = new TableColumn("Số Lượng Đã Nhập");
+            colSLDN.setCellValueFactory(new PropertyValueFactory("sldn"));
+            colSLDN.setStyle( "-fx-alignment: CENTER-RIGHT;");
+
+            TableColumn<LoaiHangHoa, Integer> colSLTK = new TableColumn("Số Lượng Trong Kho");
+            colSLTK.setCellValueFactory(new PropertyValueFactory("sltk"));
+            colSLTK.setStyle( "-fx-alignment: CENTER-RIGHT;");
 
 
-        this.tbLoaiHH.getColumns().addAll(colMaLoaiHH, colTenLoaiHH, colSLDB
-            , colSLDN,colSLTK);
+            this.tbLoaiHH.getColumns().addAll(colMaLoaiHH, colTenLoaiHH, colSLDB
+                    , colSLDN,colSLTK);
 }
 
-        
+     
+    @FXML
+    void themLoaiHH(ActionEvent event) throws SQLException {
+        try {
+            Connection conn = JdbcUtils.getConn();
+            LoaiHangHoaService s = new LoaiHangHoaService(conn);
+            
+            if( s.themLoaiHH(this.txtTenLoaiHH.getText())){
+                Utils.getBox("Thêm loại hàng hóa thành công!!!", Alert.AlertType.INFORMATION).show();
+                loadLoaiHHQLT();
+            }
+            else
+                Utils.getBox("Thêm loại hàng hóa thất bại!!!", Alert.AlertType.ERROR).show();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        loadTableHH();
+        loadHHQLT("", "");
+    }
+    
     public void loadLoaiHHQLT() throws SQLException{
         this.tbHH.getItems().clear();
         Connection conn = JdbcUtils.getConn();
@@ -384,6 +563,7 @@ public class HanghoaController implements Initializable {
         this.tbHH.getItems().clear();
         Connection conn = JdbcUtils.getConn();
         HangHoaService s = new HangHoaService(conn);
+        
         List<HangHoa> hangHoa = s.getHHQLT(key, loaiTC);
         hangHoa.forEach(h->{
             try {
@@ -392,16 +572,30 @@ public class HanghoaController implements Initializable {
                 Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
         this.tbHH.setItems(FXCollections.observableList(hangHoa));
         conn.close();
     }
-    public String moneyFormat(int money){
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return(formatter.format(money)+" VNĐ");
-    }
+    
     public void loadCBData(){
         ObservableList<String> list = FXCollections.observableArrayList("Đang bán", "Ngừng bán");
         this.cbTinhTrang.setItems(list);
         this.cbTinhTrang.getSelectionModel().selectFirst();
+    }
+    
+   public ObservableList<String> getListLoaiHH() throws SQLException{
+        Connection conn = JdbcUtils.getConn();
+        LoaiHangHoaService s = new LoaiHangHoaService(conn);
+        
+        List<LoaiHangHoa> lhh = s.getLoaiHH();
+        
+        List<String> tenloaihh = new ArrayList<>();
+        
+        lhh.forEach(lh ->{
+            tenloaihh.add(lh.getTenloai());
+        });
+        ObservableList listLHH = FXCollections.observableList(tenloaihh);
+        conn.close();
+        return listLHH;
     }
 }

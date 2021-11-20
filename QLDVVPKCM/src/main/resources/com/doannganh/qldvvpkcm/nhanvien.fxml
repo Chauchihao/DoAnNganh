@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.NhanvienController">
+   <children>
+      <Label layoutX="542.0" layoutY="14.0" prefHeight="51.0" prefWidth="294.0" text="Quản lý nhân viên">
+         <font>
+            <Font size="35.0" />
+         </font></Label>
+      <TabPane layoutX="14.0" layoutY="65.0" prefHeight="766.0" prefWidth="1390.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Danh sách nhân viên">
+               <content>
+                  <AnchorPane prefHeight="718.0" prefWidth="1401.0">
+                     <children>
+                        <TableView fx:id="tbNhanVien" layoutX="56.0" layoutY="92.0" prefHeight="578.0" prefWidth="774.0" />
+                        <Label layoutX="830.0" layoutY="92.0" text="------Thông tin chi tiết----------------------------------------">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="851.0" layoutY="154.0" prefHeight="22.0" prefWidth="56.0" text="Họ tên:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="903.0" layoutY="152.0" prefHeight="26.0" prefWidth="245.0" />
+                        <Label layoutX="1156.0" layoutY="154.0" prefHeight="22.0" prefWidth="75.0" text="Ngày sinh:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="1240.0" layoutY="152.0" prefHeight="26.0" prefWidth="137.0" />
+                        <Label layoutX="851.0" layoutY="217.0" prefHeight="22.0" prefWidth="66.0" text="Giới tính:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1041.0" layoutY="584.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="174.0" text="Cập nhật" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Button>
+                        <ComboBox layoutX="917.0" layoutY="215.0" prefHeight="26.0" prefWidth="121.0" />
+                        <Label layoutX="1062.0" layoutY="217.0" prefHeight="22.0" prefWidth="122.0" text="Số CMND/CCCD:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="1180.0" layoutY="215.0" prefHeight="26.0" prefWidth="198.0" />
+                        <Label layoutX="849.0" layoutY="291.0" prefHeight="22.0" prefWidth="102.0" text="Tên tài khoản:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="951.0" layoutY="289.0" prefHeight="26.0" prefWidth="167.0" />
+                        <Label layoutX="1131.0" layoutY="291.0" prefHeight="22.0" prefWidth="102.0" text="Ngày vào làm:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="1238.0" layoutY="289.0" prefHeight="26.0" prefWidth="138.0" />
+                        <Label layoutX="849.0" layoutY="359.0" prefHeight="22.0" prefWidth="54.0" text="Địa chỉ:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="901.0" layoutY="357.0" prefHeight="26.0" prefWidth="478.0" />
+                        <Label layoutX="849.0" layoutY="425.0" prefHeight="22.0" prefWidth="97.0" text="Số điện thoại:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="947.0" layoutY="423.0" prefHeight="26.0" prefWidth="132.0" />
+                        <Label layoutX="1095.0" layoutY="425.0" prefHeight="22.0" prefWidth="46.0" text="Email:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="1140.0" layoutY="423.0" prefHeight="26.0" prefWidth="238.0" />
+                        <Label layoutX="849.0" layoutY="491.0" prefHeight="22.0" prefWidth="72.0" text="Trạng thái:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="929.0" layoutY="490.0" prefHeight="26.0" prefWidth="138.0" />
+                        <Label layoutX="1079.0" layoutY="492.0" prefHeight="22.0" prefWidth="99.0" text="Loại nhân viên:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="1182.0" layoutY="489.0" prefHeight="26.0" prefWidth="184.0" />
+                        <TextField layoutX="56.0" layoutY="65.0" prefHeight="26.0" prefWidth="62.0" />
+                        <Label layoutX="59.0" layoutY="36.0" prefHeight="22.0" prefWidth="56.0" text="Mã NV">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="3.0" layoutY="55.0" prefHeight="46.0" prefWidth="55.0" text="Lọc:">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="182.0" layoutY="36.0" prefHeight="22.0" prefWidth="56.0" text="Họ tên">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="132.0" layoutY="65.0" prefHeight="26.0" prefWidth="149.0" />
+                        <Label layoutX="299.0" layoutY="7.0" prefHeight="51.0" prefWidth="138.0" text="Số lượng đơn hàng đã bán/ đã nhập" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="331.0" layoutY="65.0" prefHeight="26.0" prefWidth="84.0" />
+                        <Label layoutX="464.0" layoutY="36.0" prefHeight="22.0" prefWidth="95.0" text="Số điện thoại">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="454.0" layoutY="65.0" prefHeight="26.0" prefWidth="110.0" />
+                        <Label layoutX="581.0" layoutY="36.0" prefHeight="22.0" prefWidth="108.0" text="Loại nhân viên">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="574.0" layoutY="65.0" prefHeight="26.0" prefWidth="121.0" />
+                        <Label layoutX="716.0" layoutY="36.0" prefHeight="22.0" prefWidth="73.0" text="Trạng thái">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="700.0" layoutY="65.0" prefHeight="26.0" prefWidth="121.0" />
+                        <Label layoutX="307.0" layoutY="67.0" prefHeight="22.0" prefWidth="30.0" text="=&lt;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab text="Thêm nhân viên">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="8.0" layoutY="44.0" text="------Thêm nhân viên-------------------------------------------------------------------------------------------------">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="75.0" layoutY="120.0" text="Họ tên:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="139.0" layoutY="118.0" prefHeight="30.0" prefWidth="304.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="482.0" layoutY="120.0" text="Ngày sinh:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="571.0" layoutY="121.0" />
+                        <Label layoutX="830.0" layoutY="120.0" text="Giới tính:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="917.0" layoutY="121.0" prefWidth="150.0" />
+                        <Label layoutX="75.0" layoutY="204.0" text="Địa chỉ: ">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="146.0" layoutY="202.0" prefHeight="30.0" prefWidth="920.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="71.0" layoutY="287.0" text="Số CMND/CCCD:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="218.0" layoutY="285.0" prefHeight="30.0" prefWidth="304.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="582.0" layoutY="287.0" text="Số điện thoại:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="688.0" layoutY="285.0" prefHeight="30.0" prefWidth="181.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="71.0" layoutY="355.0" text="Tên tài khoản:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="898.0" layoutY="287.0" text="Email:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="963.0" layoutY="285.0" prefHeight="30.0" prefWidth="343.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="199.0" layoutY="353.0" prefHeight="30.0" prefWidth="262.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="518.0" layoutY="355.0" text="Mật khẩu:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <PasswordField layoutX="609.0" layoutY="356.0" prefHeight="26.0" prefWidth="230.0" />
+                        <Label layoutX="876.0" layoutY="355.0" text="Ngày vào làm:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <DatePicker layoutX="999.0" layoutY="355.0" prefHeight="26.0" prefWidth="175.0" />
+                        <Label layoutX="71.0" layoutY="430.0" text="Loại nhân viên:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="205.0" layoutY="430.0" prefHeight="26.0" prefWidth="190.0" />
+                        <Label layoutX="482.0" layoutY="430.0" text="Trạng thái:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="588.0" layoutY="430.0" prefHeight="26.0" prefWidth="190.0" />
+                        <Button layoutX="436.0" layoutY="556.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="340.0" text="Thêm">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab text="Lịch sử giao dịch của nhân viên">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox layoutX="146.0" layoutY="32.0" prefHeight="30.0" prefWidth="178.0" />
+                        <Label layoutX="44.0" layoutY="29.0" text="Tìm kiếm:">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="324.0" layoutY="31.0" prefHeight="30.0" prefWidth="946.0" />
+                        <ListView layoutX="147.0" layoutY="130.0" prefHeight="535.0" prefWidth="378.0" />
+                        <Label layoutX="146.0" layoutY="97.0" prefHeight="18.0" prefWidth="326.0" text="Lịch sử giao dịch:">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="606.0" layoutY="97.0" prefHeight="18.0" prefWidth="326.0" text="Chi tiết giao dịch:">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <ListView layoutX="606.0" layoutY="130.0" prefHeight="538.0" prefWidth="706.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
