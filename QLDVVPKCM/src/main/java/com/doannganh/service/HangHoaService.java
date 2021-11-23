@@ -6,16 +6,13 @@
 package com.doannganh.service;
 
 import com.doannganh.pojo.HangHoa;
-import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -153,7 +150,7 @@ public class HangHoaService {
     }
     
     public HangHoa getHangHoaByID(int id) throws SQLException {
-        String sql= "SELECT hanghoa.*, tenloai, tencongty, gianhap"
+        String sql= "SELECT hanghoa.*, tenloai,ngaysanxuat,ngayhethan, tencongty, gianhap"
                 + " FROM hanghoa, loaihanghoa, nhacungcap, nhacungcap_hanghoa"
                 + " WHERE hanghoa.loaihanghoa_id = loaihanghoa.loaihanghoa_id"
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"

@@ -143,7 +143,7 @@ public class DonHangService {
         stm.setInt(1, idDH);
         ResultSet rs = stm.executeQuery();
         
-        DonHang dh = new DonHang();;
+        DonHang dh = new DonHang();
         while (rs.next()) {
             dh.setDonhang_id(rs.getInt("donhang_id"));
             dh.setNgaytaodh(rs.getString("ngayTaoDH"));
@@ -221,5 +221,23 @@ public class DonHangService {
                 a.add(rs.getInt("donhang_id"));
             }
             return a;
+    }
+    public List<DonHang> getDHByIDNV(int idnv) throws SQLException{
+        ArrayList<DonHang> a = new ArrayList<>();
+        String sql = "SELECT * FROM qldvvpkcm.donhang"
+                + " Where nhanvien_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, idnv);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            DonHang dh = new DonHang();
+            dh.setDonhang_id(rs.getInt("donhang_id"));
+            dh.setNgaytaodh(rs.getString("ngayTaoDH"));
+            dh.setNhanvien_id(rs.getInt("nhanvien_id"));
+            dh.setKhachhang_id(rs.getInt("khachhang_id"));
+
+            a.add(dh);
+        }
+        return a;
     }
 }

@@ -95,6 +95,25 @@ public class KhachHangService {
         return id;
     }
     
+    public KhachHang getKhachHangByID(int id) throws SQLException {
+        String sql ="SELECT * FROM qldvvpkcm.khachhang WHERE khachhang_id=?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1,id);
+        
+        ResultSet rs = stm.executeQuery();
+        KhachHang kh = new KhachHang();
+        while (rs.next()) {
+            kh.setIdKhachHang(rs.getInt("khachhang_id"));
+            kh.setHoTen(rs.getString("hoten"));
+            kh.setNgaySinh(rs.getString("ngaysinh"));
+            kh.setGioiTinh(rs.getString("gioitinh"));
+            kh.setDiaChi(rs.getString("diachi"));
+            kh.setDiemTichLuy(rs.getString("diemtichluy"));
+        }
+        return kh;
+    }
+    
+    
     public boolean suaHoTen(int id, String ht)  throws SQLException {
         String sql ="UPDATE khachhang SET hoten=? WHERE khachhang_id=?";
         PreparedStatement stm = this.conn.prepareStatement(sql);

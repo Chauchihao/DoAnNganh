@@ -97,6 +97,79 @@ public class NhaCungCapService {
         return nhaCungCap;
     }
     
+    public List<NhaCungCap_HangHoa> getNCCHHByIDNV(int idnv) throws SQLException{
+        String sql= "SELECT * FROM qldvvpkcm.nhacungcap_hanghoa WHERE nhanvien_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1,idnv);
+        
+        ResultSet rs = stm.executeQuery();
+        
+        List<NhaCungCap_HangHoa> ncchhs = new ArrayList<>();
+        while(rs.next()){
+            NhaCungCap_HangHoa ncchh = new NhaCungCap_HangHoa();
+            ncchh.setNhanvien_id(rs.getInt("nhanvien_id"));
+            ncchh.setNhacungcap_id(rs.getInt("nhacungcap_id"));
+            ncchh.setHanghoa_id(rs.getInt("hanghoa_id"));
+            ncchh.setSoLuong(rs.getInt("soluong"));
+            ncchh.setNgaynhap(rs.getString("ngaynhap"));
+            ncchh.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            ncchh.setNgayhethan(rs.getString("ngayhethan"));
+            ncchh.setGianhap(rs.getString("gianhap"));
+            ncchh.setGhichu(rs.getString("ghichu"));
+            
+            ncchhs.add(ncchh);
+        }
+        return ncchhs;
+    }
+    
+    public NhaCungCap getNCCByID(int id) throws SQLException{
+        String sql= "SELECT * FROM qldvvpkcm.nhacungcap WHERE nhacungcap_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1,id);
+        
+        ResultSet rs = stm.executeQuery();
+        
+        NhaCungCap ncc = new NhaCungCap();
+        while(rs.next()){
+            ncc.setNhacungcap_id(rs.getInt("nhacungcap_id"));
+            ncc.setTencongty(rs.getString("tencongty"));
+            ncc.setDiachi(rs.getString("diachi"));
+            ncc.setTinhthanh(rs.getString("tinhthanh"));
+            ncc.setQuocgia(rs.getString("quocgia"));
+            ncc.setEmail(rs.getString("email"));
+            ncc.setSodt(rs.getString("sodt"));
+        }
+        return ncc;
+    }
+    
+        
+    public NhaCungCap_HangHoa getNCCHH(int idhh, int idncc, String date) throws SQLException{
+        String sql= "SELECT * FROM qldvvpkcm.nhacungcap_hanghoa WHERE nhacungcap_id = ?"
+                + " AND hanghoa_id = ? AND ngaynhap = ? ";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1,idncc);
+        stm.setInt(2,idhh);
+        stm.setString(3,date);
+        
+        
+        ResultSet rs = stm.executeQuery();
+        
+        NhaCungCap_HangHoa ncc = new NhaCungCap_HangHoa();
+        while(rs.next()){
+            ncc.setNhacungcap_id(rs.getInt("nhacungcap_id"));
+            ncc.setHanghoa_id(rs.getInt("hanghoa_id"));
+            ncc.setSoLuong(rs.getInt("soluong"));
+            ncc.setNgaynhap(rs.getString("ngaynhap"));
+            ncc.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            ncc.setNgayhethan(rs.getString("ngayhethan"));
+            ncc.setGianhap(rs.getString("gianhap"));
+            ncc.setNhanvien_id(rs.getInt("nhanvien_id"));
+            ncc.setGhichu(rs.getString("ghichu"));
+        }
+        return ncc;
+    }
+    
+    
     public int getNCCByTen(String ten) throws SQLException {
         
         String sql= "SELECT nhacungcap_id FROM nhacungcap WHERE tencongty=?";
@@ -198,6 +271,22 @@ public class NhaCungCapService {
         int row = stm.executeUpdate();
         
         return row > 0;
+    }
+    
+    public int tinhChiPhiDH(int idhh, String ngayNhap, int idncc) throws SQLException{
+        String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
+                + " where date(ngaynhap) = ? AND nhacungcap_id  = ?"
+                + " AND hanghoa_id = ? ";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, ngayNhap);
+        stm.setInt(2, idncc);
+        stm.setInt(3, idhh);
+        ResultSet rs = stm.executeQuery();
+        int chiphi = 0;
+        while (rs.next()) {
+            chiphi = rs.getInt("chiphi");
+        }
+        return chiphi;
     }
     
     public int tinhChiPhiByDate(String date) throws SQLException{

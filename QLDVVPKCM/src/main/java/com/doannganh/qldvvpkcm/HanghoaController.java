@@ -578,9 +578,8 @@ public class HanghoaController implements Initializable {
     }
     
     public void loadCBData(){
-        ObservableList<String> list = FXCollections.observableArrayList("Đang bán", "Ngừng bán");
+        ObservableList<String> list = FXCollections.observableArrayList("","Đang bán", "Ngừng bán");
         this.cbTinhTrang.setItems(list);
-        this.cbTinhTrang.getSelectionModel().selectFirst();
     }
     
    public ObservableList<String> getListLoaiHH() throws SQLException{

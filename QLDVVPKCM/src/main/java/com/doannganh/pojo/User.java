@@ -14,17 +14,18 @@ import java.sql.Date;
 public class User {
     private int user_id;
     private String hoten;
-    private Date ngaysinh;
+    private String ngaysinh;
     private String gioitinh;
     private String cmnd;
     private String taikhoan;
     private String matkhau;
-    private Date ngayvaolam;
+    private String ngayvaolam;
     private String email;
     private String diachi;
     private String sdt;
     private boolean trangthai;
     private int loaiuser_id;
+    private int sldh;
 
     /**
      * @return the user_id
@@ -52,20 +53,6 @@ public class User {
      */
     public void setHoten(String hoten) {
         this.hoten = hoten;
-    }
-
-    /**
-     * @return the ngaysinh
-     */
-    public Date getNgaysinh() {
-        return ngaysinh;
-    }
-
-    /**
-     * @param ngaysinh the ngaysinh to set
-     */
-    public void setNgaysinh(Date ngaysinh) {
-        this.ngaysinh = ngaysinh;
     }
 
     /**
@@ -122,20 +109,6 @@ public class User {
      */
     public void setMatkhau(String matkhau) {
         this.matkhau = matkhau;
-    }
-
-    /**
-     * @return the ngayvaolam
-     */
-    public Date getNgayvaolam() {
-        return ngayvaolam;
-    }
-
-    /**
-     * @param ngayvaolam the ngayvaolam to set
-     */
-    public void setNgayvaolam(Date ngayvaolam) {
-        this.ngayvaolam = ngayvaolam;
     }
 
     /**
@@ -206,6 +179,48 @@ public class User {
      */
     public void setTrangthai(boolean trangthai) {
         this.trangthai = trangthai;
+    }
+
+    /**
+     * @return the sldh
+     */
+    public int getSldh() {
+        return sldh;
+    }
+
+    /**
+     * @param sldh the sldh to set
+     */
+    public void setSldh(int sldh) {
+        this.sldh = sldh;
+    }
+
+    /**
+     * @return the ngaysinh
+     */
+    public String getNgaysinh() {
+        return ngaysinh;
+    }
+
+    /**
+     * @param ngaysinh the ngaysinh to set
+     */
+    public void setNgaysinh(String ngaysinh) {
+        this.ngaysinh = ngaysinh;
+    }
+
+    /**
+     * @return the ngayvaolam
+     */
+    public String getNgayvaolam() {
+        return ngayvaolam;
+    }
+
+    /**
+     * @param ngayvaolam the ngayvaolam to set
+     */
+    public void setNgayvaolam(String ngayvaolam) {
+        this.ngayvaolam = ngayvaolam;
     }
 
 }
