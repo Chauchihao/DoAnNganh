@@ -50,7 +50,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -321,7 +320,7 @@ public class NhanvienController implements Initializable {
                                 + "\t\t\t"+ ctdh.getSoluong()+"\t\t\t"+ moneyFormat(Integer.parseInt(ctdh.getDongia()))
                                 +" \t\t\t" + ctdh.getGiamgia() );
                     });
-                    listCTGD.getItems().add("TỔNG TIỀN: \t\t\t\t\t\t\t\t\t\t"+ moneyFormat(ctdhs.tongDHByID(newValue.getDonhang_id())));
+                    listCTGD.getItems().add("TỔNG TIỀN: \t"+ moneyFormat(ctdhs.tongDHByID(newValue.getDonhang_id())));
                     if(newValue.getKhachhang_id() != 1){
                         KhachHang kh = khs.getKhachHangByID(newValue.getKhachhang_id());
                         listCTGD.getItems().add("Thông tin khách hàng:");
@@ -400,7 +399,7 @@ public class NhanvienController implements Initializable {
                             + "\t\t\t" + newValue.getSoLuong() +"\t\t\t\t"+ moneyFormat(Integer.parseInt(newValue.getGianhap()))
                             + "\t\t\t" + newValue.getNgaysanxuat() + "\t\t\t"+newValue.getNgayhethan());
                     
-                    listCTGDTK.getItems().add("TỔNG TIỀN" + "\t\t\t\t\t\t\t\t\t" 
+                    listCTGDTK.getItems().add("TỔNG TIỀN: \t" 
                             +  nccs.tinhChiPhiDH(newValue.getHanghoa_id(), newValue.getNgaynhap(), newValue.getNhacungcap_id()));
                     
                     NhaCungCap ncc =  nccs.getNCCByID(newValue.getNhacungcap_id());
@@ -708,61 +707,90 @@ public class NhanvienController implements Initializable {
     
     @FXML
     void timNV(ActionEvent event) throws SQLException {
-        this.listLSGDNV.getItems().clear();
-        Connection conn = JdbcUtils.getConn();
-        UserService us = new UserService(conn);
-        DonHangService dhs = new DonHangService(conn);
+        try{
+            this.listLSGDNV.getItems().clear();
+            Connection conn = JdbcUtils.getConn();
+            UserService us = new UserService(conn);
+            DonHangService dhs = new DonHangService(conn);
 
-        
-        User u = new User();
-        if(this.cbTimKiem.getValue().equals("Mã nhân viên")){
-            u = us.getUserByID(Integer.parseInt(this.txtTimKiem.getText()));
-        }
-        if(this.cbTimKiem.getValue().equals("CMND/CCCD")){
-            u = us.getUserByCMND(Integer.parseInt(this.txtTimKiem.getText()));
-        }
-        if(this.cbTimKiem.getValue().equals("Số điện thoại")){
-            u = us.getUserBySDT(Integer.parseInt(this.txtTimKiem.getText()));
-        }
-        if(u.getLoaiuser_id() != 3){
+
+            User u = new User();
+            if(!(this.txtTimKiem.getText().matches("\\d+"))){
+                Utils.getBox("Chỉ nhập số!", Alert.AlertType.ERROR).show();
+            }
+            else if(this.cbTimKiem.getValue().equals("Mã nhân viên")){
+                u = us.getUserByID(Integer.parseInt(this.txtTimKiem.getText()));
+            }
+            else if(this.cbTimKiem.getValue().equals("CMND/CCCD")){
+                if(this.txtTimKiem.getText().length() > 12){
+                    Utils.getBox("Vui lòng nhập đúng số CMND/CCCD!", Alert.AlertType.ERROR).show();
+                }
+                else
+                    u = us.getUserByCMND(Integer.parseInt(this.txtTimKiem.getText()));
+            }
+            else if(this.cbTimKiem.getValue().equals("Số điện thoại")){
+                if(this.txtTimKiem.getText().length() >10){
+                    Utils.getBox("Vui lòng nhập đúng số điện thoại!", Alert.AlertType.ERROR).show();
+                }
+                else
+                    u = us.getUserBySDT(Integer.parseInt(this.txtTimKiem.getText()));
+            }
+            if(u.getLoaiuser_id() != 3){
              Utils.getBox("Chỉ tìm nhân viên bán hàng!", Alert.AlertType.ERROR).show();
-            
+            }
+            else{
+                List<DonHang> dh = dhs.getDHByIDNV(u.getUser_id());
+                loadLSGDNV(dh);
+            }
+        }
+        catch(NumberFormatException msg){
+           Utils.getBox("Vui lòng nhập đúng thông tin!", Alert.AlertType.ERROR).show();
         }
         
-        else if(u.getLoaiuser_id() == 3){
-            List<DonHang> dh = dhs.getDHByIDNV(u.getUser_id());
-            loadLSGDNV(dh);
-        }
-        
-        conn.close();
     }
     
     @FXML
     void timTK(ActionEvent event) throws SQLException {
-        this.listLSGDTK.getItems().clear();
-        Connection conn = JdbcUtils.getConn();
-        UserService us = new UserService(conn);
-        NhaCungCapService nccs = new NhaCungCapService(conn);
-        
-        User u = new User();
-        if(this.cbTimKiem1.getValue().equals("Mã nhân viên")){
-            u = us.getUserByID(Integer.parseInt(this.txtTimKiem1.getText()));
+        try{
+            this.listLSGDTK.getItems().clear();
+            Connection conn = JdbcUtils.getConn();
+            UserService us = new UserService(conn);
+            NhaCungCapService nccs = new NhaCungCapService(conn);
+
+            User u = new User();
+            if(!(this.txtTimKiem1.getText().matches("\\d+"))){
+                Utils.getBox("Chỉ nhập số!", Alert.AlertType.ERROR).show();
+            }
+            else if(this.cbTimKiem1.getValue().equals("Mã nhân viên")){
+                u = us.getUserByID(Integer.parseInt(this.txtTimKiem1.getText()));
+            }
+            else if(this.cbTimKiem1.getValue().equals("CMND/CCCD")){
+                if(this.txtTimKiem1.getText().length() >12){
+                    Utils.getBox("Vui lòng nhập đúng số CMND/CCCD!", Alert.AlertType.ERROR).show();
+                }
+                else{
+                    u = us.getUserByCMND(Integer.parseInt(this.txtTimKiem1.getText()));                        
+                }
+            }
+            else if(this.cbTimKiem1.getValue().equals("Số điện thoại")){
+                if(this.txtTimKiem1.getText().length() >10){
+                    Utils.getBox("Vui lòng nhập đúng số điện thoại!", Alert.AlertType.ERROR).show();
+                }
+                else{
+                    u = us.getUserBySDT(Integer.parseInt(this.txtTimKiem1.getText()));
+                }
+            }
+            if(u.getLoaiuser_id() != 2){
+                 Utils.getBox("Chỉ tìm nhân viên có chức vụ là thủ kho!", Alert.AlertType.ERROR).show();
+            }
+            else{
+                List<NhaCungCap_HangHoa> ncchh = nccs.getNCCHHByIDNV(u.getUser_id());
+                loadSLGDTK(ncchh);
+            }
         }
-        if(this.cbTimKiem1.getValue().equals("CMND/CCCD")){
-            u = us.getUserByCMND(Integer.parseInt(this.txtTimKiem1.getText()));
+        catch(NumberFormatException e){
+             Utils.getBox("Vui lòng nhập đúng thông tin!!", Alert.AlertType.ERROR).show();
         }
-        if(this.cbTimKiem1.getValue().equals("Số điện thoại")){
-            u = us.getUserBySDT(Integer.parseInt(this.txtTimKiem1.getText()));
-        }
-        if(u.getLoaiuser_id() != 2){
-             Utils.getBox("Chỉ tìm nhân viên có chức vụ là thủ kho!", Alert.AlertType.ERROR).show();
-        }
-        else if(u.getLoaiuser_id() == 2){
-            List<NhaCungCap_HangHoa> ncchh = nccs.getNCCHHByIDNV(u.getUser_id());
-            loadSLGDTK(ncchh);
-        }
-        
-        conn.close();
     }
     private void loadDataCBLoaiNV(){
         ObservableList<String> list = FXCollections.observableArrayList("","Quản lý trưởng", "Thủ kho", "Nhân viên");
