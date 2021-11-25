@@ -54,10 +54,11 @@ public class KhachhangController implements Initializable {
     @FXML
     private PieChart pieChart;
 
-    
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        loadTable();
+        loadKhachHang("", "");
     }    
     
 
@@ -127,10 +128,10 @@ public class KhachhangController implements Initializable {
             }
         });
         
-        
         colNgaySinh.setCellFactory((TableColumn<KhachHang, String> param) -> {
             DatePicker dp = new DatePicker();
-            TableCell<KhachHang, String> cell = new TableCell<KhachHang, String>() {
+//            dp.setEditable(false);
+            TableCell<KhachHang, String> cell = new TableCell<KhachHang, String>(){
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     if (empty) {
@@ -138,12 +139,12 @@ public class KhachhangController implements Initializable {
                         setGraphic(null);
                     }
                     else {
-                        setEditable(false);
+//                        setEditable(false);
                         
                         dp.setValue(LocalDate.parse(item));
                         dp.getEditor().setText(item);
-                        Callback<DatePicker, DateCell> dayCellFactory = getDayCellFactory();
-                        dp.setDayCellFactory(dayCellFactory);
+//                        Callback<DatePicker, DateCell> dayCellFactory = getDayCellFactory();
+//                        dp.setDayCellFactory(dayCellFactory);
                         
                         StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
                             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -177,17 +178,36 @@ public class KhachhangController implements Initializable {
                 if (kh == null)
                     cell.setGraphic(null);
                 else {
-                    if(event.getButton().equals(MouseButton.PRIMARY)) {
-                        cell.setEditable(true);
-                        dp.setEditable(false);
-                    }
-                    if(event.getClickCount()==2 && cell.isEditable() ) {
-                        cell.setText(null);
+//                    if(event.getButton().equals(MouseButton.PRIMARY)) {
+//                        cell.setEditable(true);
+//                        dp.setEditable(false);
+//                    }
+//
+//                    if( event.getClickCount()==2 && cell.isEditable() ) {
+//                        cell.setText(null);
                         cell.setGraphic(dp);
                     }
-                }
             });
-            
+//            dp.setOnAction((aevt)->{
+//                try {
+//                    Connection conn = JdbcUtils.getConn();
+//                    KhachHangService khs = new KhachHangService(conn);
+//                    KhachHang kh = (KhachHang) tableKH.getSelectionModel().getSelectedItem();
+//                    String ngay = dp.getValue().format(dateFormatter);
+//                    if(kh != null) {
+//                        if (ngay != kh.getNgaySinh()) {
+//                            if (khs.suaNgaySinh(tableKH.getItems().get(cell.getIndex()).getIdKhachHang(), ngay)) {
+//                                kh.setNgaySinh(ngay);
+//                                Utils.getBox("Cập nhật ngày sinh thành công!", Alert.AlertType.INFORMATION).show();
+//                            }
+//                        } else
+//                            Utils.getBox("Vui lòng thay đổi để cập nhật!!!", Alert.AlertType.WARNING).show();
+//                    }
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
+//            });
             cell.setOnKeyPressed((KeyEvent event) -> {
                 if(event.getCode().equals(KeyCode.ENTER))
                 {
@@ -210,10 +230,11 @@ public class KhachhangController implements Initializable {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                }
-            });
-            return cell;
+            }
+            
         });
+            return cell;
+    });
         
         colGioiTinh.setCellFactory((TableColumn<KhachHang, String> p) -> {
             ComboBoxTableCell<KhachHang, String> cell = new ComboBoxTableCell<>("Nam", "Nữ");
@@ -314,7 +335,7 @@ public class KhachhangController implements Initializable {
         });
         
         colDiemTichLuy.setOnEditStart(evt -> {
-            Utils.getBox("Không thể điểm tích lũy!!!", Alert.AlertType.ERROR).show();
+            Utils.getBox("Không thể sửa điểm tích lũy!!!", Alert.AlertType.ERROR).show();
         });
         
         this.tableKH.getColumns().addAll(colMaKhachHang, colTenKhachHang

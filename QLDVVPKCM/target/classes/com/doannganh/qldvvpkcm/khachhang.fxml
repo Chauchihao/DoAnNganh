@@ -9,19 +9,22 @@
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.KhachhangController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="8.0" prefHeight="61.0" prefWidth="635.0" text="Khách Hàng">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="8.0" prefHeight="35.0" prefWidth="635.0" text="Khách Hàng">
          <font>
-            <Font size="36.0" />
+            <Font size="31.0" />
          </font>
       </Label>
-      <TableView fx:id="tableKH" layoutX="45.0" layoutY="151.0" prefHeight="546.0" prefWidth="846.0" />
-      <PieChart fx:id="pieChart" layoutX="934.0" layoutY="60.0" prefHeight="196.0" prefWidth="228.0" />
-      <TextField layoutX="45.0" layoutY="120.0" prefHeight="26.0" prefWidth="65.0" />
-      <Label layoutX="950.0" layoutY="266.0" prefHeight="26.0" prefWidth="195.0" text="Thêm khách hàng">
+      <TableView fx:id="tableKH" editable="true" layoutX="45.0" layoutY="96.0" prefHeight="263.0" prefWidth="846.0" />
+      <PieChart fx:id="pieChart" layoutX="938.0" layoutY="96.0" prefHeight="187.0" prefWidth="218.0" />
+      <TextField layoutX="45.0" layoutY="70.0" prefHeight="26.0" prefWidth="65.0" />
+      <Label layoutX="955.0" layoutY="283.0" prefHeight="26.0" prefWidth="195.0" text="Thêm khách hàng">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="950.0" layoutY="14.0" prefHeight="62.0" prefWidth="195.0" text="Tỷ lệ mua hàng giữ Khách hàng thân thiết và Khách hàng thường" textOverrun="CLIP" wrapText="true" />
+      <Label layoutX="934.0" layoutY="39.0" prefHeight="62.0" prefWidth="238.0" text="Tỷ lệ mua hàng giữ Khách hàng thân thiết và Khách hàng thường" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
    </children>
 </AnchorPane>
