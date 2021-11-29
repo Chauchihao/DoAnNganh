@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.DonhangController">
+   <children>
+      <Label layoutX="681.0" layoutY="14.0" text="ĐƠN HÀNG">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbDonHang" layoutX="81.0" layoutY="129.0" prefHeight="282.0" prefWidth="519.0" />
+      <TableView fx:id="tbNhapHang" layoutX="81.0" layoutY="501.0" prefHeight="244.0" prefWidth="1250.0" />
+      <Label layoutX="27.0" layoutY="60.0" text="Đơn hàng đã bán">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="423.0" prefHeight="32.0" prefWidth="1293.0" text="----Đơn hàng đã nhập--------------------------------------------------------------------------------------------------------------------------">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="97.0" text="Lọc:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="469.0" text="Lọc:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listCTDH" layoutX="646.0" layoutY="119.0" prefHeight="294.0" prefWidth="698.0" />
+      <Label layoutX="646.0" layoutY="76.0" text="Chi tiết đơn hàng">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fMaDH" layoutX="93.0" layoutY="100.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fMaNV" layoutX="384.0" layoutY="99.0" prefHeight="26.0" prefWidth="86.0" />
+      <TextField fx:id="fMaKH" layoutX="496.0" layoutY="100.0" prefHeight="26.0" prefWidth="94.0" />
+      <DatePicker fx:id="fNgayTaoDH" layoutX="179.0" layoutY="99.0" prefHeight="26.0" prefWidth="94.0" />
+      <TextField fx:id="fMaHH" layoutX="89.0" layoutY="472.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fTenHH" layoutX="179.0" layoutY="472.0" prefHeight="26.0" prefWidth="194.0" />
+      <TextField fx:id="fSoLuong" layoutX="384.0" layoutY="472.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fGiaNhap" layoutX="470.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fMaNCC" layoutX="816.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
+      <DatePicker fx:id="fNgayNhap" layoutX="706.0" layoutY="474.0" prefHeight="26.0" prefWidth="102.0" />
+      <TextField fx:id="fTenNCC" layoutX="905.0" layoutY="474.0" prefHeight="26.0" prefWidth="164.0" />
+      <TextField fx:id="fMaTK" layoutX="1075.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fTenTK" layoutX="1167.0" layoutY="474.0" prefHeight="26.0" prefWidth="164.0" />
+   </children>
+</AnchorPane>

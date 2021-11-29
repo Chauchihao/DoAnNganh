@@ -9,74 +9,139 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.KhachhangController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.KhachhangController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="8.0" prefHeight="35.0" prefWidth="635.0" text="Khách Hàng">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <TableView fx:id="tableKH" editable="true" layoutX="45.0" layoutY="96.0" prefHeight="303.0" prefWidth="699.0" />
-      <TextField layoutX="45.0" layoutY="70.0" prefHeight="26.0" prefWidth="65.0" />
-      <Label layoutX="744.0" layoutY="83.0" prefHeight="35.0" prefWidth="458.0" text="---Thông tin khách hàng-----------------------------------">
+      <TextField fx:id="fMaKH" layoutX="87.0" layoutY="61.0" prefHeight="26.0" prefWidth="53.0" />
+      <Label layoutX="924.0" layoutY="83.0" prefHeight="35.0" prefWidth="458.0" text="---Thông tin khách hàng-----------------------------------">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tbThuCung" layoutX="45.0" layoutY="472.0" prefHeight="194.0" prefWidth="699.0" />
-      <Label layoutX="14.0" layoutY="418.0" text="-------Thú cưng-------------------------------------------------------------------------------------">
+      <TableView fx:id="tbThuCung" layoutX="69.0" layoutY="510.0" prefHeight="222.0" prefWidth="842.0" />
+      <Label layoutX="19.0" layoutY="449.0" prefHeight="27.0" prefWidth="925.0" text="-------Thú cưng---------------------------------------------------------------------------------------------------------------">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="771.0" layoutY="129.0" text="Mã khách hàng:">
+      <Label layoutX="942.0" layoutY="127.0" text="Mã khách hàng:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="886.0" layoutY="127.0" />
-      <Label layoutX="771.0" layoutY="166.0" text="Họ tên: ">
+      <TextField fx:id="txtMaKH" editable="false" layoutX="1057.0" layoutY="125.0" />
+      <Label layoutX="942.0" layoutY="164.0" text="Họ tên: ">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="838.0" layoutY="164.0" prefHeight="14.0" prefWidth="236.0" />
-      <Label layoutX="771.0" layoutY="210.0" text="Ngày sinh:">
+      <TextField fx:id="txtHoTen" layoutX="1009.0" layoutY="162.0" prefHeight="14.0" prefWidth="236.0" />
+      <Label layoutX="942.0" layoutY="208.0" text="Ngày sinh:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker layoutX="841.0" layoutY="207.0" prefHeight="26.0" prefWidth="142.0" />
-      <Label layoutX="772.0" layoutY="251.0" prefHeight="22.0" prefWidth="66.0" text="Giới tính:">
+      <DatePicker fx:id="dpKH" layoutX="1012.0" layoutY="205.0" prefHeight="26.0" prefWidth="142.0" />
+      <Label layoutX="943.0" layoutY="249.0" prefHeight="22.0" prefWidth="66.0" text="Giới tính:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox layoutX="841.0" layoutY="250.0" prefHeight="26.0" prefWidth="106.0" />
-      <Label layoutX="772.0" layoutY="295.0" prefHeight="22.0" prefWidth="66.0" text="Địa chỉ:">
+      <ComboBox fx:id="cbGioiTinhKH" layoutX="1012.0" layoutY="248.0" prefHeight="26.0" prefWidth="106.0" />
+      <Label layoutX="943.0" layoutY="293.0" prefHeight="22.0" prefWidth="66.0" text="Địa chỉ:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="827.0" layoutY="293.0" prefHeight="11.0" prefWidth="347.0" />
-      <Label layoutX="770.0" layoutY="342.0" prefHeight="22.0" prefWidth="106.0" text="Số điện thoại:">
+      <TextField fx:id="txtDiaChi" layoutX="998.0" layoutY="291.0" prefHeight="11.0" prefWidth="347.0" />
+      <Label layoutX="941.0" layoutY="340.0" prefHeight="22.0" prefWidth="106.0" text="Số điện thoại:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="874.0" layoutY="340.0" prefHeight="26.0" prefWidth="163.0" />
-      <Label layoutX="770.0" layoutY="387.0" prefHeight="22.0" prefWidth="94.0" text="Điểm tích lũy:">
+      <TextField fx:id="txtSDT" layoutX="1045.0" layoutY="338.0" prefHeight="26.0" prefWidth="163.0" />
+      <Label layoutX="941.0" layoutY="385.0" prefHeight="22.0" prefWidth="94.0" text="Điểm tích lũy:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="874.0" layoutY="386.0" prefHeight="13.0" prefWidth="163.0" />
-      <Button layoutX="1067.0" layoutY="330.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="86.0" text="Cập nhật" />
-      <Button layoutX="1067.0" layoutY="380.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="86.0" text="Thêm" />
-      <Label layoutX="754.0" layoutY="414.0" prefHeight="35.0" prefWidth="458.0" text="---Thông tin thú cưng--------------------------------------">
+      <TextField fx:id="txtDiemTL" layoutX="1045.0" layoutY="384.0" prefHeight="13.0" prefWidth="163.0" />
+      <Button fx:id="btCapNhatKH" layoutX="1238.0" layoutY="333.0" mnemonicParsing="false" onAction="#capNhatKH" prefHeight="35.0" prefWidth="86.0" text="Cập nhật" />
+      <Button fx:id="btThemKH" layoutX="1238.0" layoutY="378.0" mnemonicParsing="false" onAction="#themKH" prefHeight="35.0" prefWidth="86.0" text="Thêm" />
+      <Label layoutX="942.0" layoutY="445.0" prefHeight="35.0" prefWidth="458.0" text="---Thông tin thú cưng--------------------------------------">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <Label layoutX="947.0" layoutY="498.0" text="Mã thú cưng:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMaTC" editable="false" layoutX="1048.0" layoutY="496.0" prefHeight="26.0" prefWidth="94.0" />
+      <Label layoutX="1151.0" layoutY="542.0" text="Ngày sinh:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="946.0" layoutY="542.0" prefHeight="22.0" prefWidth="66.0" text="Giới tính:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="946.0" layoutY="622.0" text="Màu lông:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="945.0" layoutY="581.0" text="Tình trạng sức khỏe:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="1157.0" layoutY="622.0" text="Mã khách hàng:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMauLong" layoutX="1014.0" layoutY="621.0" prefHeight="26.0" prefWidth="126.0" />
+      <TextField fx:id="txtSucKhoe" layoutX="1084.0" layoutY="579.0" prefHeight="26.0" prefWidth="265.0" />
+      <ComboBox fx:id="cbGioiTinhTC" layoutX="1015.0" layoutY="540.0" prefHeight="26.0" prefWidth="86.0" />
+      <ComboBox fx:id="cbMaKH" layoutX="1266.0" layoutY="620.0" prefHeight="26.0" prefWidth="106.0" />
+      <DatePicker fx:id="dpTC" layoutX="1221.0" layoutY="540.0" prefHeight="26.0" prefWidth="125.0" />
+      <Button fx:id="btCapNhatTC" layoutX="1015.0" layoutY="667.0" mnemonicParsing="false" onAction="#capNhatTC" prefHeight="46.0" prefWidth="106.0" text="Cập nhật" />
+      <Button fx:id="btThemTC" layoutX="1143.0" layoutY="667.0" mnemonicParsing="false" onAction="#themTC" prefHeight="46.0" prefWidth="106.0" text="Thêm" />
+      <TableView fx:id="tableKH" layoutX="69.0" layoutY="90.0" prefHeight="346.0" prefWidth="842.0" />
+      <Label layoutX="1159.0" layoutY="498.0" text="Tên:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTenTC" editable="false" layoutX="1194.0" layoutY="496.0" prefHeight="26.0" prefWidth="190.0" />
+      <TextField fx:id="fTenKH" layoutX="158.0" layoutY="61.0" prefHeight="26.0" prefWidth="126.0" />
+      <TextField fx:id="fDiemTL" layoutX="577.0" layoutY="61.0" prefHeight="26.0" prefWidth="65.0" />
+      <TextField fx:id="fDiaChi" layoutX="675.0" layoutY="61.0" prefHeight="26.0" prefWidth="236.0" />
+      <TextField fx:id="fSDT" layoutX="361.0" layoutY="61.0" prefHeight="26.0" prefWidth="94.0" />
+      <Label layoutX="19.0" layoutY="56.0" text="Lọc:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fMaTC" layoutX="69.0" layoutY="482.0" prefHeight="26.0" prefWidth="66.0" />
+      <Label layoutX="19.0" layoutY="477.0" text="Lọc:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fTenTC" layoutX="162.0" layoutY="482.0" prefHeight="26.0" prefWidth="115.0" />
+      <ComboBox fx:id="fGTKH" layoutX="288.0" layoutY="61.0" prefHeight="26.0" prefWidth="66.0" />
+      <ComboBox fx:id="fGTTC" layoutX="284.0" layoutY="481.0" prefHeight="26.0" prefWidth="88.0" />
+      <DatePicker fx:id="fNgaySinhTC" layoutX="383.0" layoutY="481.0" prefHeight="26.0" prefWidth="115.0" />
+      <TextField fx:id="fMaulLong" layoutX="505.0" layoutY="481.0" prefHeight="26.0" prefWidth="86.0" />
+      <ComboBox fx:id="fIDKH" layoutX="805.0" layoutY="482.0" prefHeight="26.0" prefWidth="106.0" />
    </children>
 </AnchorPane>

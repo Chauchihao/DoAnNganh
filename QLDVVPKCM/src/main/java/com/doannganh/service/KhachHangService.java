@@ -31,36 +31,63 @@ public class KhachHangService {
             throw new SQLDataException();
         String sql = "";
         PreparedStatement stm = null;
-        if (traCuu == "" || tuKhoa == "") {
+        if (traCuu.equals("") || tuKhoa.equals("")) {
             sql = "SELECT khachhang.*"
                 + " FROM khachhang WHERE khachhang_id != 1"
-                + " GROUP BY khachhang_id ORDER BY khachhang_id DESC";
+                + " ORDER BY khachhang_id DESC";
             stm = this.conn.prepareStatement(sql);
         }
-        if (traCuu == "Mã khách hàng") {
+        if (traCuu.equals("Mã khách hàng")) {
             sql = "SELECT khachhang.*"
                 + " FROM khachhang"
                 + " WHERE khachhang_id like concat('%', ?, '%')"
                 + " AND khachhang_id != 1"
-                + " GROUP BY khachhang_id ORDER BY khachhang_id";
+                + " ORDER BY khachhang_id";
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Họ tên") {
+        if ("Họ tên".equals(traCuu)) {
             sql = "SELECT khachhang.*"
                 + " FROM khachhang"
                 + " WHERE hoten like concat('%', ?, '%')"
                 + " AND khachhang_id != 1"
-                + " GROUP BY khachhang_id ORDER BY khachhang_id";
+                + " ORDER BY khachhang_id";
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Số điện thoại") {
+        if ("Giới tính".equals(traCuu)) {
+            sql = "SELECT khachhang.*"
+                + " FROM khachhang"
+                + " WHERE gioitinh like concat('%', ?, '%')"
+                + " AND khachhang_id != 1"
+                + " ORDER BY khachhang_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Số điện thoại".equals(traCuu)) {
             sql = "SELECT khachhang.*"
                 + " FROM khachhang"
                 + " WHERE sdt like concat('%', ?, '%')"
                 + " AND khachhang_id != 1"
-                + " GROUP BY khachhang_id ORDER BY khachhang_id";
+                + " ORDER BY khachhang_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Địa chỉ".equals(traCuu)) {
+            sql = "SELECT khachhang.*"
+                + " FROM khachhang"
+                + " WHERE diachi like concat('%', ?, '%')"
+                + " AND khachhang_id != 1"
+                + " ORDER BY khachhang_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Điểm".equals(traCuu)) {
+            sql = "SELECT khachhang.*"
+                + " FROM khachhang"
+                + " WHERE diemtichluy like concat('%', ?, '%')"
+                + " AND khachhang_id != 1"
+                + " ORDER BY khachhang_id";
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
@@ -113,6 +140,24 @@ public class KhachHangService {
         return kh;
     }
     
+    public boolean updateKH(KhachHang kh) throws SQLException{
+        String sql ="UPDATE qldvvpkcm.khachhang Set hoten = ?, ngaysinh = ?"
+                + ", gioitinh = ?, diachi = ?, sdt = ? , diemtichluy = ? "
+                + "WHERE khachhang_id = ?";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, kh.getHoTen());
+        stm.setString(2, kh.getNgaySinh());
+        stm.setString(3, kh.getGioiTinh());
+        stm.setString(4, kh.getDiaChi());
+        stm.setString(5, kh.getSdt());
+        stm.setString(6, kh.getDiemTichLuy());
+        stm.setInt(7, kh.getIdKhachHang());
+        
+        int row = stm.executeUpdate();
+        
+        return row > 0;
+    }
     
     public boolean suaHoTen(int id, String ht)  throws SQLException {
         String sql ="UPDATE khachhang SET hoten=? WHERE khachhang_id=?";
@@ -196,6 +241,19 @@ public class KhachHangService {
     public int slKHTT() throws SQLException{
         String sql = "SELECT Count(donhang_id) as soluong FROM qldvvpkcm.donhang WHERE khachhang_id is not null";
         PreparedStatement stm = this.conn.prepareStatement(sql);
+        int kq = 0;
+        ResultSet rs = stm.executeQuery();
+        
+        while(rs.next()){
+            kq = rs.getInt("soluong");
+        }
+        return kq;
+    }
+    
+    public int getSLDHByID(int id) throws SQLException{
+        String sql = "SELECT Count(donhang_id) as soluong FROM qldvvpkcm.donhang WHERE khachhang_id = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setInt(1, id);
         int kq = 0;
         ResultSet rs = stm.executeQuery();
         

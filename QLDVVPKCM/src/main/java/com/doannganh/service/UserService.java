@@ -241,6 +241,52 @@ public class UserService {
         return row > 0;
     }
     
+    public boolean checkTaiKhoan(String tenTK) throws SQLException{
+        String sql ="SELECT taikhoan FROM qldvvpkcm.user\n" +
+                    "WHERE taikhoan = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, tenTK);
+        
+        String kq = "";
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            kq = rs.getString("taikhoan");
+        }
+        
+        return (kq.equals(""));
+    }
+    
+        
+    public boolean checkCMND(String CMND) throws SQLException{
+        String sql ="SELECT cmnd FROM qldvvpkcm.user\n" +
+                    "WHERE cmnd = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, CMND);
+        
+        String kq = "";
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            kq = rs.getString("cmnd");
+        }
+        
+        return (kq.equals(""));
+    }
+    
+    public boolean checkSDT(String SDT) throws SQLException{
+        String sql ="SELECT sdt FROM qldvvpkcm.user\n" +
+                    "WHERE sdt = ?";
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, SDT);
+        
+        String kq = "";
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            kq = rs.getString("sdt");
+        }
+        
+        return (kq.equals(""));
+    }
+    
     public boolean themUser(User u) throws SQLException{
         String sql ="INSERT INTO qldvvpkcm.user(hoten, ngaysinh, gioitinh, cmnd, taikhoan"
                     + ", matkhau, ngayVaoLam, email, diachi, sdt,trangthai, loaiuser_id)\n" 

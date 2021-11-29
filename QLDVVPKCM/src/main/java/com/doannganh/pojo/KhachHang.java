@@ -5,9 +5,6 @@
  */
 package com.doannganh.pojo;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-
 /**
  *
  * @author Admin
@@ -20,6 +17,7 @@ public class KhachHang {
     private String diaChi;
     private String sdt;
     private String diemTichLuy;
+    private int tongDH;
 
     /**
      * @return the idKhachHang
@@ -117,5 +115,19 @@ public class KhachHang {
      */
     public void setDiemTichLuy(String diemTichLuy) {
         this.diemTichLuy = diemTichLuy;
+    }
+
+    /**
+     * @return the tongDH
+     */
+    public int getTongDH() {
+        return tongDH;
+    }
+
+    /**
+     * @param tongDH the tongDH to set
+     */
+    public void setTongDH(int tongDH) {
+        this.tongDH = tongDH;
     }
 }

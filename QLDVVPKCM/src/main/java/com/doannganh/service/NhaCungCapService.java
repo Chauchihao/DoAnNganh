@@ -273,6 +273,132 @@ public class NhaCungCapService {
         return row > 0;
     }
     
+     public List<NhaCungCap_HangHoa> getNCCHH(String tuKhoa, String traCuu) throws SQLException {
+        if (tuKhoa == null)
+            throw new SQLDataException();
+        String sql = "";
+        PreparedStatement stm = null;
+        if ("".equals(traCuu) || "".equals(tuKhoa)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user, qldvvpkcm.hanghoa"
+                + " WHERE nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " ORDER BY hanghoa_id";
+            stm = this.conn.prepareStatement(sql);
+        }
+        if ("Mã hàng hóa".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE hanghoa.hanghoa_id like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Tên hàng hóa".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE hanghoa.tenhanghoa like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Số lượng".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE nhacungcap_hanghoa.soluong like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        
+        if ("Ngày nhập".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE nhacungcap_hanghoa.ngaynhap =< ? "
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Mã nhà cung cấp".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE nhacungcap.nhacungcap_id like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Tên công ty".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE tencongty like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Mã nhân viên".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE user.user_id like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Tên nhân viên".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE hoten like concat('%', ?, '%')"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        ResultSet rs = stm.executeQuery();
+        
+        List<NhaCungCap_HangHoa> nhaCungCapHH = new ArrayList<>();
+        while (rs.next()) {
+            NhaCungCap_HangHoa ncchh = new NhaCungCap_HangHoa();
+            ncchh.setHanghoa_id(rs.getInt("hanghoa_id"));
+            ncchh.setNhacungcap_id(rs.getInt("nhacungcap_id"));
+            ncchh.setSoLuong(rs.getInt("soluong"));
+            ncchh.setNgaynhap(rs.getString("ngaynhap"));
+            ncchh.setNgaysanxuat(rs.getString("ngaysanxuat"));
+            ncchh.setNgaysanxuat(rs.getString("ngayhethan"));
+            ncchh.setGianhap(rs.getString("gianhap"));
+            ncchh.setNhanvien_id(rs.getInt("nhanvien_id"));
+            ncchh.setTenNV(rs.getString("hoten"));
+            ncchh.setTenHH(rs.getString("tenhanghoa"));    
+            ncchh.setTenNCC(rs.getString("tencongty"));  
+            
+            nhaCungCapHH.add(ncchh);
+        }
+        return nhaCungCapHH;
+    }
+    
+    
     public int tinhChiPhiDH(int idhh, String ngayNhap, int idncc) throws SQLException{
         String sql = "SELECT sum(gianhap * soluong) as chiphi FROM qldvvpkcm.nhacungcap_hanghoa"
                 + " where date(ngaynhap) = ? AND nhacungcap_id  = ?"

@@ -30,13 +30,13 @@ public class ThuCungService {
             throw new SQLDataException();
         String sql = "";
         PreparedStatement stm = null;
-        if (traCuu == "" || tuKhoa == "") {
+        if ("".equals(traCuu) || tuKhoa == "") {
             sql = "SELECT thucung.*"
                 + " FROM thucung"
                 + " ORDER BY thucung_id";
             stm = this.conn.prepareStatement(sql);
         }
-        if (traCuu == "Mã thú cưng") {
+        if ("Mã thú cưng".equals(traCuu)) {
             sql = "SELECT thucung.*"
                 + " FROM thucung"
                 + " WHERE thucung_id like concat('%', ?, '%')"
@@ -44,7 +44,7 @@ public class ThuCungService {
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Tên") {
+        if ("Tên".equals(traCuu)) {
             sql = "SELECT thucung.*"
                 + " FROM thucung"
                 + " WHERE ten like concat('%', ?, '%')"
@@ -52,10 +52,27 @@ public class ThuCungService {
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Mã khách hàng") {
+        if ("Mã khách hàng".equals(traCuu)) {
             sql = "SELECT thucung.*"
                 + " FROM thucung"
                 + " WHERE khachhang_id like concat('%', ?, '%')"
+                + " ORDER BY thucung_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Ngày sinh".equals(traCuu)) {
+            sql = "SELECT thucung.*"
+                + " FROM thucung"
+                + " WHERE ngaysinh like concat('%', ?, '%')"
+                + " ORDER BY thucung_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        
+        if ("Giới tính".equals(traCuu)) {
+            sql = "SELECT thucung.*"
+                + " FROM thucung"
+                + " WHERE gioitinh like concat('%', ?, '%')"
                 + " ORDER BY thucung_id";
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
@@ -99,6 +116,25 @@ public class ThuCungService {
             tc.setIdKhachHang(rs.getInt("khachhang_id"));
         }
         return tc;
+    }
+    
+    public boolean updateTC(ThuCung tc) throws SQLException{
+        String sql ="UPDATE qldvvpkcm.thucung Set ten = ?, ngaysinh = ?"
+                + ", gioitinh = ?, mauLong = ?, tinhtrangsuckhoe = ?, khachhang_id  = ? "
+                + "WHERE thucung_id = ?";
+        
+        PreparedStatement stm = this.conn.prepareStatement(sql);
+        stm.setString(1, tc.getTen());
+        stm.setString(2, tc.getNgaySinh());
+        stm.setString(3, tc.getGioiTinh());
+        stm.setString(4, tc.getMauLong());
+        stm.setString(5, tc.getTinhTrangSucKhoe());
+        stm.setInt(6, tc.getIdKhachHang());
+        stm.setInt(7, tc.getIdThuCung());
+        
+        int row = stm.executeUpdate();
+        
+        return row > 0;
     }
     
     public boolean suaTen(int id, String ten)  throws SQLException {

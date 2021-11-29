@@ -5,7 +5,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
@@ -48,7 +47,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btCapNhat" alignment="CENTER" contentDisplay="CENTER" layoutX="1040.0" layoutY="518.0" mnemonicParsing="false" onAction="#capNhatNV" prefHeight="51.0" prefWidth="174.0" text="Cập nhật" textAlignment="CENTER">
+                        <Button fx:id="btCapNhat" alignment="CENTER" contentDisplay="CENTER" layoutX="915.0" layoutY="519.0" mnemonicParsing="false" onAction="#capNhatNV" prefHeight="51.0" prefWidth="174.0" text="Cập nhật" textAlignment="CENTER">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -143,118 +142,9 @@
                            </font>
                         </Label>
                         <DatePicker fx:id="fNgayVaoLam" layoutX="735.0" layoutY="65.0" prefHeight="26.0" prefWidth="98.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-          <Tab text="Thêm nhân viên">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="8.0" layoutY="44.0" text="------Thêm nhân viên-------------------------------------------------------------------------------------------------">
+                        <Button fx:id="btThem" layoutX="1122.0" layoutY="519.0" mnemonicParsing="false" onAction="#themNV" prefHeight="51.0" prefWidth="174.0" text="Thêm">
                            <font>
-                              <Font size="28.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="75.0" layoutY="120.0" text="Họ tên:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tHoTen" layoutX="139.0" layoutY="118.0" prefHeight="30.0" prefWidth="304.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="482.0" layoutY="120.0" text="Ngày sinh:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="tNgaySinh" layoutX="571.0" layoutY="121.0" />
-                        <Label layoutX="830.0" layoutY="120.0" text="Giới tính:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="tGioiTinh" layoutX="917.0" layoutY="121.0" prefWidth="150.0" />
-                        <Label layoutX="75.0" layoutY="204.0" text="Địa chỉ: ">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tDiaChi" layoutX="146.0" layoutY="202.0" prefHeight="30.0" prefWidth="920.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="71.0" layoutY="287.0" text="Số CMND/CCCD:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tCMND" layoutX="218.0" layoutY="285.0" prefHeight="30.0" prefWidth="304.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="582.0" layoutY="287.0" text="Số điện thoại:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tSDT" layoutX="688.0" layoutY="285.0" prefHeight="30.0" prefWidth="181.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="71.0" layoutY="355.0" text="Tên tài khoản:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="898.0" layoutY="287.0" text="Email:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="tEmail" layoutX="963.0" layoutY="285.0" prefHeight="30.0" prefWidth="343.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="tTaiKhoan" layoutX="199.0" layoutY="353.0" prefHeight="30.0" prefWidth="262.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="518.0" layoutY="355.0" text="Mật khẩu:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <PasswordField fx:id="tMatKhau" layoutX="609.0" layoutY="356.0" prefHeight="26.0" prefWidth="230.0" />
-                        <Label layoutX="876.0" layoutY="355.0" text="Ngày vào làm:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <DatePicker fx:id="tNgayVaoLam" layoutX="999.0" layoutY="355.0" prefHeight="26.0" prefWidth="175.0" />
-                        <Label layoutX="71.0" layoutY="430.0" text="Loại nhân viên:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="tLoaiNV" layoutX="205.0" layoutY="430.0" prefHeight="26.0" prefWidth="190.0" />
-                        <Label layoutX="482.0" layoutY="430.0" text="Trạng thái:">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="tTrangThai" layoutX="588.0" layoutY="430.0" prefHeight="26.0" prefWidth="190.0" />
-                        <Button fx:id="btThem" layoutX="436.0" layoutY="556.0" mnemonicParsing="false" onAction="#themNV" prefHeight="38.0" prefWidth="340.0" text="Thêm">
-                           <font>
-                              <Font size="17.0" />
+                              <Font size="19.0" />
                            </font>
                         </Button>
                      </children>
@@ -265,54 +155,39 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ComboBox fx:id="cbTimKiem" layoutX="268.0" layoutY="31.0" prefHeight="30.0" prefWidth="166.0" />
-                        <Label layoutX="49.0" layoutY="28.0" text="Tìm kiếm nhân viên:">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtTimKiem" layoutX="434.0" layoutY="31.0" prefHeight="30.0" prefWidth="648.0" />
-                        <Label layoutX="49.0" layoutY="80.0" prefHeight="32.0" prefWidth="188.0" text="Danh sách đơn hàng:">
+                        <Label layoutX="633.0" layoutY="-2.0" prefHeight="32.0" prefWidth="188.0" text="Danh sách đơn hàng:">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btTimKiem" layoutX="1106.0" layoutY="30.0" mnemonicParsing="false" onAction="#timNV" prefHeight="31.0" prefWidth="118.0" text="Tìm">
+                        <ListView fx:id="listCTGD" layoutX="633.0" layoutY="340.0" prefHeight="325.0" prefWidth="695.0" />
+                        <Label layoutX="633.0" layoutY="306.0" prefHeight="18.0" prefWidth="326.0" text="Chi tiết giao dịch:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listLSGDNV" layoutX="633.0" layoutY="57.0" prefHeight="238.0" prefWidth="500.0" />
+                        <Label fx:id="lbMaDH" layoutX="633.0" layoutY="25.0" prefHeight="32.0" prefWidth="90.0" text="Mã đơn hàng">
                            <font>
                               <Font size="15.0" />
                            </font>
-                        </Button>
-                        <ListView fx:id="listCTGD" layoutX="633.0" layoutY="145.0" prefHeight="538.0" prefWidth="695.0" />
-                        <Label layoutX="633.0" layoutY="89.0" prefHeight="18.0" prefWidth="326.0" text="Chi tiết giao dịch:">
+                        </Label>
+                        <Label fx:id="lbNgayTaoDon" layoutX="770.0" layoutY="25.0" prefHeight="32.0" prefWidth="102.0" text="Ngày tạo đơn">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="acNV" layoutX="37.0" layoutY="89.0" prefHeight="625.0" prefWidth="552.0">
-                           <children>
-                              <ListView fx:id="listLSGDNV" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="500.0" />
-                              <Label fx:id="lbMaDH" layoutX="14.0" layoutY="27.0" prefHeight="32.0" prefWidth="90.0" text="Mã đơn hàng">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbTTNV" layoutX="397.0" layoutY="27.0" prefHeight="32.0" prefWidth="70.0" text="Tổng tiền">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbMaKH" layoutX="264.0" layoutY="27.0" prefHeight="32.0" prefWidth="102.0" text="Mã khách hàng">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbNgayTaoDon" layoutX="143.0" layoutY="27.0" prefHeight="32.0" prefWidth="102.0" text="Ngày tạo đơn">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
+                        <Label fx:id="lbMaKH" layoutX="882.0" layoutY="25.0" prefHeight="32.0" prefWidth="102.0" text="Mã khách hàng">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbTTNV" layoutX="1026.0" layoutY="25.0" prefHeight="32.0" prefWidth="70.0" text="Tổng tiền">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbDSNV" layoutX="54.0" layoutY="22.0" prefHeight="648.0" prefWidth="480.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -321,54 +196,39 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ComboBox fx:id="cbTimKiem1" layoutX="268.0" layoutY="31.0" prefHeight="30.0" prefWidth="166.0" />
-                        <Label layoutX="49.0" layoutY="28.0" text="Tìm kiếm nhân viên:">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtTimKiem1" layoutX="434.0" layoutY="31.0" prefHeight="30.0" prefWidth="648.0" />
-                        <Label layoutX="49.0" layoutY="80.0" prefHeight="32.0" prefWidth="188.0" text="Danh sách đơn hàng:">
+                        <Label layoutX="632.0" layoutY="14.0" prefHeight="32.0" prefWidth="188.0" text="Danh sách đơn hàng:">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btTimKiem1" layoutX="1106.0" layoutY="30.0" mnemonicParsing="false" onAction="#timTK" prefHeight="31.0" prefWidth="118.0" text="Tìm">
+                        <ListView fx:id="listCTGDTK" layoutX="633.0" layoutY="379.0" prefHeight="296.0" prefWidth="695.0" />
+                        <Label layoutX="633.0" layoutY="348.0" prefHeight="18.0" prefWidth="326.0" text="Chi tiết giao dịch:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listLSGDTK" layoutX="632.0" layoutY="85.0" prefHeight="242.0" prefWidth="500.0" />
+                        <Label fx:id="lbMaHH" layoutX="635.0" layoutY="53.0" prefHeight="32.0" prefWidth="90.0" text="Mã hàng hóa">
                            <font>
                               <Font size="15.0" />
                            </font>
-                        </Button>
-                        <ListView fx:id="listCTGDTK" layoutX="633.0" layoutY="141.0" prefHeight="534.0" prefWidth="695.0" />
-                        <Label layoutX="636.0" layoutY="81.0" prefHeight="18.0" prefWidth="326.0" text="Chi tiết giao dịch:">
+                        </Label>
+                        <Label fx:id="lbTTTK" layoutX="1044.0" layoutY="53.0" prefHeight="32.0" prefWidth="70.0" text="Giá nhập">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="acTK" layoutX="26.0" layoutY="83.0" prefHeight="615.0" prefWidth="574.0">
-                           <children>
-                              <ListView fx:id="listLSGDTK" layoutX="26.0" layoutY="59.0" prefHeight="537.0" prefWidth="500.0" />
-                              <Label fx:id="lbMaHH" layoutX="29.0" layoutY="27.0" prefHeight="32.0" prefWidth="90.0" text="Mã hàng hóa">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbTTTK" layoutX="438.0" layoutY="27.0" prefHeight="32.0" prefWidth="70.0" text="Giá nhập">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbNCC" layoutX="264.0" layoutY="27.0" prefHeight="32.0" prefWidth="125.0" text="Mã nhà cung cấp">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lbNgayNhap" layoutX="143.0" layoutY="27.0" prefHeight="32.0" prefWidth="102.0" text="Ngày nhập">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
+                        <Label fx:id="lbNCC" layoutX="870.0" layoutY="53.0" prefHeight="32.0" prefWidth="125.0" text="Mã nhà cung cấp">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbNgayNhap" layoutX="749.0" layoutY="53.0" prefHeight="32.0" prefWidth="102.0" text="Ngày nhập">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbDSTK" layoutX="57.0" layoutY="53.0" prefHeight="620.0" prefWidth="478.0" />
                      </children>
                   </AnchorPane>
                </content>

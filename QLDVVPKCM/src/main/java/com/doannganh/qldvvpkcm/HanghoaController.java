@@ -9,23 +9,18 @@ import com.doannganh.pojo.HangHoa;
 import com.doannganh.pojo.LoaiHangHoa;
 import com.doannganh.service.HangHoaService;
 import com.doannganh.service.JdbcUtils;
-import com.doannganh.service.KhachHangService;
 import com.doannganh.service.LoaiHangHoaService;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,7 +29,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -43,7 +37,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 
 
 /**
@@ -52,11 +45,6 @@ import javafx.scene.layout.AnchorPane;
  * @author LENOVO
  */
 public class HanghoaController implements Initializable {
-    @FXML
-    private AnchorPane paneHH;
-
-    @FXML
-    private AnchorPane table;
 
     @FXML
     private TextField txtMaHH;
@@ -164,6 +152,13 @@ public class HanghoaController implements Initializable {
                     } catch (SQLException ex) {
                         Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    catch(NullPointerException n){
+                    try {
+                        loadHHQLT("", "");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    }
                 });
                 this.NgayHH.valueProperty().addListener(obj -> {
                     try {
@@ -171,6 +166,13 @@ public class HanghoaController implements Initializable {
                     } catch (SQLException ex) {
                         Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    catch(NullPointerException n){
+                    try {
+                        loadHHQLT("", "");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 });
                 this.cbTinhTrang.valueProperty().addListener(obj -> {
                     try {
@@ -198,6 +200,13 @@ public class HanghoaController implements Initializable {
                     } catch (SQLException ex) {
                         Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    catch(NullPointerException n){
+                    try {
+                        loadHHQLT("", "");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 });
             } catch (SQLException ex) {
                 Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);

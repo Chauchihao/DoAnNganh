@@ -5,8 +5,6 @@
  */
 package com.doannganh.pojo;
 
-import java.sql.Date;
-
 /**
  *
  * @author Admin

@@ -9,6 +9,9 @@ package com.doannganh.pojo;
 public class NhaCungCap_HangHoa {
     private int nhacungcap_id;
     private int hanghoa_id;
+    private String tenHH;
+    private String tenNCC;
+    private String TenNV;
     private int soLuong;
     private String ngaysanxuat;
     private String ngayhethan;
@@ -141,6 +144,48 @@ public class NhaCungCap_HangHoa {
      */
     public void setGhichu(String ghichu) {
         this.ghichu = ghichu;
+    }
+
+    /**
+     * @return the tenHH
+     */
+    public String getTenHH() {
+        return tenHH;
+    }
+
+    /**
+     * @param tenHH the tenHH to set
+     */
+    public void setTenHH(String tenHH) {
+        this.tenHH = tenHH;
+    }
+
+    /**
+     * @return the tenNCC
+     */
+    public String getTenNCC() {
+        return tenNCC;
+    }
+
+    /**
+     * @param tenNCC the tenNCC to set
+     */
+    public void setTenNCC(String tenNCC) {
+        this.tenNCC = tenNCC;
+    }
+
+    /**
+     * @return the TenNV
+     */
+    public String getTenNV() {
+        return TenNV;
+    }
+
+    /**
+     * @param TenNV the TenNV to set
+     */
+    public void setTenNV(String TenNV) {
+        this.TenNV = TenNV;
     }
 
 }

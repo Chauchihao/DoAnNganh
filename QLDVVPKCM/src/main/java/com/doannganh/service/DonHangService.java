@@ -32,7 +32,7 @@ public class DonHangService {
             throw new SQLDataException();
         String sql = "";
         PreparedStatement stm = null;
-        if (traCuu == "" || tuKhoa == "") {
+        if ("".equals(traCuu) || "".equals(tuKhoa)) {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -43,7 +43,7 @@ public class DonHangService {
                 + " GROUP BY donhang_id ORDER BY donhang_id DESC";
             stm = this.conn.prepareStatement(sql);
         }
-        if (traCuu == "Mã đơn hàng") {
+        if ("Mã đơn hàng".equals(traCuu)) {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -56,12 +56,12 @@ public class DonHangService {
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Ngày mua hàng") {
+        if ("Ngày mua hàng".equals(traCuu)) {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
                 + " FROM donhang, user, khachhang, chitietdonhang"
-                + " WHERE ngayTaoDH like concat('%', ?, '%')"
+                + " WHERE ngayTaoDH <= ?"
                 + " AND donhang.nhanvien_id = user.user_id"
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
@@ -69,7 +69,7 @@ public class DonHangService {
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Nhân viên") {
+        if ("Nhân viên".equals(traCuu)) {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
@@ -82,12 +82,38 @@ public class DonHangService {
             stm = this.conn.prepareStatement(sql);
             stm.setString(1, tuKhoa);
         }
-        if (traCuu == "Khách hàng") {
+        if ("Mã Nhân viên".equals(traCuu)) {
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE user.user_id like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Khách hàng".equals(traCuu)) {
             sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
                 + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
                 + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
                 + " FROM donhang, user, khachhang, chitietdonhang"
                 + " WHERE khachhang.hoten like concat('%', ?, '%')"
+                + " AND donhang.nhanvien_id = user.user_id"
+                + " AND donhang.khachhang_id = khachhang.khachhang_id"
+                + " AND donhang.donhang_id = chitietdonhang.donhang_id"
+                + " GROUP BY donhang_id ORDER BY donhang_id DESC";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Mã Khách hàng".equals(traCuu)) {
+            sql = "SELECT donhang.*, user.hoten, khachhang.hoten,"
+                + " COUNT(chitietdonhang.donhang_id) AS tongCTDH,"
+                + " SUM(soluong * dongia * (1 - giamgia)) AS tongtien"
+                + " FROM donhang, user, khachhang, chitietdonhang"
+                + " WHERE khachhang.khachhang_id like concat('%', ?, '%')"
                 + " AND donhang.nhanvien_id = user.user_id"
                 + " AND donhang.khachhang_id = khachhang.khachhang_id"
                 + " AND donhang.donhang_id = chitietdonhang.donhang_id"
@@ -107,7 +133,8 @@ public class DonHangService {
             dh.setHoTenKH(rs.getString("khachhang.hoten"));
             dh.setTongCTDH(rs.getInt("tongCTDH"));
             dh.setTongTien(rs.getString("tongtien"));
-            
+            dh.setKhachhang_id(rs.getInt("khachhang_id"));
+            dh.setNhanvien_id(rs.getInt("nhanvien_id"));
             donHang.add(dh);
         }
         return donHang;
