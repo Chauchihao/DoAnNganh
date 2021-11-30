@@ -324,7 +324,18 @@ public class NhaCungCapService {
         if ("Ngày nhập".equals(traCuu)) {
             sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
                 + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
-                + " WHERE nhacungcap_hanghoa.ngaynhap =< ? "
+                + " WHERE date(nhacungcap_hanghoa.ngaynhap) <= ?"
+                + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
+                + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
+                + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"
+                + " ORDER BY nhacungcap_id";
+            stm = this.conn.prepareStatement(sql);
+            stm.setString(1, tuKhoa);
+        }
+        if ("Giá nhập".equals(traCuu)) {
+            sql = "SELECT nhacungcap_hanghoa.*,tenhanghoa, hoten, tencongty"
+                + " FROM qldvvpkcm.nhacungcap_hanghoa, qldvvpkcm.nhacungcap, qldvvpkcm.user,qldvvpkcm.hanghoa"
+                + " WHERE gianhap like concat('%', ?, '%')"
                 + " AND nhacungcap.nhacungcap_id = nhacungcap_hanghoa.nhacungcap_id"
                 + " AND hanghoa.hanghoa_id = nhacungcap_hanghoa.hanghoa_id"
                 + " AND user.user_id = nhacungcap_hanghoa.nhanvien_id"

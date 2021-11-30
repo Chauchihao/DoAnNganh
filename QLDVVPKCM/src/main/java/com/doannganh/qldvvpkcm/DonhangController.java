@@ -146,63 +146,71 @@ public class DonhangController implements Initializable {
                         Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-//            this.fTenHH.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fTenHH.getText(), "Tên hàng hóa");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
-//            this.fSoLuong.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fSoLuong.getText(), "Số lượng");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
-//            
-//            this.fNgayNhap.valueProperty().addListener(obj -> {
-//                try {
-//                    loadNhapHang(this.fNgayNhap.getValue().format(dateFormatter), "Ngày nhập");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                catch(NullPointerException n){
-//                try {
-//                    loadNhapHang("", "");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                }
-//            });
-//            this.fMaNCC.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fMaNCC.getText(), "Mã nhà cung cấp");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
-//            this.fTenNCC.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fTenNCC.getText(), "Tên công ty");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
-//            this.fMaTK.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fMaTK.getText(), "Mã nhân viên");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
-//            this.fTenTK.textProperty().addListener((obj) -> {
-//                try {
-//                    loadNhapHang(this.fTenTK.getText(), "Tên nhân viên");
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            });
+            this.fTenHH.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fTenHH.getText(), "Tên hàng hóa");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            this.fSoLuong.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fSoLuong.getText(), "Số lượng");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            this.fGiaNhap.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fGiaNhap.getText(), "Giá nhập");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            
+            
+            this.fNgayNhap.valueProperty().addListener(obj -> {
+                try {
+                    loadNhapHang(this.fNgayNhap.getValue().format(dateFormatter), "Ngày nhập");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch(NullPointerException n){
+                try {
+                    loadNhapHang("", "");
+                } catch (SQLException ex) {
+                    Logger.getLogger(KhachhangController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
+            });
+            this.fMaNCC.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fMaNCC.getText(), "Mã nhà cung cấp");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            this.fTenNCC.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fTenNCC.getText(), "Tên công ty");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            this.fMaTK.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fMaTK.getText(), "Mã nhân viên");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            this.fTenTK.textProperty().addListener((obj) -> {
+                try {
+                    loadNhapHang(this.fTenTK.getText(), "Tên nhân viên");
+                } catch (SQLException ex) {
+                    Logger.getLogger(HanghoaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
         } catch (SQLException ex) {
             Logger.getLogger(DonhangController.class.getName()).log(Level.SEVERE, null, ex);
         }
