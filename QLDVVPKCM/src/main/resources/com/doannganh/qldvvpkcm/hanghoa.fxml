@@ -15,9 +15,9 @@
    <children>
       <VBox layoutX="2.0" layoutY="1.0" prefHeight="800.0" prefWidth="1398.0">
          <children>
-            <Label alignment="CENTER" prefHeight="70.0" prefWidth="1341.0" text="Hàng hóa">
+            <Label alignment="CENTER" prefHeight="70.0" prefWidth="1341.0" text="HÀNG HÓA">
                <font>
-                  <Font size="36.0" />
+                  <Font size="30.0" />
                </font>
                <VBox.margin>
                   <Insets />

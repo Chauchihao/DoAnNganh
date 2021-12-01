@@ -20,6 +20,7 @@ import com.doannganh.service.KhachHangService;
 import com.doannganh.service.NhaCungCapService;
 import com.doannganh.service.UserService;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -47,6 +48,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * FXML Controller class
@@ -461,7 +463,7 @@ public class NhanvienController implements Initializable {
     }
     
     @FXML
-    void themNV(ActionEvent event) throws SQLException {
+    void themNV(ActionEvent event) throws SQLException, NoSuchAlgorithmException {
         Connection conn = JdbcUtils.getConn();
         UserService s = new UserService(conn);
         User u = new User();
@@ -526,7 +528,7 @@ public class NhanvienController implements Initializable {
             u.setGioitinh(cbGT.getValue());
             u.setCmnd(txtCMND.getText());
             u.setTaikhoan(txtTaiKhoan.getText());
-            u.setMatkhau(String.valueOf(1));
+            u.setMatkhau(DigestUtils.md5Hex(String.valueOf(1)));
             u.setNgayvaolam(dpNgayVaoLam.getValue().format(dateFormatter));
             u.setEmail(txtEmail.getText());
             u.setDiachi(txtDiaChi.getText());

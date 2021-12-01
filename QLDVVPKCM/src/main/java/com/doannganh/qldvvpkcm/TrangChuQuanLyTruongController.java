@@ -111,6 +111,13 @@ public class TrangChuQuanLyTruongController implements Initializable {
         acpLoad.getChildren().add(loader.load());
     }
     
+    @FXML
+    void loadDoiMatKhau(ActionEvent event) throws IOException {
+        acpLoad.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("doimatkhau.fxml"));
+        acpLoad.getChildren().add(loader.load());
+    }
+    
     
     public void loadBarchart(){
         try {

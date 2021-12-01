@@ -6,6 +6,7 @@ module com.doannganh.qldvvpkcm {
     requires javafx.graphics;
     requires java.base;
     requires jasperreports;
+    requires org.apache.commons.codec;
 
     opens com.doannganh.qldvvpkcm to javafx.fxml;
     exports com.doannganh.qldvvpkcm;

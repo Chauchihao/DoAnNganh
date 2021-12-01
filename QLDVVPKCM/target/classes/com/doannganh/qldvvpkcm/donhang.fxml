@@ -12,7 +12,7 @@
    <children>
       <Label layoutX="681.0" layoutY="14.0" text="ĐƠN HÀNG">
          <font>
-            <Font size="31.0" />
+            <Font size="30.0" />
          </font>
       </Label>
       <TableView fx:id="tbDonHang" layoutX="81.0" layoutY="129.0" prefHeight="282.0" prefWidth="519.0" />
@@ -49,12 +49,12 @@
       <DatePicker fx:id="fNgayTaoDH" layoutX="179.0" layoutY="99.0" prefHeight="26.0" prefWidth="94.0" />
       <TextField fx:id="fMaHH" layoutX="89.0" layoutY="472.0" prefHeight="26.0" prefWidth="70.0" />
       <TextField fx:id="fTenHH" layoutX="179.0" layoutY="472.0" prefHeight="26.0" prefWidth="237.0" />
-      <TextField fx:id="fSoLuong" layoutX="460.0" layoutY="471.0" prefHeight="26.0" prefWidth="70.0" />
-      <TextField fx:id="fGiaNhap" layoutX="575.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
-      <TextField fx:id="fMaNCC" layoutX="856.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
-      <DatePicker fx:id="fNgayNhap" layoutX="742.0" layoutY="474.0" prefHeight="26.0" prefWidth="102.0" />
+      <TextField fx:id="fSoLuong" layoutX="445.0" layoutY="474.0" prefHeight="26.0" prefWidth="86.0" />
+      <TextField fx:id="fGiaNhap" layoutX="543.0" layoutY="474.0" prefHeight="26.0" prefWidth="86.0" />
+      <TextField fx:id="fMaNCC" layoutX="848.0" layoutY="474.0" prefHeight="26.0" prefWidth="94.0" />
+      <DatePicker fx:id="fNgayNhap" layoutX="742.0" layoutY="474.0" prefHeight="26.0" prefWidth="94.0" />
       <TextField fx:id="fTenNCC" layoutX="960.0" layoutY="474.0" prefHeight="26.0" prefWidth="123.0" />
-      <TextField fx:id="fMaTK" layoutX="1104.0" layoutY="474.0" prefHeight="26.0" prefWidth="70.0" />
+      <TextField fx:id="fMaTK" layoutX="1104.0" layoutY="474.0" prefHeight="26.0" prefWidth="79.0" />
       <TextField fx:id="fTenTK" layoutX="1208.0" layoutY="474.0" prefHeight="26.0" prefWidth="123.0" />
    </children>
 </AnchorPane>

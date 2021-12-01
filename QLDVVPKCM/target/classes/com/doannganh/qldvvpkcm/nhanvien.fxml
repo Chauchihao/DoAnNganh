@@ -14,9 +14,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.NhanvienController">
    <children>
-      <Label layoutX="542.0" layoutY="14.0" prefHeight="51.0" prefWidth="294.0" text="Quản lý nhân viên">
+      <Label layoutX="592.0" layoutY="14.0" prefHeight="51.0" prefWidth="182.0" text="NHÂN VIÊN">
          <font>
-            <Font size="35.0" />
+            <Font size="30.0" />
          </font></Label>
       <TabPane layoutX="14.0" layoutY="65.0" prefHeight="766.0" prefWidth="1390.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>

@@ -11,9 +11,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.doannganh.qldvvpkcm.KhachhangController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="8.0" prefHeight="35.0" prefWidth="635.0" text="Khách Hàng">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="8.0" prefHeight="35.0" prefWidth="635.0" text="KHÁCH HÀNG">
          <font>
-            <Font size="31.0" />
+            <Font size="30.0" />
          </font>
       </Label>
       <TextField fx:id="fMaKH" layoutX="87.0" layoutY="61.0" prefHeight="26.0" prefWidth="53.0" />
